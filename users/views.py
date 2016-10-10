@@ -17,7 +17,8 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 
-@permission_required('users.index_profile', login_url='/login')
+
+@permission_required('users.index_profile', login_url='/log_in')
 def profiles_index(request):
     profiles_all = Profile.objects.all()
     return render(request, 'profiles/index.html', {
@@ -25,7 +26,8 @@ def profiles_index(request):
         'profile_obj': Profile,
     })
 
-@permission_required('users.add_profile', login_url='/login')
+
+@permission_required('users.add_profile', login_url='/log_in')
 def profiles_new(request):
     if request.method == 'POST':
         formUser = UserCreationForm(request.POST)
@@ -49,7 +51,8 @@ def profiles_new(request):
         'form_second': formUser,
     })
 
-@permission_required('users.change_profile', login_url='/login')
+
+@permission_required('users.change_profile', login_url='/log_in')
 def profiles_edit(request, id):
     profile = Profile.objects.get(id=id)
     if request.method == 'POST':
@@ -66,7 +69,8 @@ def profiles_edit(request, id):
         'form': profile_form
     })
 
-@permission_required('users.delete_profile', login_url='/login')
+
+@permission_required('users.delete_profile', login_url='/log_in')
 def profiles_show(request, id):
     profile = Profile.objects.get(id=id)
 
@@ -76,7 +80,8 @@ def profiles_show(request, id):
         'user_obj': User,
     })
 
-@permission_required('users.show_profile', login_url='/login')
+
+@permission_required('users.show_profile', login_url='/log_in')
 def profiles_user_show(request, u_id):
     if not Profile.objects.filter(user_id=u_id).exists():
         message = "No existe perfil para este usuario"
@@ -90,7 +95,8 @@ def profiles_user_show(request, u_id):
         'user_instance': User,
     })
 
-@permission_required('users.delete_profile', login_url='/login')
+
+@permission_required('users.delete_profile', login_url='/log_in')
 def profiles_delete(request, id):
     profile = Profile.objects.get(id=id)
     profile.delete()
