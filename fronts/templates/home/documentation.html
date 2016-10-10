@@ -1,0 +1,55 @@
+{% extends 'layout/base.html' %}
+
+{% block layout %}
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12">
+            <div class="white-box">
+                <h2>API</h2>
+                <h3>MAPS</h3>
+
+                <pre>
+                    MOSTRAR TODAS LAS TAREAS
+                    GET
+                    /api/v1/jobs/[imei]/
+                    /api/v1/jobs/123456789/
+
+                    RESPONSE
+
+
+                </pre>
+
+
+                <pre>
+                    INSERTAR HISTORIA DE TAREA
+                    POST
+
+                    /api/v1/jobhistories/
+
+                    DATA
+
+                    {
+                    	"job_id": 1,
+                    	"imei_code": "123456789",
+                    	"state": "P",
+                    	"observation": "Esto es una observacion",
+                    	"lat": "-12.312123",
+                    	"lng": "12.123123123"
+                    }
+
+                    RESPONSE
+
+                    {
+                      "job_id": 1,
+                      "profile_id": 1,
+                      "imei_code": "123456789",
+                      "state": "P",
+                      "lat": "-12.312123",
+                      "lng": "12.123123123",
+                      "observation": "Esto es una observacion"
+                    }
+                </pre>
+                 <hr>
+            </div>
+        </div>
+    </div>
+{% endblock %}

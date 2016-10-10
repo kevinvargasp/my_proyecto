@@ -1,0 +1,74 @@
+{% extends 'layout/admin_base.html' %}
+
+{% block title_layout %}
+    <h3><a href="{% url 'jobs-index' %}" data-tooltip="tooltip" title="Atrás"><i
+            class="fa fa-arrow-circle-left"></i></a> Modificando Trabajo</h3>
+{% endblock %}
+{% block layout %}
+    <div class="row">
+        <div class="col-md-6">
+            {% include 'partials/_partial_form_horizontal.html' %}
+        </div>
+        <div class="col-md-6" onload="initialize()">
+
+            <div id="gmap" style="width: 550px; height: 450px"></div>
+        </div>
+
+    </div>
+{% endblock %}
+{% block code_js %}
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+    <script type="text/javascript">
+        var map;
+        var markers = [];
+        var lat = '{{ job.lat }}';
+        var lng = '{{ job.lng }}';
+        function initialize() {
+            var myLatlng = new google.maps.LatLng(-16.50662341330832, -68.130362033844);
+            var myOptions = {
+                zoom: 14,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+
+            map = new google.maps.Map(document.getElementById("gmap"), myOptions);
+            // marker refers to a global variable
+
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat, lng),
+                map: map
+            });
+            markers.push(marker);
+
+
+            google.maps.event.addListener(map, "click", function (event) {
+                // get lat/lon of click
+                var clickLat = event.latLng.lat();
+                var clickLon = event.latLng.lng();
+
+                // show in input box
+                document.getElementById("id_lat").value = clickLat;
+                document.getElementById("id_lng").value = clickLon;
+                setMapOnAll(null);
+
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(clickLat, clickLon),
+                    map: map
+                });
+                markers.push(marker)
+            });
+        }
+        function setMapOnAll(map) {
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(map);
+            }
+        }
+
+        window.onload = function () {
+            initialize()
+        };
+    </script>
+
+
+{% endblock %}

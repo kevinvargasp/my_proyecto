@@ -1,0 +1,30 @@
+{% extends 'layout/base.html' %}
+
+{% block panel_left %}
+    <a class="ui blue ribbon label" href="{% url 'jobhistories-index' %}">
+        Atras
+    </a>
+{% endblock %}
+
+{% block layout %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="white-box">
+                {% include 'partials/_partial_form_horizontal.html' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block code_js %}
+    <script>
+        $(document).ready(function () {
+            $('#id_date_of_birth').datepicker({dateFormat: 'dd/mm/yy'});
+            $('input:checkbox').addClass('js-switch');
+
+            var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+            $('.js-switch').each(function () {
+                new Switchery($(this)[0], $(this).data());
+            });
+        });
+    </script>
+{% endblock %}

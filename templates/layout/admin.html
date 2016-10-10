@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html{% if request.LANGUAGE_CODE %} lang="{{ request.LANGUAGE_CODE }}"{% endif %}>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+
+    <title>{% block title %}SSP{% endblock %}</title>
+    {% load staticfiles %}
+    {% block css %}
+    {% endblock %}
+    {% block custom_css %}
+    {% endblock %}
+
+    <link rel="icon" href="/static/images/logo.png">
+</head>
+
+<body class="fix-sidebar">
+
+<div id="wrapper">
+
+    {% block header %}
+        {% include 'partials/_header_sidebar.html' %}
+    {% endblock %}
+
+    {% block content_main %}
+        <div id="page-wrapper" style="padding-top: 15px">
+            <div class="container-fluid">
+                {% include 'layout/_messages.html' %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="white-box">
+                            {% block title_layout %}
+                            {% endblock %}
+                            {% block layout %}
+                            {% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block url_js %}
+    {% endblock %}
+    {% block custom_url_js %}
+    {% endblock %}
+
+    {% block code_global_js %}
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('input').addClass('form-control');
+                $('input:checkbox, input:radio').removeClass('form-control');
+                $('[data-tooltip="tooltip"]').tooltip();
+                $('#confirm-delete').on('show.bs.modal', function (e) {
+                    $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+                });
+            })
+        </script>
+    {% endblock %}
+    {% block code_js %}
+    {% endblock %}
+    {% block footer %}
+    {% endblock %}
+</div>
+{% include 'partials/_modal_delete.html' %}
+</body>
+</html>

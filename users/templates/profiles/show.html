@@ -1,0 +1,88 @@
+{% extends 'layout/admin_base.html' %}
+{% load utils %}
+{% block title_layout %}
+    <h3><a href="{% url 'profiles-index' %}" data-tooltip="tooltip" title="Atrás"><i
+            class="fa fa-arrow-circle-left"></i></a>Detalles de Usuario</h3>
+{% endblock %}
+{% block layout %}
+    <div class="row">
+        <div class="col-lg-4 col-sm-4">
+            <div class="panel panel-info">
+                <div class="panel-heading"> Perfil
+                    <div class="pull-right"><a href="#" data-perform="panel-collapse"><i class="ti-minus"></i></a> <a
+                            href="#" data-perform="panel-dismiss"><i class="ti-close"></i></a></div>
+                </div>
+                <div class="panel-wrapper collapse in" aria-expanded="true">
+                    <div class="panel-body">
+                        <p><strong>{% get_field_name profile_obj 'ci' %}</strong> {{ profile.ci }}</p>
+                        <p><strong>{% get_field_name profile_obj 'first_name' %}</strong> {{ profile.first_name }}</p>
+                        <p><strong>{% get_field_name profile_obj 'middle_name' %}</strong> {{ profile.middle_name }}</p>
+                        <p><strong>{% get_field_name profile_obj 'last_name' %}</strong> {{ profile.last_name }}</p>
+                        <p>
+                            <strong>{% get_field_name profile_obj 'gender' %} </strong>{% get_gender_profile profile.gender %}
+                        </p>
+                        <p><strong>{% get_field_name profile_obj 'date_of_birth' %}</strong> {{ profile.date_of_birth }}
+                        </p>
+                        <p>
+                            <strong>{% get_field_name profile_obj 'marital_status' %}</strong> {% get_marital_profile profile.marital_status %}
+                        </p>
+                        <p><strong>{% get_field_name profile_obj 'home_address' %}</strong> {{ profile.home_address }}
+                        </p>
+                        <p><strong>{% get_field_name profile_obj 'mobile_phone' %}</strong> {{ profile.mobile_phone }}
+                        </p>
+                        <p><strong>{% get_field_name profile_obj 'rol' %} </strong>{% get_role_profile profile.rol %}
+                        </p>
+                        <p><strong>{% get_field_name profile_obj 'imei_code' %} </strong>{{ profile.imei_code }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.col-lg-4 -->
+        <div class="col-lg-4 col-sm-4">
+            <div class="panel panel-success">
+                <div class="panel-heading"> Cuenta
+                    <div class="pull-right"><a href="#" data-perform="panel-collapse"><i class="ti-minus"></i></a> <a
+                            href="#" data-perform="panel-dismiss"><i class="ti-close"></i></a></div>
+                </div>
+                <div class="panel-wrapper collapse in" aria-expanded="true">
+                    <div class="panel-body">
+                        <p><strong>{% get_field_name user_obj 'username' %}</strong> {{ profile.user.username }}</p>
+                        <p><strong>{% get_field_name user_obj 'is_active' %}</strong>?
+                            {% if profile.user.is_active %}
+                                SI
+                            {% else %}
+                                NO
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block custom_js %}
+    <script>
+        $(document).ready(function () {
+            // Search input
+            $('#demo-input-search2').on('input', function (e) {
+                e.preventDefault();
+                addrow.trigger('footable_filter', {filter: $(this).val()});
+            });
+            var addrow = $('#table-locations');
+            addrow.footable().on('click', '.delete-row-btn', function () {
+
+                //get the footable object
+                var footable = addrow.data('footable');
+
+                //get the row we are wanting to delete
+                var row = $(this).parents('tr:first');
+
+                //delete the row
+                footable.removeRow(row);
+            });
+        })
+    </script>
+{% endblock %}

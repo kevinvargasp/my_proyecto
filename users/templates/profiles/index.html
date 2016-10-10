@@ -1,0 +1,112 @@
+{% extends 'layout/admin_base.html' %}
+{% block title_layout %}
+    <h3>Usuarios</h3>
+{% endblock %}
+{% load utils %}
+{% block layout %}
+    <div class="panel panel-primary">
+        <div class="row">
+            <div class="form-inline padding-bottom-15">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            {% if perms.users.add_profile %}
+                                <a href="{% url 'profiles-new' %}"
+                                   class="fcbtn btn btn-outline btn-primary btn-1f"> Nuevo Perfil</a>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                    <div class="col-sm-6 text-right m-b-20">
+                        <div class="form-group">
+                            <input id="demo-input-search2" type="text" placeholder="Buscar"
+                                   class="form-control"
+                                   autocomplete="off">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table id="table-users" class="table table-bordered table-striped">
+                <thead class="table-bordered ">
+                <tr>
+                    <th>#</th>
+                    <th>Nombres y Apellidos</th>
+                    <th>{% get_field_name profile_obj 'ci' %}</th>
+                    <th>{% get_field_name profile_obj 'rol' %}</th>
+                    <th class="text-center">Opciones</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for profile in profiles %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>
+                            {% if profile.user.is_active %}
+                                <span class="fa fa-circle text-success m-r-10" data-tooltip="tooltip"
+                                      title="Cuenta Activa"></span>
+                            {% else %}
+                                <span class="fa fa-circle text-warning m-r-10" data-tooltip="tooltip"
+                                      title="Cuenta Desactivada"></span>
+                            {% endif %}
+                            {{ profile.first_name }}
+                            {{ profile.middle_name }}
+                        </td>
+                        <td>{{ profile.ci }}</td>
+                        <td>{% get_role_profile profile.rol %}</td>
+                        <td class="text-center">
+                            {% if perms.users.show_profile %}
+                                <a href="{% url 'profiles-show' profile.id %}" data-tooltip="tooltip"
+                                   title="Más Detalles"><i class="fa fa-bars text-success"></i></a>
+                            {% endif %}
+                            {% if perms.users.change_profile %}
+                                <a href="{% url 'profiles-edit' profile.id %}" data-tooltip="tooltip"
+                                   title="Editar"><i class="fa fa-pencil text-success"></i></a>
+                            {% endif %}
+                            {% if perms.users.delete_profile %}
+                                <a href="#" data-href="{% url 'profiles-delete' profile.id %}"
+                                   data-toggle="modal" data-target="#confirm-delete" data-tooltip="tooltip"
+                                   title="Eliminar"> <i class="fa fa-times text-danger"></i>
+                                </a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="6">
+                        <div class="text-right">
+                            <ul class="pagination">
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+{% endblock %}
+{% block custom_js %}
+    <script>
+        $(document).ready(function () {
+            // Search input
+            $('#demo-input-search2').on('input', function (e) {
+                e.preventDefault();
+                addrow.trigger('footable_filter', {filter: $(this).val()});
+            });
+            var addrow = $('#table-users');
+            addrow.footable().on('click', '.delete-row-btn', function () {
+
+                //get the footable object
+                var footable = addrow.data('footable');
+
+                //get the row we are wanting to delete
+                var row = $(this).parents('tr:first');
+
+                //delete the row
+                footable.removeRow(row);
+            });
+        })
+    </script>
+{% endblock %}

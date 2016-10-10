@@ -1,0 +1,23 @@
+{% extends 'layout/admin_base.html' %}
+
+{% block title_layout %}
+    <h3><a href="{% url 'profiles-index' %}" data-tooltip="tooltip" title="Atrás"><i
+            class="fa fa-arrow-circle-left"></i></a> Agregando Perfil</h3>
+{% endblock %}
+
+{% block layout %}
+    {% include 'partials/_partial_form_horizontal.html' %}
+{% endblock %}
+{% block code_js %}
+    <script>
+        $(document).ready(function () {
+            $('#id_date_of_birth').datepicker({dateFormat: 'dd/mm/yy'});
+            $('input:checkbox').addClass('js-switch');
+
+            var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+            $('.js-switch').each(function () {
+                new Switchery($(this)[0], $(this).data());
+            });
+        });
+    </script>
+{% endblock %}

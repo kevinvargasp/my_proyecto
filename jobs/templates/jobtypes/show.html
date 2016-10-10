@@ -1,0 +1,17 @@
+{% extends 'layout/admin_base.html' %}
+{% load utils %}
+{% block title_layout %}
+    <h3><a href="{% url 'jobtypes-index' %}" data-tooltip="tooltip" title="Atrás"><i
+            class="fa fa-arrow-circle-left"></i></a> Mostrando Tipo de Trabajo</h3>
+{% endblock %}
+
+{% block layout %}
+    <p>
+        <strong>{% get_verbose_field_name jobtype_instance 'name' %}</strong>
+        {{ jobtype.name }}
+    </p>
+{% endblock %}
+
+{% block custom_js %}
+
+{% endblock %}

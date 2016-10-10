@@ -1,0 +1,43 @@
+.contenedor
+{
+    background: antiquewhite;
+    box-shadow: 0 0 10px #000;
+    border: 1px solid #b2dfdb;
+    height: 500px;
+    margin: 0 auto;
+    padding: 5px;
+    text-align: center;
+    width: 800px;
+}
+.capas{
+    border: 1px solid #000;
+    display: inline-block;
+    width: 500px;
+    vertical-align: top;
+    height: 430px;
+
+}
+.container-fluid
+{
+    border: 1px solid black;
+    opacity: 5;
+
+}
+.color-text
+{
+    !important; color: #ffffff;
+    text-decoration: none;
+}
+.item img{
+    width: 100%;
+    height:400px;
+}
+.carrousel-inner>.item{
+    width: 100%;
+   min-height: 100%;
+}
+.carousel-caption{
+    right: 20%;
+    left: 20%;
+    padding-bottom: 250px;
+}

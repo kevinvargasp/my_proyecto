@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html{% if request.LANGUAGE_CODE %} lang="{{ request.LANGUAGE_CODE }}"{% endif %}>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+
+    <title>{% block title %}SSP{% endblock %}</title>
+    {% load staticfiles %}
+    {% block css %}
+    {% endblock %}
+    {% block custom_css %}
+    {% endblock %}
+
+    <link rel="icon" href="/static/images/logo.png">
+</head>
+
+<body {% block body_class %}class="fix-sidebar"{% endblock %}>
+{% if user.is_authenticated %}
+    <div id="wrapper">
+{% endif %}
+{% block header %}
+{% endblock %}
+
+{% block panel_title %}
+{% endblock %}
+{% block panel_left %}
+{% endblock %}
+{% block panel_title_right %}
+{% endblock %}
+{% block content_main %}
+    <div class="container-fluid">
+        {% block panel_body %}
+
+        {% endblock %}
+        {% block content_secondary %}
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}
+{% block custom_js %}
+{% endblock %}
+
+{% block code_global_js %}
+{% endblock %}
+{% block code_js %}
+{% endblock %}
+{% block footer %}
+{% endblock %}
+{% if user.is_authenticated %}
+    </div>
+{% endif %}
+{% include 'partials/_modal_delete.html' %}
+</body>
+</html>

@@ -1,0 +1,140 @@
+@import "custom_login.css";
+
+.img-slider {
+    height: 300px;
+}
+
+.img-slider img {
+    width: 100%;
+}
+
+.carousel-inner {
+    height: 400px;
+}
+
+.navbar {
+    margin-bottom: 0px;
+}
+
+.element .img-thumbnail:hover {
+    background-color: #D32F2F;
+    color: white;
+}
+
+.capa-transp {
+    background-color: rgba(255, 121, 63, 0.24);
+}
+
+.capa-transp2 {
+    background-color: rgba(122, 54, 250, 0.24);
+}
+
+.capa-transp3 {
+    background-color: rgba(255, 121, 63, 0.24);
+}
+
+.rellenar {
+    margin: 0 0;
+}
+
+.text-white ul li a, a.text-white {
+    color: #ffffff;
+}
+
+.text-white ul li a:hover, a.text-white:hover {
+    background-color: #FFCDD2;
+    color: #000;
+}
+
+.animation-text {
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-duration: 3s;
+    -webkit-animation-duration: 3s;
+    -moz-animation-name: slidein;
+    -webkit-animation-name: slidein;
+}
+
+@-moz-keyframes slidein {
+    from {
+        margin-left: 100%;
+        width: 300%
+    }
+
+    to {
+        margin-left: 0%;
+        width: 100%;
+    }
+}
+
+@-webkit-keyframes slidein {
+    from {
+        margin-left: 100%;
+        width: 300%
+    }
+
+    to {
+        margin-left: 0%;
+        width: 100%;
+    }
+}
+
+.borde-red {
+    border: solid 1px red;
+    box-shadow: 2px 2px 25px red;
+    border-radius: 2px;
+}
+
+.sombra-text {
+    text-shadow: 2px 2px 15px black;
+}
+
+.alert {
+    margin-bottom: 0px !important;
+}
+
+.main-finally {
+    padding: 0;
+}
+
+.panel {
+    box-shadow: none;
+}
+
+.panel-heading {
+    padding: 15px 15px;
+}
+
+.panel-emeth .panel-heading h3 {
+    font-weight: bolder;
+}
+
+.module-content ul:nth-child(even) {
+    background-color: #e5e6e0;
+}
+
+.module-content ul {
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.module-content li {
+    padding: 4px 2px;
+    border-bottom: 1px solid #eee;
+    line-height: 25px;
+    min-height: 25px;
+    min-width: 190px;
+    overflow: hidden;
+}
+
+.module-content li label {
+    width: 30%;
+    display: block;
+    float: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: normal;
+}
+.ui-datepicker-title{
+    color: #000000;
+}

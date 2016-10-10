@@ -1,0 +1,48 @@
+{% extends 'layout/admin_base.html' %}
+{% load utils %}
+{% block title_layout %}
+    <h3><a href="{% url 'jobs-index' %}" data-tooltip="tooltip" title="Atrás"><i
+            class="fa fa-arrow-circle-left"></i></a> Mostrando Trabajo</h3>
+{% endblock %}
+{% block layout %}
+
+    <a href="{% url 'profilejobs-new' job.id %}"
+       class="fcbtn btn btn-outline btn-primary btn-1f">Asignar</a>
+    <p>
+        <strong>{% get_verbose_field_name job_instance 'name_client' %}</strong>
+        {{ job.name_client }}
+    </p>
+    <p>
+        <strong>{% get_verbose_field_name job_instance 'jobtype' %}</strong>
+        {{ job.jobtype }}
+    </p>
+    <p>
+        <strong>{% get_verbose_field_name job_instance 'address' %}</strong>
+        {{ job.address }}
+    </p>
+    <p>
+        <strong>{% get_verbose_field_name job_instance 'description' %}</strong>
+        {{ job.description }}
+    </p>
+    <p>
+        <strong>{% get_verbose_field_name job_instance 'mobile_phone' %}</strong>
+        {{ job.mobile_phone }}
+    </p>
+    <p>
+        <strong>{% get_verbose_field_name job_instance 'register_at' %}</strong>
+        {{ job.register_at }}
+    </p>
+    <p>
+        <strong>{% get_verbose_field_name job_instance 'lat' %}</strong>
+        {{ job.lat }}
+    </p>
+    <p>
+        <strong>{% get_verbose_field_name job_instance 'lng' %}</strong>
+        {{ job.lng }}
+    </p>
+
+{% endblock %}
+
+{% block custom_js %}
+
+{% endblock %}

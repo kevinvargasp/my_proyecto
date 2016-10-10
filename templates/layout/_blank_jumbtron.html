@@ -1,0 +1,8 @@
+<div class="jumbotron text-center">
+    <p>No tiene {{ model_plural }} desea crear?</p>
+    {% if can_create == 'False' %}
+        <p>{{ messaje_error }}</p>
+    {% else %}
+        <p><a href="{% url url_new %}" class="btn btn-black">Agregar {{ model_singular }}</a></p>
+    {% endif %}
+</div>

@@ -1,0 +1,173 @@
+<nav class="navbar navbar-default navbar-static-top m-b-0">
+    <div class="navbar-header"><a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)"
+                                  data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
+        <div class="top-left-part"><a class="logo" href="/">
+            <br><div class="text-center">
+                  SSP
+            </div>
+        </a>
+        </div>
+        <ul class="nav navbar-top-links navbar-left hidden-xs">
+            <li><a href="javascript:void(0)" class="open-close hidden-xs waves-effect waves-light"><i
+                    class="icon-arrow-left-circle ti-menu"></i></a></li>
+            <li>
+                <form role="search" class="app-search hidden-xs">
+                    <input type="text" placeholder="Buscar..." class="form-control">
+                    <a href=""><i class="fa fa-search"></i></a>
+                </form>
+            </li>
+        </ul>
+        <ul class="nav navbar-top-links navbar-right pull-right">
+            <li class="dropdown"><a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown"
+                                    href="#"><i class="icon-envelope"></i>
+                <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
+            </a>
+                <ul class="dropdown-menu mailbox animated bounceInDown">
+                    <li>
+                        <div class="drop-title">Notificacioness</div>
+                    </li>
+                    <li>
+                        <div class="message-center"><a href="#">
+                            <div class="user-img"><img src="/static/eliteadmin/plugins/images/users/pawandeep.jpg"
+                                                       alt="user"
+                                                       class="img-circle"> <span
+                                    class="profile-status online pull-right"></span></div>
+                            <div class="mail-contnet">
+                                <h5>Pavan kumar</h5>
+                                <span class="mail-desc">Just see the my admin!</span> <span
+                                    class="time">9:30 AM</span></div>
+                        </a> <a href="#">
+                            <div class="user-img"><img src="/static/eliteadmin/plugins/images/users/sonu.jpg" alt="user"
+                                                       class="img-circle"> <span
+                                    class="profile-status busy pull-right"></span></div>
+                            <div class="mail-contnet">
+                                <h5>Sonu Nigam</h5>
+                                <span class="mail-desc">I've sung a song! See you at</span> <span
+                                    class="time">9:10 AM</span>
+                            </div>
+                        </a> <a href="#">
+                            <div class="user-img"><img src="/static/eliteadmin/plugins/images/users/arijit.jpg"
+                                                       alt="user"
+                                                       class="img-circle"> <span
+                                    class="profile-status away pull-right"></span></div>
+                            <div class="mail-contnet">
+                                <h5>Arijit Sinh</h5>
+                                <span class="mail-desc">I am a singer!</span> <span class="time">9:08 AM</span>
+                            </div>
+                        </a> <a href="#">
+                            <div class="user-img"><img src="/static/eliteadmin/plugins/images/users/pawandeep.jpg"
+                                                       alt="user"
+                                                       class="img-circle"> <span
+                                    class="profile-status offline pull-right"></span></div>
+                            <div class="mail-contnet">
+                                <h5>Pavan kumar</h5>
+                                <span class="mail-desc">Just see the my admin!</span> <span
+                                    class="time">9:02 AM</span></div>
+                        </a></div>
+                    </li>
+                    <li><a class="text-center" href=""> <strong>Ver todo</strong> <i
+                            class="fa fa-angle-right"></i> </a></li>
+                </ul>
+                <!-- /.dropdown-messages -->
+            </li>
+
+            <!-- /.dropdown -->
+            <li class="dropdown"><a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img
+                    src="/static/eliteadmin/plugins/images/users/varun.jpg" alt="user-img" width="36"
+                    class="img-circle"><b
+                    class="hidden-xs">{{ user.username }}</b> </a>
+                <ul class="dropdown-menu dropdown-user animated flipInY">
+                    <li><a href="{%  url 'profiles-user-show' user.id %}"><i class="ti-user"></i> Mi perfil</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#"><i class="ti-settings"></i> Configuraciones</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="{% url 'log_out' %}"><i class="fa fa-power-off"></i> Salir</a></li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
+            <!-- .Megamenu -->
+
+            <!-- /.Megamenu -->
+
+            <!-- /.dropdown -->
+        </ul>
+    </div>
+    <!-- /.navbar-header -->
+    <!-- /.navbar-top-links -->
+    <!-- /.navbar-static-side -->
+</nav>
+<!-- End Top Navigation -->
+<!-- Left navbar-header -->
+<div class="navbar-default sidebar" role="navigation">
+    <div class="sidebar-nav navbar-collapse slimscrollsidebar">
+        <ul class="nav" id="side-menu">
+            <li class="sidebar-search hidden-sm hidden-md hidden-lg">
+                <!-- input-group -->
+                <div class="input-group custom-search-form">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+            <button class="btn btn-default" type="button"> <i class="fa fa-search"></i> </button>
+            </span></div>
+                <!-- /input-group -->
+            </li>
+
+            <li class="nav-small-cap m-t-10">--- Menu</li>
+            <li><a href="index.html" class="waves-effect"><i class="linea-icon linea-basic fa-fw" data-icon="v"></i>
+                <span class="hide-menu"> Dashboard <span class="fa arrow"></span> <span
+                        class="label label-rouded label-custom pull-right">4</span></span></a>
+                <ul class="nav nav-second-level">
+                    <li><a href="index.html">Demographical</a></li>
+                    <li><a href="index2.html">Minimalistic</a></li>
+                    <li><a href="index3.html">Analitical</a></li>
+                    <li><a href="index4.html">Simpler</a></li>
+                </ul>
+            </li>
+
+            <li><a href="#" class="waves-effect"><i class="fa fa-cubes"></i>
+                <span class="hide-menu">Tipo de Trabajos <span class="fa arrow"></span><span
+                        class="label label-rouded label-danger pull-right">1</span></span></a>
+                <ul class="nav nav-second-level">
+                    <li><a href="{% url 'jobtypes-index' %}">Mostrar Todos</a></li>
+                    <li><a href="{% url 'jobtypes-new' %}">Agregar Tipo de Trabajos</a></li>
+                </ul>
+            </li>
+            <li><a href="#" class="waves-effect"><i class="fa fa-object-group"></i>
+                <span class="hide-menu">Trabajos <span class="fa arrow"></span><span
+                        class="label label-rouded label-danger pull-right">1</span></span></a>
+                <ul class="nav nav-second-level">
+                    <li><a href="{% url 'jobs-index' %}">Mostrar Todos</a></li>
+                    <li><a href="{% url 'jobs-new' %}">Agregar Trabajo</a></li>
+                    <li><a href="{% url 'profilejobs-index' %}">Asignaciones</a></li>
+                </ul>
+            </li>
+
+            <li><a href="#" class="waves-effect"><i class="fa fa-users"></i> <span
+                    class="hide-menu">Usuarios<span class="fa arrow"></span> <span
+                    class="label label-rouded label-info pull-right">2</span> </span></a>
+                <ul class="nav nav-second-level">
+                    <li><a href="{% url 'profiles-index' %}">Todos los Usuarios</a></li>
+                    <li><a href="{% url 'profiles-new' %}">Agregar Usuario</a></li>
+
+                </ul>
+            </li>
+
+            <li><a href="#" class="waves-effect"><i class="fa fa-envelope-o"></i> <span
+                    class="hide-menu">Notificaciones<span class="fa arrow"></span> <span
+                    class="label label-rouded label-info pull-right">1</span> </span></a>
+                <ul class="nav nav-second-level">
+                    <li><a href="#">Enviados</a></li>
+
+                </ul>
+            </li>
+
+            <li>
+                <a href="{% url 'log_out' %}" class="waves-effect"><i class="icon-logout fa-fw"></i> <span
+                        class="hide-menu">Salir</span></a>
+            </li>
+            <li class="nav-small-cap">--- Support</li>
+            <li><a href="{% url 'api-docs' %}" class="waves-effect"><i class="fa fa-circle-o text-danger"></i> <span
+                    class="hide-menu">Documentation</span></a></li>
+
+        </ul>
+    </div>
+</div>

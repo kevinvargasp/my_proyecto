@@ -1,0 +1,100 @@
+{% extends 'layout/base.html' %}
+
+{% block layout %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="white-box">
+                <h3>Usuarios</h3>
+                <div class="panel panel-primary">
+                    <div class="row">
+                        <div class="form-inline padding-bottom-15">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <a href="{% url 'jobhistories-new' %}"
+                                           class="fcbtn btn btn-outline btn-primary btn-1f"> Nuevo Perfil</a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 text-right m-b-20">
+                                    <div class="form-group">
+                                        <input id="demo-input-search2" type="text" placeholder="Search"
+                                               class="form-control"
+                                               autocomplete="off">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table id="table-users" class="table table-bordered table-striped">
+                            <thead class="table-bordered ">
+                            <tr>
+                                <th>#</th>
+                                <th>Nombres y Apellidos</th>
+                                <th>Ci</th>
+                                <th class="text-center">Opciones</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            {% for profile in jobhistories %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>
+                                        {% if profile.is_connect %}
+                                            <span class="fa fa-circle text-success m-r-10"></span>
+                                        {% else %}
+                                            <span class="fa fa-circle text-warning m-r-10"></span>
+                                        {% endif %}
+                                        {{ profile.first_name }}
+                                        {{ profile.middle_name }}
+                                    </td>
+                                    <td>{{ profile.ci }}</td>
+                                    <td class="text-center">
+                                        <a href="{% url 'jobhistories-show' profile.id %}">Ver mas Detalles</a> |
+                                        <a href="{% url 'jobhistories-edit' profile.id %}">Modificar</a> |
+                                        <a href="{% url 'jobhistories-delete' profile.id %}">Eliminar</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="6">
+                                    <div class="text-right">
+                                        <ul class="pagination">
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block custom_js %}
+
+    <script>
+        $(document).ready(function () {
+            // Search input
+            $('#demo-input-search2').on('input', function (e) {
+                e.preventDefault();
+                addrow.trigger('footable_filter', {filter: $(this).val()});
+            });
+            var addrow = $('#table-users');
+            addrow.footable().on('click', '.delete-row-btn', function () {
+
+                //get the footable object
+                var footable = addrow.data('footable');
+
+                //get the row we are wanting to delete
+                var row = $(this).parents('tr:first');
+
+                //delete the row
+                footable.removeRow(row);
+            });
+        })
+    </script>
+{% endblock %}

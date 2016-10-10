@@ -1,0 +1,331 @@
+{% extends 'layout/layout.html' %}
+
+{% block title %}
+    SSP
+{% endblock %}
+
+
+{% block css %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'font-awesome-4.6.3/css/font-awesome.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'themify-icons/themify-icons.css' %}"/>
+    <link rel="stylesheet" href="{% static 'simple-line-icons-master/css/simple-line-icons.css' %}"/>
+    <link rel="stylesheet" href="{% static 'linea-icons/linea.css' %}"/>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'eliteadmin/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!--My admin Custom CSS -->
+    <link href="{% static 'eliteadmin/plugins/bower_components/owl.carousel/owl.carousel.min.css' %}" rel="stylesheet"
+          type="text/css"/>
+    <link href="{% static 'eliteadmin/plugins/bower_components/owl.carousel/owl.theme.default.css' %}" rel="stylesheet"
+          type="text/css"/>
+    <!-- animation CSS -->
+    <link href="{% static 'eliteadmin/css/animate.css' %}" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{% static 'eliteadmin/css/style.css' %}" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+{% endblock %}
+
+
+{% block js %}
+    {% load staticfiles %}
+
+
+
+    <script src="{% static 'eliteadmin/plugins/bower_components/jquery/dist/jquery.min.js' %}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'eliteadmin/bootstrap/js/bootstrap.min.js' %}"></script>
+    <!-- jQuery for carousel -->
+    <script src="{% static 'eliteadmin/plugins/bower_components/owl.carousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'eliteadmin/js/custom.js' %}"></script>
+
+{% endblock %}
+
+
+{% block header %}
+     {% load staticfiles %}
+    <div id="wrapper">
+  <div class="container-fluid">
+    <!-- Row -->
+    <div class="row">
+        <div class="col-md-12 navbar-fixed">
+            <div class="fix-width">
+                <nav class="navbar navbar-default">
+
+                      <!-- Brand and toggle get grouped for better mobile display -->
+                      <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                          <span class="sr-only">Toggle navigation</span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                          <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#"><img src="{% static 'eliteadmin/images/elite-admin-logo.png' %}" alt="Eliteadmin" /></a>
+                      </div>
+
+                      <!-- Collect the nav links, forms, and other content for toggling -->
+                      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+
+                        <ul class="nav navbar-nav custom-nav navbar-right">
+
+
+                          <li><a href="#myfeatures">FEATURES</a></li>
+                          <li><a href="#" target="_blank">DOCUMENTATION</a></li>
+                          <li><a href="{% url 'log_in' %}" class="btn btn-danger btn-rounded custom-btn" >ENTRAR</a></li>
+                        </ul>
+                      </div><!-- /.navbar-collapse -->
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!-- /Row -->
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="fix-width text-center banner-part">
+                <h1 class="banner-title">Clean & Elegant Multipurpose Admin Theme</h1>
+                <span class="banner-small-text">Multipurpose Admin Theme with <b>Light & Dark Versions</b>, Landing Page, <b>5 Dashboards</b>, eCommerce Version, <b>70+</b> Integrated Plugins, <b>100+</b> Pages, <b>2000+</b> Font Icons, <b>500+</b> UI Components</span>
+                <img src="{% static 'eliteadmin/images/banner-img.jpg' %}" class="img-responsive" />
+            </div>
+        </div>
+    </div>
+    <!-- Row -->
+
+    <!-- .row -->
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="fix-width top-features">
+              <div id="owl-demo2" class="owl-carousel owl-theme">
+                <div class="item">
+                    <small class="text-megna">AND COUNTING</small>
+                    <h3>100+ Quality Designed Pages Included</h3>
+                    <p>We have included 100+ Different Pages to fulfil your requirements. Includes Data Tables, Form Pages, Charts, Widgets etc.</p>
+                </div>
+                <div class="item">
+                    <small class="text-megna">AND COUNTING</small>
+                    <h3>5 Unique Dashboard Demos Included</h3>
+                    <p>We have included 5 Unique Dashboard Variations at the moment and We are going to add new demos soon. You will love all Dashboards.</p>
+                </div>
+                <div class="item">
+                    <small class="text-megna">BEAUTIFUL NAVBARS</small>
+                    <h3>6 Styles for Navigation with Mega Menu</h3>
+                    <p>We have added 6 different styles for Header and Navigations. Added Horizontal and Vertical, both types of Navigation & Mega Menu.</p>
+                </div>
+                <div class="item">
+                    <small class="text-megna">SHOPING DASHBOARD</small>
+                    <h3>eCommerce Dashboard Included</h3>
+                    <p>Yes, We have also added eCommerce Dashboard option. It also has relevant sections, like List of Products, Total Earnings and & Status.</p>
+                </div>
+                <div class="item">
+                    <small class="text-megna">JUST ADDED</small>
+                    <h3>Lots of Chart Options Added in Package</h3>
+                    <p>We have covered almost each possible Graphs / Charts in our Elite Admin - Responsive Web App Kit. Its easy to implement in your project.</p>
+                </div>
+                <div class="item">
+                    <small class="text-megna">JUST ADDED</small>
+                    <h3>Data table Export - csv, Excel, Pdf, copy</h3>
+                    <p>With Elite Admin - Responsive Web App Kit, you will get option for export data from data table. You can save your data in excel, pdf, csv format.</p>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+
+      <!-- .row -->
+      <div class="row m-t-60">
+          <div class="col-md-12 m-t-40">
+              <div class="fix-width">
+                  <center class="col-md-6 col-md-offset-3">
+                      <small class="text-megna">ALMOST COVERED EVERYTHING</small>
+                      <h2 class="font-500">We are proud on Features provided with EliteAdmin Template</h2>
+                  </center>
+
+              </div>
+          </div>
+
+      </div>
+      <!-- /.row -->
+      <!-- .row -->
+      <div class="row inner-margin">
+        <div class="fix-width">
+            <!-- .col -->
+            <div class="col-md-4 col-sm-4 text-center">
+                <img src="{% static 'eliteadmin/images/tables.png' %}"/>
+                <h4 class="font-500">Lots of Table Examples</h4>
+                <p>Data Tables are initial requirement <br/>and we added them.</p>
+            </div>
+            <!-- /.col -->
+            <!-- .col -->
+            <div class="col-md-4 col-sm-4 text-center">
+                <img src="{% static 'eliteadmin/images/forms.png' %}"/>
+                <h4 class="font-500">Validation Forms</h4>
+                <p>Different Forms with Validation are <br/>included in pack.</p>
+            </div>
+            <!-- /.col -->
+            <!-- .col -->
+            <div class="col-md-4 col-sm-4 text-center">
+                <img src="{% static 'eliteadmin/images/e-com.png' %}"/>
+                <h4 class="font-500">eCommerce Pages</h4>
+                <p>Yes, all related e-Commerce <br/>pages are included.</p>
+            </div>
+            <!-- /.col -->
+
+        </div>
+      </div>
+      <!-- /.row -->
+      <!-- .row -->
+      <div class="row inner-margin">
+        <div class="fix-width">
+            <!-- .col -->
+            <div class="col-md-4 col-sm-4 text-center">
+                <img src="{% static 'eliteadmin/images/multi-level.png' %}"/>
+                <h4 class="font-500">3 Level Dropdown Menu</h4>
+                <p>We have added 3 Level Dropdown <br/>Menu in Elite Pack.</p>
+            </div>
+            <!-- /.col -->
+            <!-- .col -->
+            <div class="col-md-4 col-sm-4 text-center">
+                <img src="{% static 'eliteadmin/images/calendar.png' %}"/>
+                <h4 class="font-500">Calendar Design</h4>
+                <p>Calendar is available with our package <br/>& in nice design.</p>
+            </div>
+            <!-- /.col -->
+            <!-- .col -->
+            <div class="col-md-4 col-sm-4 text-center">
+                <img src="{% static 'eliteadmin/images/gallery.png' %}"/>
+                <h4 class="font-500">Gallery Options</h4>
+                <p>Covered options to showcase different <br/>variation for gallery.</p>
+            </div>
+            <!-- /.col -->
+
+        </div>
+      </div>
+      <!-- /.row -->
+      <!-- .row -->
+      <div class="row inner-margin">
+        <div class="fix-width">
+            <!-- .col -->
+            <div class="col-md-4 col-sm-4 text-center">
+                <img src="{% static 'eliteadmin/images/docs.png' %}"/>
+                <h4 class="font-500">Detailed Documentation</h4>
+                <p>We have made detailed documentation, <br/>so it will easy to use.</p>
+            </div>
+            <!-- /.col -->
+            <!-- .col -->
+            <div class="col-md-4 col-sm-4 text-center">
+                <img src="{% static 'eliteadmin/images/dedicated.png' %}"/>
+                <h4 class="font-500">Dedicated Support</h4>
+                <p>We believe in supreme support is <br/>key and we offer that.</p>
+            </div>
+            <!-- /.col -->
+            <!-- .col -->
+            <div class="col-md-4 col-sm-4 text-center">
+                <img src="{% static 'eliteadmin/images/ragular.png' %}"/>
+                <h4 class="font-500">Regular Updates</h4>
+                <p>We are constantly updating our <br/>pack with new features.</p>
+            </div>
+            <!-- /.col -->
+
+        </div>
+      </div>
+      <!-- /.row -->
+      <!-- .row -->
+      <div class="row m-t-40">
+        <div class="fix-width">
+            <center><a href="#" class="btn btn-danger btn-rounded cst-btn" target="_blank">BUY ELITE ADMIN NOW</a></center>
+        </div>
+      </div>
+      <!-- /.row -->
+      <!-- .row -->
+      <div class="row inner-margin">
+        <div class="col-lg-12 m-t-40">
+          <div class="light-blue-bg">
+              <div class="fix-width text-center">
+                  <small class="text-megna">ALMOST COVERED EVERYTHING</small>
+                  <h2 class="font-500">What Real Buyers have to <br/>Say about EliteAdmin</h2>
+                  <p class="testimonial-text">I purchased this web kit hoping to <b class="font-500">spend more time coding database interactions rather than interface.</b> All of my expectations have been met so far. <b class="font-500">This is a fantastic kit with everything I’ve needed.</b> I love the <b class="font-500">modal window inputs</b> and <b class="font-500">various calendar and time pickers.</b><b class="font-500"> I used to do all this with seperate jquery and java scripts, but now it’s all built in.</b> I’m working on <b class="font-500">two client projects using this kit and they love it.</b> </p>
+                  <div class="username"><span>E</span><b>inshawaii<br/><small class="text-danger"><i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i></small></b></div>
+              </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+      <!-- .row -->
+      <div class="row">
+          <div class="col-md-12 call-to-action">
+              <div class="fix-width">
+                  <div class="col-md-6 m-t-20 m-b-20"><span>Are you Satisfied with what we Offer?</span></div>
+                  <div class="col-md-6 "><a href="#" target="_blank" class="btn btn-default btn-rounded suggest-btn m-t-10">SUGGEST NEW FEATURES</a><a href="#" target="_blank" class="btn btn-outline btn-rounded btn-default buy-btn m-t-10">BUY ELITE ADMIN NOW</a></div>
+              </div>
+          </div>
+      </div>
+      <!-- /.row -->
+      <!-- .row -->
+      <footer class="footer">
+          <div class="row">
+              <div class="fix-width">
+                  <div class="col-md-3 col-sm-6"><img src="{% static 'eliteadmin/images/footer-logo.png' %}"/><p class="m-t-30"><font class="text-white">Eliteadmin</font> is premium quality admin dashboard template with flat design. It is fully responsive admin dashboard template built with Bootstrap Framework, HTML5 & CSS3, Media query. </p></div>
+                  <div class="col-md-3 col-sm-6">
+                    <ul class="footer-link list-icons">
+                        <li><a href="#"><i class="ti-angle-right text-megna"></i> Minimal Dashboard</a></li>
+                        <li><a href="#"><i class="ti-angle-right text-megna"></i> Demographical Dashboad</a></li>
+                        <li><a href="#"><i class="ti-angle-right text-megna"></i> Analytical Dashboad</a></li>
+                        <li><a href="#"><i class="ti-angle-right text-megna"></i> Simpler Dashboard</a></li>
+                        <li><a href="#"><i class="ti-angle-right text-megna"></i> eCommerce Dashboard</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                     <ul class="footer-link list-icons">
+                        <li><a href="#"><i class="ti-angle-right text-megna"></i> Widget Sections</a></li>
+                        <li><a href="#"><i class="ti-angle-right text-megna"></i> Chart Options</a></li>
+                        <li><a href="#"><i class="ti-angle-right text-megna"></i> Lots of Form Layouts</a></li>
+                        <li><a href="#"><i class="ti-angle-right text-megna"></i> Data Table Options</a></li>
+                        <li><a href="#"><i class="ti-angle-right text-megna"></i> Calendar Designs</a></li>
+                    </ul>
+                  </div>
+                  <div class="col-md-3 col-sm-6">
+                    <ul class="footer-link list-icons">
+                        <li><a href="#"><i class="ti-angle-right text-megna"></i> Inbox Layout</a></li>
+                        <li><a href="#"><i class="ti-angle-right text-megna"></i> Tree View Options</a></li>
+                        <li><a href="#"><i class="ti-angle-right text-megna"></i> Carousel Slider Option</a></li>
+                        <li><a href="#"><i class="ti-angle-right text-megna"></i> Gallery Option</a></li>
+                        <li><a href="#"><i class="ti-angle-right text-megna"></i> Starter Pages</a></li>
+                    </ul>
+                  </div>
+                  <div class="clearfix"></div>
+
+                      <div class="col-md-12 sub-footer">
+                          <span>Copyright 2016. All Rights Reserved by <a class="text-white" href="#" target="_blank">Elite Admin</a></span>
+                          <span class="pull-right">Design & Developed by <a class="text-white" href="#" target="_blank">Theme Designer</a></span>
+                      </div>
+
+              </div>
+          </div>
+      </footer>
+
+      <!-- /.row -->
+
+  </div>
+</div>
+{% endblock %}
+{% block content_main %}
+    {% block layout %}
+
+    {% endblock %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

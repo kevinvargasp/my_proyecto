@@ -1,0 +1,41 @@
+{% extends 'layout/base.html' %}
+
+{% block layout %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="white-box">
+                <p>
+                    <strong>Nombre</strong>
+                    {{ profile.first_name }}
+                </p>
+                <h3>Ubicaciones</h3>
+                {% include 'histories/_histories.html' %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block custom_js %}
+
+    <script>
+        $(document).ready(function () {
+            // Search input
+            $('#demo-input-search2').on('input', function (e) {
+                e.preventDefault();
+                addrow.trigger('footable_filter', {filter: $(this).val()});
+            });
+            var addrow = $('#table-locations');
+            addrow.footable().on('click', '.delete-row-btn', function () {
+
+                //get the footable object
+                var footable = addrow.data('footable');
+
+                //get the row we are wanting to delete
+                var row = $(this).parents('tr:first');
+
+                //delete the row
+                footable.removeRow(row);
+            });
+        })
+    </script>
+{% endblock %}

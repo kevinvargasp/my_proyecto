@@ -1,0 +1,19 @@
+{% load utils %}
+<p><strong>{% get_field_name profile_obj 'ci' %}</strong> {{ profile.ci }}</p>
+<p><strong>{% get_field_name profile_obj 'first_name' %}</strong> {{ profile.first_name }}</p>
+<p><strong>{% get_field_name profile_obj 'middle_name' %}</strong> {{ profile.middle_name }}
+</p>
+<p><strong>{% get_field_name profile_obj 'last_name' %}</strong> {{ profile.last_name }}</p>
+<p><strong>{% get_field_name profile_obj 'gender' %} </strong>{% get_gender_profile profile.gender %}
+</p>
+<p><strong>{% get_field_name profile_obj 'date_of_birth' %}</strong> {{ profile.date_of_birth }}
+</p>
+<p>
+    <strong>{% get_field_name profile_obj 'marital_status' %}</strong> {% get_marital_profile profile.marital_status %}
+</p>
+<p><strong>{% get_field_name profile_obj 'home_address' %}</strong> {{ profile.home_address }}
+</p>
+<p><strong>{% get_field_name profile_obj 'mobile_phone' %}</strong> {{ profile.mobile_phone }}
+</p>
+<p><strong>{% get_field_name profile_obj 'rol' %} </strong>{% get_role_profile profile.rol %}</p>
+<p><strong>{% get_field_name profile_obj 'imei_code' %} </strong>{{ profile.imei_code }}</p>
