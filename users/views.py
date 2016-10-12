@@ -33,21 +33,10 @@ def profiles_new(request):
         formUser = UserCreationForm(request.POST)
         form = ProfileForm(request.POST)
         if formUser.is_valid() and form.is_valid():
-            add_group_permissions()
-
             user = formUser.save()
             profile = form.save(commit=False)
             profile.user = user
             profile.save()
-
-            type_rol = request.POST['rol']
-
-            if type_rol == 'SUP':
-                g = Group.objects.get(name='SUPERVISOR')
-                g.user_set.add(user.id)
-            elif type_rol == 'TEC':
-                g = Group.objects.get(name='TECNICO')
-                g.user_set.add(user.id)
 
             message = 'Registrado correctamente!'
             messages.add_message(request, messages.SUCCESS, message)
@@ -67,12 +56,15 @@ def check_permision(id):
     add_group_permissions()
 
     profile = Profile.objects.get(id=id)
+    user = User.objects.get(id=profile.user_id)
     type_rol = profile.rol
 
     if type_rol == 'SUP':
+        user.groups.clear()
         g = Group.objects.get(name='SUPERVISOR')
         g.user_set.add(profile.user_id)
     elif type_rol == 'TEC':
+        user.groups.clear()
         g = Group.objects.get(name='TECNICO')
         g.user_set.add(profile.user_id)
 
@@ -80,12 +72,12 @@ def check_permision(id):
 @permission_required('users.change_profile', login_url='/log_in')
 def profiles_edit(request, id):
     profile = Profile.objects.get(id=id)
-    check_permision(id)
 
     if request.method == 'POST':
         profile_form = ProfileForm(request.POST, request.FILES, instance=profile)
         if profile_form.is_valid():
             save_profile = profile_form.save()
+            check_permision(id)
 
             message = "actualizado Correctamente"
             messages.add_message(request, messages.INFO, message)
@@ -93,11 +85,12 @@ def profiles_edit(request, id):
     else:
         profile_form = ProfileForm(instance=profile)
     return render(request, 'profiles/edit.html', {
-        'form': profile_form
+        'form': profile_form,
+        'profile': profile
     })
 
 
-#@permission_required('users.show_profile', login_url='/log_in')
+@permission_required('users.show_profile', login_url='/log_in')
 def profiles_show(request, id):
     profile = Profile.objects.get(id=id)
 
@@ -182,7 +175,7 @@ def add_group_permissions():
     # ENCARGADO_RECURSOS_PROPIOS
     group, created = Group.objects.get_or_create(name='SUPERVISOR')
 
-    if created:
+    if True:
         group.permissions.add(
             Permission.objects.get(codename="add_job"),
             Permission.objects.get(codename="change_job"),
@@ -225,7 +218,7 @@ def add_group_permissions():
 
     # ENCARGADO_SISTEMAS_DAF
     group, created = Group.objects.get_or_create(name='TECNICO')
-    if created:
+    if True:
         group.permissions.add(
             Permission.objects.get(codename="change_job"),
             Permission.objects.get(codename="show_job"),
