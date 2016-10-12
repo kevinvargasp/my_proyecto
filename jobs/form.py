@@ -1,7 +1,7 @@
 # encoding: utf-8
 from django.forms.models import ModelForm
 from django import forms
-from jobs.models import JobType, Job, ProfileJob, JobHistory
+from jobs.models import JobType, Job, ProfileJob, JobHistory, Zone
 from users.models import Profile
 
 
@@ -15,6 +15,12 @@ class BaseForm(ModelForm):
 class JobTypeForm(BaseForm):
     class Meta:
         model = JobType
+        fields = '__all__'
+
+
+class ZoneForm(BaseForm):
+    class Meta:
+        model = Zone
         fields = '__all__'
 
 

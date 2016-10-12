@@ -1,0 +1,12 @@
+{% extends 'layout/admin_base.html' %}
+
+{% block title_layout %}
+    {% if perms.jobs.index_zone %}
+    <h3><a href="{% url 'zones-index' %}" data-tooltip="tooltip" title="Atrás"><i
+            class="fa fa-arrow-circle-left"></i></a> Agregando Zona</h3>
+    {% endif %}
+{% endblock %}
+
+{% block layout %}
+    {% include 'partials/_partial_form_horizontal.html' %}
+{% endblock %}

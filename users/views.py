@@ -33,10 +33,22 @@ def profiles_new(request):
         formUser = UserCreationForm(request.POST)
         form = ProfileForm(request.POST)
         if formUser.is_valid() and form.is_valid():
+            add_group_permissions()
+
             user = formUser.save()
             profile = form.save(commit=False)
             profile.user = user
             profile.save()
+
+            type_rol = request.POST['rol']
+
+            if type_rol == 'SUP':
+                g = Group.objects.get(name='SUPERVISOR')
+                g.user_set.add(user.id)
+            elif type_rol == 'TEC':
+                g = Group.objects.get(name='TECNICO')
+                g.user_set.add(user.id)
+
             message = 'Registrado correctamente!'
             messages.add_message(request, messages.SUCCESS, message)
             return HttpResponseRedirect(reverse(profiles_index))
@@ -81,7 +93,6 @@ def profiles_show(request, id):
     })
 
 
-@permission_required('users.show_profile', login_url='/log_in')
 def profiles_user_show(request, u_id):
     if not Profile.objects.filter(user_id=u_id).exists():
         message = "No existe perfil para este usuario"
@@ -92,7 +103,7 @@ def profiles_user_show(request, u_id):
     return render(request, 'profiles/show.html', {
         'profile': profile,
         'profile_obj': Profile,
-        'user_instance': User,
+        'user_obj': User,
     })
 
 
@@ -145,3 +156,57 @@ def log_in(request):
 def log_out(request):
     logout(request)
     return HttpResponseRedirect('/')
+
+from django.contrib.auth.models import Group, Permission
+import logging
+logger = logging.getLogger(__name__)
+
+def add_group_permissions():
+    # ENCARGADO_RECURSOS_PROPIOS
+    group, created = Group.objects.get_or_create(name='SUPERVISOR')
+
+    if created:
+        group.permissions.add(
+            Permission.objects.get(codename="add_job"),
+            Permission.objects.get(codename="change_job"),
+            Permission.objects.get(codename="show_job"),
+            Permission.objects.get(codename="index_job"),
+            Permission.objects.get(codename="delete_job"),
+
+            Permission.objects.get(codename="add_jobtype"),
+            Permission.objects.get(codename="change_jobtype"),
+            Permission.objects.get(codename="show_jobtype"),
+            Permission.objects.get(codename="index_jobtype"),
+            Permission.objects.get(codename="delete_jobtype"),
+
+            Permission.objects.get(codename="add_zone"),
+            Permission.objects.get(codename="change_zone"),
+            Permission.objects.get(codename="show_zone"),
+            Permission.objects.get(codename="index_zone"),
+            Permission.objects.get(codename="delete_zone"),
+
+            Permission.objects.get(codename="add_profilejob"),
+            Permission.objects.get(codename="change_profilejob"),
+            Permission.objects.get(codename="show_profilejob"),
+            Permission.objects.get(codename="index_profilejob"),
+            Permission.objects.get(codename="delete_profilejob"),
+
+            Permission.objects.get(codename="add_jobhistory"),
+            Permission.objects.get(codename="change_jobhistory"),
+            Permission.objects.get(codename="show_jobhistory"),
+            Permission.objects.get(codename="index_jobhistory"),
+            Permission.objects.get(codename="delete_jobhistory"),
+        )
+
+        logger.info('SUPERVISOR Group created')
+
+    # ENCARGADO_SISTEMAS_DAF
+    group, created = Group.objects.get_or_create(name='TECNICO')
+    if created:
+        group.permissions.add(
+            Permission.objects.get(codename="change_job"),
+            Permission.objects.get(codename="show_job"),
+            Permission.objects.get(codename="index_job")
+        )
+        logger.info('SUPERVISOR Group created')
+

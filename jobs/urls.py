@@ -25,6 +25,11 @@ urlpatterns = [
     url(r'^jobtypes/show/(\d+)/$', views.jobtypes_show, name='jobtypes-show'),
     url(r'^jobtypes/delete/(\d+)/$', views.jobtypes_delete, name='jobtypes-delete'),
 
+    url(r'^zones/index$', views.zones_index, name='zones-index'),
+    url(r'^zones/new/$', views.zones_new, name='zones-new'),
+    url(r'^zones/edit/(\d+)/$', views.zones_edit, name='zones-edit'),
+    url(r'^zones/delete/(\d+)/$', views.zones_delete, name='zones-delete'),
+
     url(r'^profilejobs/index$', views.profilejobs_index, name='profilejobs-index'),
     url(r'^profilejobs/new/(?P<j_id>\d+)/$', views.profilejobs_new, name='profilejobs-new'),
     url(r'^profilejobs/edit/(\d+)/$', views.profilejobs_edit, name='profilejobs-edit'),

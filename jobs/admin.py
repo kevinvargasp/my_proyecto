@@ -1,10 +1,15 @@
 from django.contrib import admin
 
-from .models import Job, JobType, ProfileJob, JobHistory
+from .models import Job, JobType, ProfileJob, JobHistory, Zone
 
 
 @admin.register(JobType)
 class JobTypeAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Zone)
+class ZoneAdmin(admin.ModelAdmin):
     pass
 
 

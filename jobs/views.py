@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User, Group
 from django.contrib import messages
 from django.core.urlresolvers import reverse
@@ -11,8 +11,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response
 # Create your views here.
 from jobs.api import JobSerializer
-from jobs.models import JobType, Job, ProfileJob, JobHistory
-from jobs.form import JobTypeForm, JobForm, ProfileJobForm, JobHistoryForm
+from jobs.models import JobType, Job, ProfileJob, JobHistory, Zone
+from jobs.form import JobTypeForm, JobForm, ProfileJobForm, JobHistoryForm, ZoneForm
 from users.models import Profile
 
 from rest_framework import generics
@@ -22,7 +22,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.renderers import JSONRenderer
 
-
+@permission_required('jobs.index_jobtype', login_url='/log_in')
 def jobtypes_index(request):
     jobtypes_all = JobType.objects.all()
     return render(request, 'jobtypes/index.html', {
@@ -30,7 +30,7 @@ def jobtypes_index(request):
         'jobtypes': jobtypes_all,
     })
 
-
+@permission_required('jobs.add_jobtype', login_url='/log_in')
 def jobtypes_new(request):
     if request.method == 'POST':
         form = JobTypeForm(request.POST)
@@ -49,7 +49,7 @@ def jobtypes_new(request):
         'form': form,
     })
 
-
+@permission_required('jobs.change_jobtype', login_url='/log_in')
 def jobtypes_edit(request, id):
     jobtype = JobType.objects.get(id=id)
     if request.method == 'POST':
@@ -66,7 +66,7 @@ def jobtypes_edit(request, id):
         'form': jobtype_form
     })
 
-
+@permission_required('jobs.show_jobtype', login_url='/log_in')
 def jobtypes_show(request, id):
     jobtype = JobType.objects.get(id=id)
 
@@ -76,7 +76,7 @@ def jobtypes_show(request, id):
         'user_instance': User,
     })
 
-
+@permission_required('jobs.delete_jobtype', login_url='/log_in')
 def jobtypes_delete(request, id):
     jobtype = JobType.objects.get(id=id)
     jobtype.delete()
@@ -90,6 +90,70 @@ def jobtypes_delete(request, id):
         messages.add_message(request, messages.SUCCESS, message)
 
     return HttpResponseRedirect(reverse(jobtypes_index))
+
+
+# ZONES
+@permission_required('jobs.index_zone', login_url='/log_in')
+def zones_index(request):
+    zones_all = Zone.objects.all()
+    return render(request, 'zones/index.html', {
+        'zone_obj': Zone,
+        'zones': zones_all,
+    })
+
+
+@permission_required('jobs.add_zone', login_url='/log_in')
+def zones_new(request):
+    if request.method == 'POST':
+        form = ZoneForm(request.POST)
+        if form.is_valid():
+            zone = form.save(commit=False)
+            zone.save()
+            message = 'Registrado correctamente!'
+            messages.add_message(request, messages.SUCCESS, message)
+            return HttpResponseRedirect(reverse(zones_index))
+        else:
+            message = 'Existen errores por favor verifica!.'
+            messages.add_message(request, messages.ERROR, message)
+    else:
+        form = ZoneForm()
+    return render(request, 'zones/new.html', {
+        'form': form,
+    })
+
+
+@permission_required('jobs.change_zone', login_url='/log_in')
+def zones_edit(request, id):
+    zone = Zone.objects.get(id=id)
+    if request.method == 'POST':
+        zone_form = ZoneForm(request.POST, request.FILES, instance=zone)
+        if zone_form.is_valid():
+            save_zone = zone_form.save()
+
+            message = "actualizado Correctamente"
+            messages.add_message(request, messages.INFO, message)
+            return HttpResponseRedirect(reverse(zones_index))
+    else:
+        zone_form = ZoneForm(instance=zone)
+    return render(request, 'zones/edit.html', {
+        'form': zone_form
+    })
+
+
+@permission_required('jobs.delete_zone', login_url='/log_in')
+def zones_delete(request, id):
+    zone = Zone.objects.get(id=id)
+    zone.delete()
+    is_exist = Zone.objects.filter(id=id).exists()
+
+    if is_exist:
+        message = 'No se pudo eliminar'
+        messages.add_message(request, messages.ERROR, message)
+    else:
+        message = 'Eliminado!'
+        messages.add_message(request, messages.SUCCESS, message)
+
+    return HttpResponseRedirect(reverse(zones_index))
 
 
 # JOB HISTORIES

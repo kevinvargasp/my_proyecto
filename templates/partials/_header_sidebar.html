@@ -2,8 +2,9 @@
     <div class="navbar-header"><a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)"
                                   data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
         <div class="top-left-part"><a class="logo" href="/">
-            <br><div class="text-center">
-                  SSP
+            <br>
+            <div class="text-center">
+                SSP
             </div>
         </a>
         </div>
@@ -77,7 +78,7 @@
                     class="img-circle"><b
                     class="hidden-xs">{{ user.username }}</b> </a>
                 <ul class="dropdown-menu dropdown-user animated flipInY">
-                    <li><a href="{%  url 'profiles-user-show' user.id %}"><i class="ti-user"></i> Mi perfil</a></li>
+                    <li><a href="{% url 'profiles-user-show' user.id %}"><i class="ti-user"></i> Mi perfil</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="#"><i class="ti-settings"></i> Configuraciones</a></li>
                     <li role="separator" class="divider"></li>
@@ -112,15 +113,34 @@
             </li>
 
             <li class="nav-small-cap m-t-10">--- Menu</li>
-
-            <li><a href="#" class="waves-effect"><i class="fa fa-cubes"></i>
-                <span class="hide-menu">Tipo de Trabajos <span class="fa arrow"></span><span
-                        class="label label-rouded label-danger pull-right">1</span></span></a>
-                <ul class="nav nav-second-level">
-                    <li><a href="{% url 'jobtypes-index' %}">Mostrar Todos</a></li>
-                    <li><a href="{% url 'jobtypes-new' %}">Agregar Tipo de Trabajos</a></li>
-                </ul>
-            </li>
+            {% if perms.jobs.index_jobtype  or perms.jobs.add_jobtype %}
+                <li><a href="#" class="waves-effect"><i class="fa fa-cubes"></i>
+                    <span class="hide-menu">Tipo de Trabajos <span class="fa arrow"></span><span
+                            class="label label-rouded label-danger pull-right">1</span></span></a>
+                    <ul class="nav nav-second-level">
+                        {% if perms.jobs.index_jobtype %}
+                            <li><a href="{% url 'jobtypes-index' %}">Mostrar Todos</a></li>
+                        {% endif %}
+                        {% if perms.jobs.add_jobtype %}
+                            <li><a href="{% url 'jobtypes-new' %}">Agregar Tipo de Trabajos</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+            {% endif %}
+            {% if perms.jobs.index_zone  or perms.jobs.add_zone %}
+                <li><a href="#" class="waves-effect"><i class="fa fa-cubes"></i>
+                    <span class="hide-menu">Zonas <span class="fa arrow"></span><span
+                            class="label label-rouded label-danger pull-right">1</span></span></a>
+                    <ul class="nav nav-second-level">
+                        {% if perms.jobs.index_zone %}
+                            <li><a href="{% url 'zones-index' %}">Mostrar Todos</a></li>
+                        {% endif %}
+                        {% if perms.jobs.add_zone %}
+                            <li><a href="{% url 'zones-new' %}">Agregar Zona</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+            {% endif %}
             <li><a href="#" class="waves-effect"><i class="fa fa-object-group"></i>
                 <span class="hide-menu">Trabajos <span class="fa arrow"></span><span
                         class="label label-rouded label-danger pull-right">1</span></span></a>
@@ -130,17 +150,20 @@
                     <li><a href="{% url 'profilejobs-index' %}">Asignaciones</a></li>
                 </ul>
             </li>
-
-            <li><a href="#" class="waves-effect"><i class="fa fa-users"></i> <span
-                    class="hide-menu">Usuarios<span class="fa arrow"></span> <span
-                    class="label label-rouded label-info pull-right">2</span> </span></a>
-                <ul class="nav nav-second-level">
-                    <li><a href="{% url 'profiles-index' %}">Todos los Usuarios</a></li>
-                    <li><a href="{% url 'profiles-new' %}">Agregar Usuario</a></li>
-
-                </ul>
-            </li>
-
+            {% if perms.users.index_profile  or perms.users.add_profile %}
+                <li><a href="#" class="waves-effect"><i class="fa fa-users"></i> <span
+                        class="hide-menu">Usuarios<span class="fa arrow"></span> <span
+                        class="label label-rouded label-info pull-right">2</span> </span></a>
+                    <ul class="nav nav-second-level">
+                        {% if perms.users.index_profile %}
+                            <li><a href="{% url 'profiles-index' %}">Todos los Usuarios</a></li>
+                        {% endif %}
+                        {% if  perms.users.add_profile %}
+                            <li><a href="{% url 'profiles-new' %}">Agregar Usuario</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+            {% endif %}
             <li><a href="#" class="waves-effect"><i class="fa fa-envelope-o"></i> <span
                     class="hide-menu">Notificaciones<span class="fa arrow"></span> <span
                     class="label label-rouded label-info pull-right">1</span> </span></a>

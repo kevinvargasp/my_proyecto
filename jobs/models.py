@@ -27,11 +27,26 @@ class JobType(models.Model):
             ('index_jobtype', 'Can List JobType'),
         )
 
+class Zone(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Nombre de Zona')
+
+    def __unicode__(self):
+        return "%s" % (self.name)
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = 'Zona'
+        verbose_name_plural = 'Zonas'
+        permissions = (
+            ('show_zone', 'Can Details Zone'),
+            ('index_zone', 'Can List Zone'),
+        )
 
 class Job(models.Model):
     jobtype = models.ForeignKey(JobType, verbose_name='Tipo de Trabajo')
     name_client = models.CharField(max_length=100, verbose_name='Nombres del Cliente')
     address = models.CharField(max_length=100, verbose_name=u'Dirección')
+    zone = models.ForeignKey(Zone, default=1, verbose_name='Zona')
     description = models.TextField(verbose_name=u'Descripción')
     mobile_phone = models.CharField(max_length=20, verbose_name=u'Número de Celular')
     state = models.CharField(max_length=10, choices=STATUS_TASK, verbose_name='Estado', default='NUEVO')
@@ -66,8 +81,8 @@ class ProfileJob(models.Model):
         verbose_name = 'Assignacion'
         verbose_name_plural = 'Asignaciones'
         permissions = (
-            ('show_pj', 'Can Details PJ'),
-            ('index_pj', 'Can List PJ'),
+            ('show_profilejob', 'Can Details Profije Job'),
+            ('index_profilejob', 'Can List Profile Job'),
         )
 
 

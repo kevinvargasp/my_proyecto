@@ -1,19 +1,18 @@
 {% extends 'layout/admin_base.html' %}
-{% load utils %}
 {% block title_layout %}
-    <h3>Tipo de Trabajos</h3>
+    <h3>Zonas</h3>
 {% endblock %}
+{% load utils %}
 {% block layout %}
-
     <div class="panel panel-primary">
         <div class="row">
             <div class="form-inline padding-bottom-15">
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            {% if perms.jobs.add_jobtype %}
-                                <a href="{% url 'jobtypes-new' %}"
-                                   class="fcbtn btn btn-outline btn-primary btn-1f">Agregar</a>
+                            {% if perms.jobs.add_zone %}
+                                <a href="{% url 'zones-new' %}"
+                                   class="fcbtn btn btn-outline btn-primary btn-1f"> Nueva Zona</a>
                             {% endif %}
                         </div>
                     </div>
@@ -30,33 +29,27 @@
                 <thead class="table-bordered ">
                 <tr>
                     <th>#</th>
-                    <th>{% get_verbose_field_name jobtype_instance 'name' %}</th>
+                    <th>{% get_field_name zone_obj 'name' %}</th>
                     <th class="text-center">Opciones</th>
                 </tr>
                 </thead>
 
                 <tbody>
-                {% for jt in jobtypes %}
+                {% for zone in zones %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td>
-                            {{ jt.name }}
-                        </td>
+                        <td>{{ zone.name }}</td>
                         <td class="text-center">
-                            {% if perms.jobs.show_jobtype %}
-                                <a href="{% url 'jobtypes-show' jt.id %}" data-tooltip="tooltip"
-                                   title="Más Detalles"><i class="fa fa-bars text-success"></i></a>
+                            {% if perms.jobs.change_zone %}
+                                <a href="{% url 'zones-edit' zone.id %}" data-tooltip="tooltip"
+                                   title="Editar"><i class="fa fa-pencil text-success"></i></a>
                             {% endif %}
-                            {% if perms.jobs.change_jobtype %}
-                                <a href="{% url 'jobtypes-edit' jt.id %}" data-tooltip="tooltip"
-                                   title="Modificar"><i class="fa fa-pencil text-success"></i></a>
-                            {% endif %}
-                            {% if perms.jobs.delete_jobtype %}
-                                <a href="#" data-href="{% url 'jobtypes-delete' jt.id %}"
+                            {% if perms.jobs.delete_zone %}
+                                <a href="#" data-href="{% url 'zones-delete' zone.id %}"
                                    data-toggle="modal" data-target="#confirm-delete" data-tooltip="tooltip"
-                                   title="Eliminar"> <i class="fa fa-times text-danger"></i> </a>
+                                   title="Eliminar"> <i class="fa fa-times text-danger"></i>
+                                </a>
                             {% endif %}
-
                         </td>
                     </tr>
                 {% endfor %}
@@ -74,10 +67,8 @@
             </table>
         </div>
     </div>
-
 {% endblock %}
 {% block custom_js %}
-
     <script>
         $(document).ready(function () {
             // Search input
