@@ -1,8 +1,13 @@
 {% extends 'layout/admin_base.html' %}
 
 {% block title_layout %}
-    <h3><a href="{% url 'profiles-index' %}" data-tooltip="tooltip" title="Atrás"><i
-            class="fa fa-arrow-circle-left"></i></a> Modificando Perfil</h3>
+    <h3>
+        {% if perms.users.index_profile %}
+            <a href="{% url 'profiles-index' %}" data-tooltip="tooltip" title="Atrás"><i
+                    class="fa fa-arrow-circle-left"></i></a>
+        {% endif %}
+
+        Modificando Perfil</h3>
 {% endblock %}
 
 {% block layout %}

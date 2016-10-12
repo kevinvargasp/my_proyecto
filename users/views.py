@@ -63,10 +63,25 @@ def profiles_new(request):
         'form_second': formUser,
     })
 
+def check_permision(id):
+    add_group_permissions()
+
+    profile = Profile.objects.get(id=id)
+    type_rol = profile.rol
+
+    if type_rol == 'SUP':
+        g = Group.objects.get(name='SUPERVISOR')
+        g.user_set.add(profile.user_id)
+    elif type_rol == 'TEC':
+        g = Group.objects.get(name='TECNICO')
+        g.user_set.add(profile.user_id)
+
 
 @permission_required('users.change_profile', login_url='/log_in')
 def profiles_edit(request, id):
     profile = Profile.objects.get(id=id)
+    check_permision(id)
+
     if request.method == 'POST':
         profile_form = ProfileForm(request.POST, request.FILES, instance=profile)
         if profile_form.is_valid():
@@ -74,7 +89,7 @@ def profiles_edit(request, id):
 
             message = "actualizado Correctamente"
             messages.add_message(request, messages.INFO, message)
-            return HttpResponseRedirect(reverse(profiles_index))
+            return HttpResponseRedirect(reverse('profiles-show', kwargs={'id': profile.id}))
     else:
         profile_form = ProfileForm(instance=profile)
     return render(request, 'profiles/edit.html', {
@@ -82,7 +97,7 @@ def profiles_edit(request, id):
     })
 
 
-@permission_required('users.delete_profile', login_url='/log_in')
+#@permission_required('users.show_profile', login_url='/log_in')
 def profiles_show(request, id):
     profile = Profile.objects.get(id=id)
 
@@ -124,7 +139,6 @@ def profiles_delete(request, id):
 
 
 def log_in(request):
-
     if request.method == 'POST':
         form = AuthenticationForm(request.POST)
         if form.is_valid:
@@ -157,9 +171,12 @@ def log_out(request):
     logout(request)
     return HttpResponseRedirect('/')
 
+
 from django.contrib.auth.models import Group, Permission
 import logging
+
 logger = logging.getLogger(__name__)
+
 
 def add_group_permissions():
     # ENCARGADO_RECURSOS_PROPIOS
@@ -196,6 +213,12 @@ def add_group_permissions():
             Permission.objects.get(codename="show_jobhistory"),
             Permission.objects.get(codename="index_jobhistory"),
             Permission.objects.get(codename="delete_jobhistory"),
+
+            Permission.objects.get(codename="add_profile"),
+            Permission.objects.get(codename="change_profile"),
+            Permission.objects.get(codename="show_profile"),
+            Permission.objects.get(codename="index_profile"),
+            Permission.objects.get(codename="delete_profile"),
         )
 
         logger.info('SUPERVISOR Group created')
@@ -206,7 +229,9 @@ def add_group_permissions():
         group.permissions.add(
             Permission.objects.get(codename="change_job"),
             Permission.objects.get(codename="show_job"),
-            Permission.objects.get(codename="index_job")
+            Permission.objects.get(codename="index_job"),
+
+            Permission.objects.get(codename="change_profile"),
+            Permission.objects.get(codename="show_profile"),
         )
         logger.info('SUPERVISOR Group created')
-
