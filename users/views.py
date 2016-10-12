@@ -113,8 +113,7 @@ def profiles_delete(request, id):
 
 
 def log_in(request):
-    if not request.user.is_anonymous():
-        return HttpResponseRedirect('/private')
+
     if request.method == 'POST':
         form = AuthenticationForm(request.POST)
         if form.is_valid:
@@ -137,7 +136,7 @@ def log_in(request):
     else:
         form = AuthenticationForm()
 
-    return render(request, 'login/imput_system.html', {
+    return render(request, 'login/session_new.html', {
         'form': form
     })
 
