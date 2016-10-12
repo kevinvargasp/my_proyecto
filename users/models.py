@@ -28,7 +28,7 @@ class Profile(models.Model):
     home_address = models.CharField(max_length=100, verbose_name=u'Dirección')
     mobile_phone = models.CharField(max_length=25, blank=True, verbose_name='Nro. de Celular')
     rol = models.CharField(max_length=3, choices=ROLES_PROFILE, default='TEC', verbose_name='Rol')
-    imei_code = models.CharField(max_length=25, blank=True, unique=True, verbose_name='Imei Celular')
+    imei_code = models.CharField(max_length=25, unique=True, verbose_name='Imei Celular')
 
     def __unicode__(self):
         return "%s %s" % (self.first_name, self.middle_name)
