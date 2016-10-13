@@ -37,6 +37,7 @@ def profiles_new(request):
             profile = form.save(commit=False)
             profile.user = user
             profile.save()
+            check_permision(profile.id)
 
             message = 'Registrado correctamente!'
             messages.add_message(request, messages.SUCCESS, message)

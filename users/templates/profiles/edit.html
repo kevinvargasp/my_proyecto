@@ -15,7 +15,7 @@
 {% endblock %}
 {% block code_js %}
     <script>
-        var role = '{{ profile.rol}}';
+        var role = '{{ profile.rol }}';
         $(document).ready(function () {
             $('#id_date_of_birth').datepicker({dateFormat: 'dd/mm/yy'});
             $('input:checkbox').addClass('js-switch');
@@ -25,7 +25,7 @@
                 new Switchery($(this)[0], $(this).data());
             });
             if (role == 'TEC') {
-            $('.rol').addClass('hidden')
+                $('.rol').addClass('hidden')
             }
         });
     </script>
