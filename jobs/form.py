@@ -48,6 +48,11 @@ class ProfileJobForm(BaseForm):
         job = cleaned_data.get("job")
         profile = cleaned_data.get("profile")
 
+        if cleaned_data.get('id') is None and ProfileJob.objects.filter(profile=profile, job=job).exists():
+            msg = u'Ya se asignó este trabajo a este usuario'
+            self.add_error('job', msg)
+            self.add_error('profile', msg)
+
         if ProfileJob.objects.filter(profile=profile, state='N').count() > 5:
             msg = "No se pueden asignar mas trabajos."
             self.add_error('job', msg)

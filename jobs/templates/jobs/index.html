@@ -28,6 +28,7 @@
                 <tr>
                     <th>#</th>
                     <th>{% get_field_name job_obj 'jobtype' %}</th>
+                    <th>{% get_field_name job_obj 'state' %}</th>
                     <th>{% get_field_name job_obj 'register_at' %}</th>
                     <th>{% get_field_name job_obj 'name_client' %}</th>
                     <th>{% get_field_name job_obj 'description' %}</th>
@@ -40,6 +41,7 @@
                     <tr>
                         <td>{{ forloop.counter }}</td>
                         <td>{{ job.jobtype }}</td>
+                        <td>{{ job.state }}</td>
                         <td>{{ job.register_at }}</td>
                         <td>{{ job.name_client }}</td>
                         <td>{{ job.description }}</td>
@@ -59,14 +61,13 @@
                                title="Eliminar">
                                 <i class="fa fa-times text-danger"></i>
                             </a>
-
                         </td>
                     </tr>
                 {% endfor %}
                 </tbody>
                 <tfoot>
                 <tr>
-                    <td colspan="6">
+                    <td colspan="7">
                         <div class="text-right">
                             <ul class="pagination">
                             </ul>

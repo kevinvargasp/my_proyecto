@@ -366,7 +366,7 @@ def jobs_show(request, id):
 
     return render(request, 'jobs/show.html', {
         'job': job,
-        'job_instance': Job,
+        'job_obj': Job,
     })
 
 
@@ -399,7 +399,14 @@ def profilejobs_new(request, j_id):
         form = ProfileJobForm(request.POST)
         if form.is_valid():
             profilejob = form.save(commit=False)
-            profilejob.save()
+            pj = profilejob.save()
+
+            profilejob = ProfileJob.objects.get(pk=profilejob.id)
+
+            job = Job.objects.get(pk=profilejob.job_id)
+            job.state = request.POST.get('state')
+            job.save(update_fields=['state'])
+
             message = 'Registrado correctamente!'
             messages.add_message(request, messages.SUCCESS, message)
             return HttpResponseRedirect(reverse(profilejobs_index))
@@ -420,6 +427,10 @@ def profilejobs_edit(request, id):
         profilejob_form = ProfileJobForm(request.POST, request.FILES, instance=profilejob)
         if profilejob_form.is_valid():
             save_profilejob = profilejob_form.save()
+
+            job = Job.objects.get(pk=profilejob.job_id)
+            job.state = request.POST.get('state')
+            job.save(update_fields=['state'])
 
             message = "actualizado Correctamente"
             messages.add_message(request, messages.INFO, message)

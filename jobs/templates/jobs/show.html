@@ -9,35 +9,39 @@
     <a href="{% url 'profilejobs-new' job.id %}"
        class="fcbtn btn btn-outline btn-primary btn-1f">Asignar</a>
     <p>
-        <strong>{% get_verbose_field_name job_instance 'name_client' %}</strong>
+        <strong>{% get_verbose_field_name job_obj 'name_client' %}</strong>
         {{ job.name_client }}
     </p>
     <p>
-        <strong>{% get_verbose_field_name job_instance 'jobtype' %}</strong>
+        <strong>{% get_verbose_field_name job_obj 'jobtype' %}</strong>
         {{ job.jobtype }}
     </p>
     <p>
-        <strong>{% get_verbose_field_name job_instance 'address' %}</strong>
+        <strong>{% get_verbose_field_name job_obj 'state' %}</strong>
+        {{ job.state }}
+    </p>
+    <p>
+        <strong>{% get_verbose_field_name job_obj 'address' %}</strong>
         {{ job.address }}
     </p>
     <p>
-        <strong>{% get_verbose_field_name job_instance 'description' %}</strong>
+        <strong>{% get_verbose_field_name job_obj 'description' %}</strong>
         {{ job.description }}
     </p>
     <p>
-        <strong>{% get_verbose_field_name job_instance 'mobile_phone' %}</strong>
+        <strong>{% get_verbose_field_name job_obj 'mobile_phone' %}</strong>
         {{ job.mobile_phone }}
     </p>
     <p>
-        <strong>{% get_verbose_field_name job_instance 'register_at' %}</strong>
+        <strong>{% get_verbose_field_name job_obj 'register_at' %}</strong>
         {{ job.register_at }}
     </p>
     <p>
-        <strong>{% get_verbose_field_name job_instance 'lat' %}</strong>
+        <strong>{% get_verbose_field_name job_obj 'lat' %}</strong>
         {{ job.lat }}
     </p>
     <p>
-        <strong>{% get_verbose_field_name job_instance 'lng' %}</strong>
+        <strong>{% get_verbose_field_name job_obj 'lng' %}</strong>
         {{ job.lng }}
     </p>
 
