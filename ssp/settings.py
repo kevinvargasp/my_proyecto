@@ -97,6 +97,7 @@ DEBUG = False
 try:
     import os
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+    DEBUG = True
 
     from .local_settings import *
 except ImportError:
