@@ -274,7 +274,7 @@ class HistoryViewSet(APIView):
                 print history['imei_code']
                 job_id = history['job_id']
                 imei = history['imei_code']
-                imei = '123456789'
+                #imei = '123456789'
 
                 state = history['h_state'] if history.has_key('h_state') else None
                 observation = history['h_observation'] if history.has_key('h_observation') else None
