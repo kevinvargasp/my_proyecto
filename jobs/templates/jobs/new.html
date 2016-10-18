@@ -17,7 +17,7 @@
     </div>
 {% endblock %}
 {% block code_js %}
-    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+    {% include 'partials/_url_gmaps.html' %}
 
     <script type="text/javascript">
         var map;
