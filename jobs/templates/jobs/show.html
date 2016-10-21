@@ -25,6 +25,10 @@
         {{ job.address }}
     </p>
     <p>
+        <strong>{% get_verbose_field_name job_obj 'zone' %}</strong>
+        {{ job.zone }}
+    </p>
+    <p>
         <strong>{% get_verbose_field_name job_obj 'description' %}</strong>
         {{ job.description }}
     </p>

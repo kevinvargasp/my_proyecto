@@ -13,7 +13,7 @@ STATUS_TASK = (('NUEVO', 'NUEVO'),
 
 
 class JobType(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Tipo de Trabajo')
+    name = models.CharField(max_length=100, unique=True, verbose_name='Tipo de Trabajo')
 
     def __unicode__(self):
         return "%s" % (self.name)
@@ -27,8 +27,9 @@ class JobType(models.Model):
             ('index_jobtype', 'Can List JobType'),
         )
 
+
 class Zone(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Nombre de Zona')
+    name = models.CharField(max_length=100, unique=True, verbose_name='Nombre de Zona')
 
     def __unicode__(self):
         return "%s" % (self.name)
@@ -41,6 +42,7 @@ class Zone(models.Model):
             ('show_zone', 'Can Details Zone'),
             ('index_zone', 'Can List Zone'),
         )
+
 
 class Job(models.Model):
     jobtype = models.ForeignKey(JobType, verbose_name='Tipo de Trabajo')
