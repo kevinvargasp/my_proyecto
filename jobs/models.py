@@ -34,6 +34,9 @@ class Zone(models.Model):
     def __unicode__(self):
         return "%s" % (self.name)
 
+    def clean(self):
+        self.name = self.name.capitalize()
+
     class Meta:
         ordering = ['id']
         verbose_name = 'Zona'
