@@ -17,11 +17,27 @@ class JobTypeForm(BaseForm):
         model = JobType
         fields = '__all__'
 
+    def clean(self):
+        cleaned_data = super(JobTypeForm, self).clean()
+        name = cleaned_data.get("name")
+
+        if not self.instance.pk and JobType.objects.filter(name__contains=name).exists():
+            msg = u'Ya se registró este tipo de trabajo'
+            self.add_error('name', msg)
+
 
 class ZoneForm(BaseForm):
     class Meta:
         model = Zone
         fields = '__all__'
+
+    def clean(self):
+        cleaned_data = super(ZoneForm, self).clean()
+        name = cleaned_data.get("name")
+
+        if not self.instance.pk and Zone.objects.filter(name__contains=name).exists():
+            msg = u'Ya se registró esta zona'
+            self.add_error('name', msg)
 
 
 class JobForm(BaseForm):
@@ -48,7 +64,7 @@ class ProfileJobForm(BaseForm):
         job = cleaned_data.get("job")
         profile = cleaned_data.get("profile")
 
-        if cleaned_data.get('id') is None and ProfileJob.objects.filter(profile=profile, job=job).exists():
+        if not self.instance.pk and ProfileJob.objects.filter(profile=profile, job=job).exists():
             msg = u'Ya se asignó este trabajo a este usuario'
             self.add_error('job', msg)
             self.add_error('profile', msg)
