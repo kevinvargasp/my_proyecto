@@ -1,17 +1,8 @@
-{% extends 'layout/base.html' %}
-{% block submit %}
-    Guardar
-{% endblock %}
-{% block title %}
-    Modificar
-{% endblock %}
-{% block link_back %}
-    {% url 'profilejobs-index' %}
-{% endblock %}
-{% block panel_title %}
-    Modificar
-{% endblock %}
-{% block panel_title_right %}
+{% extends 'layout/admin_base.html' %}
+
+{% block title_layout %}
+    <h3>{% if perms.jobs.index_jobtype %}<a href="{% url 'profilejobs-index' %}" data-tooltip="tooltip" title="Atrás"><i
+            class="fa fa-arrow-circle-left"></i></a> {% endif %} Modificando Asignacion</h3>
 {% endblock %}
 {% block layout %}
     <div class="row">
@@ -25,7 +16,6 @@
 {% block code_js %}
     <script>
         $(document).ready(function () {
-            $('#id_date_of_birth').datepicker({dateFormat: 'dd/mm/yy'});
             $('input:checkbox').addClass('js-switch');
 
             var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));

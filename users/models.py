@@ -1,6 +1,6 @@
 # encoding:utf-8
 from __future__ import unicode_literals
-
+from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -29,6 +29,8 @@ class Profile(models.Model):
     mobile_phone = models.CharField(max_length=25, blank=True, verbose_name='Nro. de Celular')
     rol = models.CharField(max_length=3, choices=ROLES_PROFILE, default='TEC', verbose_name='Rol')
     imei_code = models.CharField(max_length=25, unique=True, verbose_name='Imei Celular')
+    register_at = models.DateTimeField(default=datetime.now, verbose_name='Fecha de registro')
+
 
     def __unicode__(self):
         return "%s %s" % (self.first_name, self.middle_name)

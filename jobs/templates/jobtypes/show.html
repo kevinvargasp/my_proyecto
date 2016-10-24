@@ -3,7 +3,7 @@
 {% block title_layout %}
 
     <h3>
-        {% if perms.jobs.index_jobtipe %}
+        {% if perms.jobs.index_jobtype %}
             <a href="{% url 'jobtypes-index' %}" data-tooltip="tooltip" title="Atrás">
                 <i class="fa fa-arrow-circle-left"></i></a>
         {% endif %}
@@ -19,6 +19,6 @@
     </p>
 {% endblock %}
 
-{% block custom_js %}
+{% block code_js %}
 
 {% endblock %}

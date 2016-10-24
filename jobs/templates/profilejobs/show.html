@@ -1,12 +1,18 @@
-{% extends 'layout/base.html' %}
+{% extends 'layout/admin_base.html' %}
 {% load utils %}
+{% block title_layout %}
+    <h3>
+        {% if perms.jobs.index_profilejob %}
+            <a href="{% url 'profilejobs-index' %}" data-tooltip="tooltip" title="Atrás">
+                <i class="fa fa-arrow-circle-left"></i></a>
+        {% endif %}
+        Mostrando Asignación
+    </h3>
+{% endblock %}
 {% block layout %}
     <div class="row">
         <div class="col-md-12">
             <div class="white-box">
-                <a href="{% url 'jobhistories-new' profilejob.id %}"
-                   class="fcbtn btn btn-outline btn-primary btn-1f">Registrar Trabajo</a>
-
                 <p>
                     <strong>{% get_verbose_field_name profilejob_instance 'state' %}</strong>
                     {{ profilejob.state }}
@@ -61,6 +67,6 @@
     </div>
 {% endblock %}
 
-{% block custom_js %}
+{% block code_js %}
 
 {% endblock %}

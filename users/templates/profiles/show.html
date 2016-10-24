@@ -43,6 +43,7 @@
                         <p><strong>{% get_field_name profile_obj 'rol' %} </strong>{% get_role_profile profile.rol %}
                         </p>
                         <p><strong>{% get_field_name profile_obj 'imei_code' %} </strong>{{ profile.imei_code }}</p>
+                        <p><strong>{% get_field_name profile_obj 'register_at' %} </strong>{{ profile.register_at }}</p>
                     </div>
                 </div>
             </div>
@@ -73,7 +74,7 @@
 
 {% endblock %}
 
-{% block custom_js %}
+{% block code_js %}
     <script>
         $(document).ready(function () {
             // Search input

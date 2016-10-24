@@ -1,6 +1,7 @@
 from django import template
 from datetime import datetime
 
+from jobs.models import ProfileJob
 from users.models import ROLES_PROFILE, MARITAL_STATUS, GENDER
 
 register = template.Library()
@@ -84,3 +85,12 @@ def index(List, i):
     if (int(i) > count - 1):
         return "No registrado"
     return List[int(i)]
+
+
+@register.simple_tag
+def is_assigned(job_id):
+    html_icon = '<span class="label label-danger label-rounded">SIN ASIGNAR</span>'
+    if ProfileJob.objects.filter(job_id=int(job_id)).exists():
+        html_icon = '<span class="label label-megna label-rounded">ASIGNADO</span>'
+
+    return html_icon

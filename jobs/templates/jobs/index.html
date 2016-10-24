@@ -28,6 +28,7 @@
                 <tr>
                     <th>#</th>
                     <th>{% get_field_name job_obj 'jobtype' %}</th>
+                    <th>Estado de asignacion</th>
                     <th>{% get_field_name job_obj 'state' %}</th>
                     <th>{% get_field_name job_obj 'register_at' %}</th>
                     <th>{% get_field_name job_obj 'name_client' %}</th>
@@ -41,6 +42,10 @@
                     <tr>
                         <td>{{ forloop.counter }}</td>
                         <td>{{ job.jobtype }}</td>
+                        <td class="text-center">{% autoescape off %}
+                            {% is_assigned job.id  %}
+                            {% endautoescape %}
+                        </td>
                         <td>{{ job.state }}</td>
                         <td>{{ job.register_at }}</td>
                         <td>{{ job.name_client }}</td>
@@ -79,7 +84,7 @@
         </div>
     </div>
 {% endblock %}
-{% block custom_js %}
+{% block code_js %}
 
     <script>
         $(document).ready(function () {
