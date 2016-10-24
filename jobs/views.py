@@ -314,6 +314,14 @@ class HistoryViewSet(APIView):
             # message = {'message': 'No Existe perfil o Tarea'}
             # return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
+#JOBS MAPS
+
+def jobs_maps_index(request):
+    jobs_all = Job.objects.all()
+    return render(request, 'jobs/maps/index.html', {
+        'job_obj': Job,
+        'jobs': jobs_all,
+    })
 
 # JOBS
 def jobs_index(request):

@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^jobs/edit/(\d+)/$', views.jobs_edit, name='jobs-edit'),
     url(r'^jobs/show/(\d+)/$', views.jobs_show, name='jobs-show'),
     url(r'^jobs/delete/(\d+)/$', views.jobs_delete, name='jobs-delete'),
+    url(r'^jobs/maps/index$', views.jobs_maps_index, name='jobs-maps-index'),
 
     url(r'^jobtypes/index$', views.jobtypes_index, name='jobtypes-index'),
     url(r'^jobtypes/new/$', views.jobtypes_new, name='jobtypes-new'),

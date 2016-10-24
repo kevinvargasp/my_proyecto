@@ -148,6 +148,7 @@
                     <li><a href="{% url 'jobs-index' %}">Mostrar Todos</a></li>
                     <li><a href="{% url 'jobs-new' %}">Agregar Trabajo</a></li>
                     <li><a href="{% url 'profilejobs-index' %}">Asignaciones</a></li>
+                    <li><a href="{% url 'jobs-maps-index' %}">Mapas de Trabajos</a></li>
                 </ul>
             </li>
             {% if perms.users.index_profile  or perms.users.add_profile %}
