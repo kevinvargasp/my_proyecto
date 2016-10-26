@@ -22,6 +22,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.renderers import JSONRenderer
 
+
 @permission_required('jobs.index_jobtype', login_url='/log_in')
 def jobtypes_index(request):
     jobtypes_all = JobType.objects.all()
@@ -29,6 +30,7 @@ def jobtypes_index(request):
         'jobtype_instance': JobType,
         'jobtypes': jobtypes_all,
     })
+
 
 @permission_required('jobs.add_jobtype', login_url='/log_in')
 def jobtypes_new(request):
@@ -49,6 +51,7 @@ def jobtypes_new(request):
         'form': form,
     })
 
+
 @permission_required('jobs.change_jobtype', login_url='/log_in')
 def jobtypes_edit(request, id):
     jobtype = JobType.objects.get(id=id)
@@ -66,6 +69,7 @@ def jobtypes_edit(request, id):
         'form': jobtype_form
     })
 
+
 @permission_required('jobs.show_jobtype', login_url='/log_in')
 def jobtypes_show(request, id):
     jobtype = JobType.objects.get(id=id)
@@ -75,6 +79,7 @@ def jobtypes_show(request, id):
         'jobtype_instance': JobType,
         'user_instance': User,
     })
+
 
 @permission_required('jobs.delete_jobtype', login_url='/log_in')
 def jobtypes_delete(request, id):
@@ -274,7 +279,7 @@ class HistoryViewSet(APIView):
                 print history['imei_code']
                 job_id = history['job_id']
                 imei = history['imei_code']
-                #imei = '123456789'
+                # imei = '123456789'
 
                 state = history['h_state'] if history.has_key('h_state') else None
                 observation = history['h_observation'] if history.has_key('h_observation') else None
@@ -314,14 +319,26 @@ class HistoryViewSet(APIView):
             # message = {'message': 'No Existe perfil o Tarea'}
             # return Response(message, status=status.HTTP_400_BAD_REQUEST)
 
-#JOBS MAPS
+
+# JOBS MAPS
 
 def jobs_maps_index(request):
-    jobs_all = Job.objects.all()
+    filter = request.GET.get('filter')
+
+    if filter == 'assig':
+        pj = ProfileJob.objects.all().values_list('id', flat=True)
+        jobs_all = Job.objects.filter(pk__in=pj)
+    elif filter == 'wassig':
+        jobs_all = Job.objects.filter(profilejob__profile=None)
+    elif filter == 'comp':
+        jobs_all = Job.objects.filter(state='TERMINADO')
+    else:
+        jobs_all = Job.objects.all()
     return render(request, 'jobs/maps/index.html', {
         'job_obj': Job,
         'jobs': jobs_all,
     })
+
 
 # JOBS
 def jobs_index(request):

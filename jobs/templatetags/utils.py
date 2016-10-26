@@ -57,7 +57,6 @@ def get_marital_profile(marital):
 
 @register.simple_tag
 def get_role_profile(role):
-    print "-%s-" % role
     for rol in ROLES_PROFILE:
         if rol[0] == role:
             return rol[1]
@@ -87,10 +86,10 @@ def index(List, i):
     return List[int(i)]
 
 
-@register.simple_tag
-def is_assigned(job_id):
-    html_icon = '<span class="label label-danger label-rounded">SIN ASIGNAR</span>'
-    if ProfileJob.objects.filter(job_id=int(job_id)).exists():
-        html_icon = '<span class="label label-megna label-rounded">ASIGNADO</span>'
+@register.assignment_tag
+def is_assigned_plain(job_id):
+    return ProfileJob.objects.filter(job_id=int(job_id)).exists()
 
-    return html_icon
+@register.assignment_tag
+def get_profiles_assigment(job_id):
+    return ProfileJob.objects.filter(job_id=int(job_id))
