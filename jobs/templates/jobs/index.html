@@ -42,9 +42,15 @@
                     <tr>
                         <td>{{ forloop.counter }}</td>
                         <td>{{ job.jobtype }}</td>
-                        <td class="text-center">{% autoescape off %}
-                            {% is_assigned job.id  %}
-                            {% endautoescape %}
+                        <td class="text-center">
+                            {% is_assigned_plain job.id as state_job %}
+
+                            {% if state_job %}
+                                <span class="label label-megna label-rounded">ASIGNADO</span>
+                            {% else %}
+                                <span class="label label-danger label-rounded">SIN ASIGNAR</span>
+                            {% endif %}
+                            <br>
                         </td>
                         <td>{{ job.state }}</td>
                         <td>{{ job.register_at }}</td>
