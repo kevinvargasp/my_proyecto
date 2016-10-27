@@ -1,5 +1,6 @@
 {% extends 'layout/admin_base.html' %}
 {% load utils %}
+{% load humanize %}
 {% block title_layout %}
     <h3>Trabajos</h3>
 {% endblock %}
@@ -29,7 +30,7 @@
                     <tr>
                         <th>#</th>
                         <th>{% get_field_name job_obj 'jobtype' %}</th>
-                        <th>Asignado?</th>
+                        <th>{% get_field_name job_obj 'zone' %}</th>
                         <th>{% get_field_name job_obj 'state' %}</th>
                         <th>{% get_field_name job_obj 'register_at' %}</th>
                         <th>{% get_field_name job_obj 'name_client' %}</th>
@@ -42,19 +43,19 @@
                     {% for job in jobs %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td>{{ job.jobtype }}</td>
-                            <td class="text-center">
+                            <td>
                                 {% is_assigned_plain job.id as state_job %}
 
                                 {% if state_job %}
-                                    <span class="label label-megna label-rounded">SI</span>
+                                    <i class="fa fa-circle m-r-5" style="color: #00bfc7;" data-tooltip="tooltip" title="Asignado"></i>
                                 {% else %}
-                                    <span class="label label-danger label-rounded">NO</span>
+                                    <i class="fa fa-circle m-r-5" style="color: #fa3e18;" data-tooltip="tooltip" title="No Asignado"></i>
                                 {% endif %}
-                                <br>
+                                {{ job.jobtype }}
                             </td>
+                            <td>{{ job.zone }}</td>
                             <td>{{ job.state }}</td>
-                            <td>{{ job.register_at }}</td>
+                            <td>{{ job.register_at|naturaltime }}</td>
                             <td>{{ job.name_client }}</td>
                             <td>{{ job.description }}</td>
                             <td class="text-center">
