@@ -14,7 +14,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PROJECT_DIR  = os.path.dirname(__file__)
+PROJECT_DIR = os.path.dirname(__file__)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'users',
     'jobs',
     'notifications',
+    'reports',
     'rest_framework',
+    'easy_pdf',
 ]
 
 MIDDLEWARE = [
@@ -96,6 +98,7 @@ DEBUG = False
 
 try:
     import os
+
     BASE_DIR = os.path.dirname(os.path.dirname(__file__))
     DEBUG = True
 
@@ -149,4 +152,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 
-APPEND_SLASH=False
+APPEND_SLASH = False

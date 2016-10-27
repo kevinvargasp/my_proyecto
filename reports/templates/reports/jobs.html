@@ -1,0 +1,63 @@
+{% extends 'layout/admin_base.html' %}
+{% load utils %}
+{% block title_layout %}
+    <h3>Reportes de Trabajos</h3>
+{% endblock %}
+{% block layout %}
+    <div class="panel panel-primary">
+        {% if is_correct %}
+            <a href="{% url 'jobs-pdf' %}?date_start={{ date_start }}&date_end={{ date_end }}" target="_blank" class="btn btn-success">Reporte General</a>
+        {% else %}
+            <div class="row">
+                <div class="col-md-4">
+                    <form action="#" method="post" class="form">
+                        {% csrf_token %}
+                        <label for="date_first">Fecha inicial</label>
+                        <input class="form-control datepicker" type="text" name="date_start" id="date_first"
+                               autocomplete="off"
+                               required="true">
+                        <label for="date_second">Fecha final </label>
+                        <input class="form-control datepicker" type="text" name="date_end" id="date_second"
+                               autocomplete="off" required="true">
+
+                        <button type="submit" class="btn btn-success">Verificar</button>
+                    </form>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+{% block code_js %}
+    <script language="javascript">
+        $(document).ready(function () {
+            //$('.datepicker').datepicker();
+            var nowTemp = new Date();
+            var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+
+            var checkin = $('#date_first').datepicker({
+                onRender: function (date) {
+                    return date.valueOf();
+                },
+                format: 'dd/mm/yyyy',
+                maxDate: '0'
+            }).on('changeDate', function (ev) {
+                if (ev.date.valueOf() > checkout.date.valueOf()) {
+                    var newDate = new Date(ev.date);
+                    newDate.setDate(newDate.getDate() + 1);
+                    checkout.setValue(newDate);
+                }
+                checkin.hide();
+                $('#date_second')[0].focus();
+            }).data('datepicker');
+            var checkout = $('#date_second').datepicker({
+                onRender: function (date) {
+                    return date.valueOf();
+                },
+                format: 'dd/mm/yyyy',
+                maxDate: '0'
+            }).on('changeDate', function (ev) {
+                checkout.hide();
+            }).data('datepicker');
+        });
+    </script>
+{% endblock %}

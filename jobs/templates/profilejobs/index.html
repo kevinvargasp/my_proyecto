@@ -20,55 +20,57 @@
                     </div>
                 </div>
             </div>
-            <table id="table-users" class="table table-bordered table-striped">
-                <thead class="table-bordered ">
-                <tr>
-                    <th>#</th>
-                    <th>{% get_verbose_field_name profilejob_instance 'state' %}</th>
-                    <th>{% get_verbose_field_name profilejob_instance 'profile' %}</th>
-                    <th>{% get_verbose_field_name profilejob_instance 'job' %}</th>
-                    <th class="text-center">Opciones</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                {% for profile in profilejobs %}
+            <div class="table-responsive">
+                <table id="table-users" class="table table-bordered table-striped">
+                    <thead class="table-bordered ">
                     <tr>
-                        <td>{{ forloop.counter }}</td>
-                        <td>
-                            {{ profile.state }}
-                        </td>
-                        <td>{{ profile.profile }}</td>
-                        <td>{{ profile.job }}</td>
-                        <td class="text-center">
-                            <a href="{% url 'profilejobs-show' profile.id %}" data-tooltip="tooltip"
-                               title="Más Detalles"><i
-                                    class="fa fa-bars text-success"></i></a>
-                            <a href="{% url 'profilejobs-edit' profile.id %}" data-tooltip="tooltip"
-                               title="Modificar"><i
-                                    class="fa fa-pencil text-success"></i></a>
+                        <th>#</th>
+                        <th>{% get_verbose_field_name profilejob_instance 'state' %}</th>
+                        <th>{% get_verbose_field_name profilejob_instance 'profile' %}</th>
+                        <th>{% get_verbose_field_name profilejob_instance 'job' %}</th>
+                        <th class="text-center">Opciones</th>
+                    </tr>
+                    </thead>
 
-                            <a href="#" data-href="{% url 'profilejobs-delete' profile.id %}"
-                               data-toggle="modal" data-target="#confirm-delete" data-tooltip="tooltip"
-                               title="Eliminar">
-                                <i class="fa fa-times text-danger"></i>
-                            </a>
+                    <tbody>
+                    {% for profile in profilejobs %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>
+                                {{ profile.state }}
+                            </td>
+                            <td>{{ profile.profile }}</td>
+                            <td>{{ profile.job }}</td>
+                            <td class="text-center">
+                                <a href="{% url 'profilejobs-show' profile.id %}" data-tooltip="tooltip"
+                                   title="Más Detalles"><i
+                                        class="fa fa-bars text-success"></i></a>
+                                <a href="{% url 'profilejobs-edit' profile.id %}" data-tooltip="tooltip"
+                                   title="Modificar"><i
+                                        class="fa fa-pencil text-success"></i></a>
 
+                                <a href="#" data-href="{% url 'profilejobs-delete' profile.id %}"
+                                   data-toggle="modal" data-target="#confirm-delete" data-tooltip="tooltip"
+                                   title="Eliminar">
+                                    <i class="fa fa-times text-danger"></i>
+                                </a>
+
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="6">
+                            <div class="text-right">
+                                <ul class="pagination">
+                                </ul>
+                            </div>
                         </td>
                     </tr>
-                {% endfor %}
-                </tbody>
-                <tfoot>
-                <tr>
-                    <td colspan="6">
-                        <div class="text-right">
-                            <ul class="pagination">
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                </tfoot>
-            </table>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     </div>
 {% endblock %}

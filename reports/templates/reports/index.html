@@ -1,0 +1,21 @@
+{% extends 'layout/admin_base.html' %}
+{% load utils %}
+{% block title_layout %}
+    <h3>Reportes </h3>
+{% endblock %}
+{% block layout %}
+    <div class="panel panel-primary">
+
+    <div class="row">
+        <div class="col-md-3">
+            <a href="{% url 'report-jobs' %}" class="btn btn-block btn-default btn-outline" >Trabajos</a>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+        <div class="col-md-3">
+
+        </div>
+    </div>
+    </div>
+{% endblock %}
