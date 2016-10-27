@@ -1,0 +1,69 @@
+{% extends "layout/application.pdf.html" %}
+{% block extra_style %}
+{% endblock %}
+{% load utils %}
+{% block content %}
+    <div id="content">
+        <div class="main">
+            <h1 align="center">TRABAJO - ASSIGNACION</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="white-box">
+                <p>
+                    <strong>{% get_verbose_field_name profilejob_obj 'state' %}</strong>
+                    {{ profilejob.state }}
+                </p>
+                <p>
+                    <strong>{% get_verbose_field_name profilejob_obj 'profile' %}</strong>
+                    {{ profilejob.profile }}
+                </p>
+                <p>
+                    <strong>{% get_verbose_field_name profilejob_obj 'job' %}</strong>
+                    {{ profilejob.job }}
+                </p>
+                <p>
+                    <strong>{% get_verbose_field_name profilejob_obj 'assign_at' %}</strong>
+                    {{ profilejob.assign_at }}
+                </p>
+                <p>
+                    <strong>{% get_verbose_field_name job_obj 'description' %}</strong>
+                    {{ profilejob.job.description }}
+                </p>
+                <h3>Historial</h3>
+                <table id="table-users" class="table table-bordered table-striped">
+                    <thead class="table-bordered ">
+                    <tr>
+                        <th width="25">#</th>
+                        <th>{% get_verbose_field_name jobhistory_obj 'observation' %}</th>
+                        <th>{% get_verbose_field_name jobhistory_obj 'register_at' %}</th>
+                        <th>{% get_verbose_field_name jobhistory_obj 'lat' %}</th>
+                        <th>{% get_verbose_field_name jobhistory_obj 'lng' %}</th>
+                        <th>{% get_verbose_field_name jobhistory_obj 'profile' %}</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for jh in jobhistories %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ jh.observation }}</td>
+                            <td>{{ jh.register_at }}</td>
+                            <td>{{ jh.lat }}</td>
+                            <td>{{ jh.lng }}</td>
+                            <td>{{ jh.profile }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block code_js %}
+
+{% endblock %}

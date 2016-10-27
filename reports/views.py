@@ -4,7 +4,7 @@ from django.template.context import RequestContext
 from django.utils.datetime_safe import datetime
 from easy_pdf.views import PDFTemplateView
 
-from jobs.models import Job
+from jobs.models import Job, ProfileJob, JobHistory
 from users.models import Profile
 
 
@@ -36,6 +36,7 @@ class JobsStatePdf(PDFTemplateView):
             **kwargs
         )
 
+
 def report_employees(request):
     date_start = request.POST.get('date_start')
     date_end = request.POST.get('date_end')
@@ -49,7 +50,6 @@ class EmployeesPdf(PDFTemplateView):
     template_name = 'reports/employees.pdf.html'
 
     def get_context_data(self, **kwargs):
-        # career_id = self.kwargs['c']
         date_start = datetime.strptime(self.request.GET.get('date_start'), "%m/%d/%Y").date()
         date_end = datetime.strptime(self.request.GET.get('date_end'), "%m/%d/%Y").date()
 
@@ -57,5 +57,24 @@ class EmployeesPdf(PDFTemplateView):
             pagesize="Letter",
             profile_obj=Profile,
             profiles=Profile.objects.filter(register_at__range=(date_start, date_end)),
+            **kwargs
+        )
+
+
+class AssignPdf(PDFTemplateView):
+    template_name = 'reports/pj.pdf.html'
+
+    def get_context_data(self, **kwargs):
+        profilejob = ProfileJob.objects.get(pk=self.request.GET.get('id'))
+        jobhistories = JobHistory.objects.filter(profilejob=profilejob)
+
+        return super(AssignPdf, self).get_context_data(
+            pagesize="Letter",
+            jobhistory_obj=JobHistory,
+            profilejob_obj=ProfileJob,
+            profile_obj=Profile,
+            job_obj=Job,
+            profilejob=profilejob,
+            jobhistories=jobhistories,
             **kwargs
         )

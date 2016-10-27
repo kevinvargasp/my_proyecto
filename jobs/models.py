@@ -75,7 +75,7 @@ class Job(models.Model):
 
 class ProfileJob(models.Model):
     job = models.ForeignKey(Job, verbose_name='Trabajo')
-    profile = models.ForeignKey(Profile, verbose_name='Perfil')
+    profile = models.ForeignKey(Profile, verbose_name='Asignado a:')
     state = models.CharField(max_length=10, choices=STATUS_TASK, verbose_name='Estado', default='NUEVO')
     assign_at = models.DateTimeField(default=datetime.now, verbose_name=u'Fecha de Asignación')
 

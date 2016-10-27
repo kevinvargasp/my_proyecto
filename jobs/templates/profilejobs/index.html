@@ -33,23 +33,26 @@
                     </thead>
 
                     <tbody>
-                    {% for profile in profilejobs %}
+                    {% for profilejob in profilejobs %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
                             <td>
-                                {{ profile.state }}
+                                {{ profilejob.state }}
                             </td>
-                            <td>{{ profile.profile }}</td>
-                            <td>{{ profile.job }}</td>
+                            <td>{{ profilejob.profile }}</td>
+                            <td>{{ profilejob.job }}</td>
                             <td class="text-center">
-                                <a href="{% url 'profilejobs-show' profile.id %}" data-tooltip="tooltip"
+                                <a href="{% url 'profilejobs-show' profilejob.id %}" data-tooltip="tooltip"
                                    title="Más Detalles"><i
                                         class="fa fa-bars text-success"></i></a>
-                                <a href="{% url 'profilejobs-edit' profile.id %}" data-tooltip="tooltip"
+                                <a href="{% url 'profilejobs-edit' profilejob.id %}" data-tooltip="tooltip"
                                    title="Modificar"><i
                                         class="fa fa-pencil text-success"></i></a>
+                                <a href="{% url 'assign-pdf' %}?id={{ profilejob.id }}" data-tooltip="tooltip"
+                                   title="Pdf" target="_blank"><i
+                                        class="fa fa-file-pdf-o text-success"></i></a>
 
-                                <a href="#" data-href="{% url 'profilejobs-delete' profile.id %}"
+                                <a href="#" data-href="{% url 'profilejobs-delete' profilejob.id %}"
                                    data-toggle="modal" data-target="#confirm-delete" data-tooltip="tooltip"
                                    title="Eliminar">
                                     <i class="fa fa-times text-danger"></i>
