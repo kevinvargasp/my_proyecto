@@ -19,7 +19,7 @@ class JobType(models.Model):
         return "%s" % (self.name)
 
     class Meta:
-        ordering = ['id']
+        ordering = ['name']
         verbose_name = 'Tipo de Trabajo'
         verbose_name_plural = 'Tipo de Trabajos'
         permissions = (
@@ -38,7 +38,7 @@ class Zone(models.Model):
         self.name = self.name.capitalize()
 
     class Meta:
-        ordering = ['id']
+        ordering = ['name']
         verbose_name = 'Zona'
         verbose_name_plural = 'Zonas'
         permissions = (
