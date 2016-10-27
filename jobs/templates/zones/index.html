@@ -44,6 +44,14 @@
                                 <a href="{% url 'zones-edit' zone.id %}" data-tooltip="tooltip"
                                    title="Editar"><i class="fa fa-pencil text-success"></i></a>
                             {% endif %}
+                            {% is_use_zone zone.id as is_use %}
+
+                            {% if perms.jobs.delete_zone and not is_use  %}
+                                <a href="#" data-href="{% url 'zones-delete' zone.id %}"
+                                   data-toggle="modal" data-target="#confirm-delete" data-tooltip="tooltip"
+                                   title="Eliminar"> <i class="fa fa-times text-danger"></i>
+                                </a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}

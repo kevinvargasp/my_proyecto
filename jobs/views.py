@@ -84,7 +84,8 @@ def jobtypes_show(request, id):
 @permission_required('jobs.delete_jobtype', login_url='/log_in')
 def jobtypes_delete(request, id):
     jobtype = JobType.objects.get(id=id)
-    jobtype.delete()
+    if not Job.objects.filter(jobtype_id=int(id)).exists():
+        jobtype.delete()
     is_exist = JobType.objects.filter(id=id).exists()
 
     if is_exist:
@@ -148,7 +149,9 @@ def zones_edit(request, id):
 @permission_required('jobs.delete_zone', login_url='/log_in')
 def zones_delete(request, id):
     zone = Zone.objects.get(id=id)
-    zone.delete()
+    if not Job.objects.filter(zone_id=int(id)).exists():
+        zone.delete()
+
     is_exist = Zone.objects.filter(id=id).exists()
 
     if is_exist:
