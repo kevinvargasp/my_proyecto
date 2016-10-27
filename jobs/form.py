@@ -21,7 +21,7 @@ class JobTypeForm(BaseForm):
         cleaned_data = super(JobTypeForm, self).clean()
         name = cleaned_data.get("name")
 
-        if not self.instance.pk and JobType.objects.filter(name__contains=name).exists():
+        if not self.instance.pk and JobType.objects.filter(name__iexact=name).exists():
             msg = u'Ya se registró este tipo de trabajo'
             self.add_error('name', msg)
 
@@ -35,7 +35,7 @@ class ZoneForm(BaseForm):
         cleaned_data = super(ZoneForm, self).clean()
         name = cleaned_data.get("name")
 
-        if not self.instance.pk and Zone.objects.filter(name__contains=name).exists():
+        if not self.instance.pk and Zone.objects.filter(name__iexact=name).exists():
             msg = u'Ya se registró esta zona'
             self.add_error('name', msg)
 

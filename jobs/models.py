@@ -18,6 +18,9 @@ class JobType(models.Model):
     def __unicode__(self):
         return "%s" % (self.name)
 
+    def clean(self):
+        self.name = self.name.capitalize()
+
     class Meta:
         ordering = ['name']
         verbose_name = 'Tipo de Trabajo'
