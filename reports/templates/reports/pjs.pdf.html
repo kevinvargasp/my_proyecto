@@ -1,0 +1,39 @@
+{% extends "layout/application.pdf.html" %}
+{% block extra_style %}
+{% endblock %}
+{% load utils %}
+{% block content %}
+    <div id="content">
+        <div class="main">
+            <h1 align="center">ASIGNACIONES</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="table-responsive">
+            <table id="table-users" class="table table-bordered table-striped">
+                <thead class="table-bordered ">
+                <tr>
+                    <th width="25">#</th>
+                    <th>{% get_verbose_field_name profilejob_obj 'state' %}</th>
+                    <th>{% get_verbose_field_name profilejob_obj 'profile' %}</th>
+                    <th>{% get_verbose_field_name profilejob_obj 'job' %}</th>
+                    <th>{% get_verbose_field_name profilejob_obj 'assign_at' %}</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                {% for profilejob in profilejobs %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ profilejob.state }}</td>
+                        <td>{{ profilejob.profile }}</td>
+                        <td>{{ profilejob.job }}</td>
+                        <td>{{ profilejob.assign_at }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+{% endblock %}

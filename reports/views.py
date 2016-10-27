@@ -78,3 +78,29 @@ class AssignPdf(PDFTemplateView):
             jobhistories=jobhistories,
             **kwargs
         )
+
+
+def report_assigns(request):
+    date_start = request.POST.get('date_start')
+    date_end = request.POST.get('date_end')
+    is_correct = (date_start is not None and date_end is not None)
+
+    return render(request, 'reports/pjs.html',
+                  {'is_correct': is_correct, 'date_start': date_start, 'date_end': date_end})
+
+
+class AssignsPdf(PDFTemplateView):
+    template_name = 'reports/pjs.pdf.html'
+
+    def get_context_data(self, **kwargs):
+        date_start = datetime.strptime(self.request.GET.get('date_start'), "%m/%d/%Y").date()
+        date_end = datetime.strptime(self.request.GET.get('date_end'), "%m/%d/%Y").date()
+        return super(AssignsPdf, self).get_context_data(
+            pagesize="Letter",
+            jobhistory_obj=JobHistory,
+            profilejob_obj=ProfileJob,
+            profile_obj=Profile,
+            job_obj=Job,
+            profilejobs=ProfileJob.objects.filter(assign_at__range=(date_start, date_end)),
+            **kwargs
+        )

@@ -2,7 +2,7 @@ from django.conf.urls import url, include
 from reports import views
 
 # import api lib for routes
-from reports.views import JobsStatePdf, EmployeesPdf, AssignPdf
+from reports.views import JobsStatePdf, EmployeesPdf, AssignPdf, AssignsPdf
 
 urlpatterns = [
     url(r'^reports/index/$', views.index, name='report-index'),
@@ -11,6 +11,8 @@ urlpatterns = [
     url(r'^reports/employees/$', views.report_employees, name='report-employees'),
     url(r'^reports/employees.pdf$', EmployeesPdf.as_view(), name='employees-pdf'),
     url(r'^reports/assign.pdf$', AssignPdf.as_view(), name='assign-pdf'),
+    url(r'^reports/assigns/$', views.report_assigns, name='report-assigns'),
+    url(r'^reports/assigns.pdf$', AssignsPdf.as_view(), name='assigns-pdf'),
 ]
 
 '''
