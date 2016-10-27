@@ -8,7 +8,8 @@ class JobSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Job
-        fields = ['job_id', 'job_type', 'name_client', 'address', 'description', 'mobile_phone', 'state', 'lat', 'lng']
+        fields = ['job_id', 'job_type', 'name_client', 'address', 'description', 'mobile_phone', 'state', 'lat',
+                  'lng', 'zone']
 
     def get_alternate_name(self, obj):
         return obj.id
