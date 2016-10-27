@@ -150,10 +150,10 @@
             {% get_profiles_assigment job.id as jprofiles %}
             var profiles = '';
             {% for jprofile in jprofiles %}
-                profiles += '<a href="{% url 'profiles-show' jprofile.profile.id %}">{{ jprofile.profile }}</a>,';
+                profiles += "<a href='{% url 'profiles-show' jprofile.profile.id %}'>{{ jprofile.profile }}</a>,";
             {% endfor %}
 
-            new_point.push('<b>Cliente:</b> {{ job.name_client }}<br><b>Estado:</b> {{ job.state }}<br><b>Descripción:</b> {{ job.description }} <br><b>Asignado a:</b> ' + profiles);
+            new_point.push("<b>Cliente:</b> {{ job.name_client }}<br><b>Estado:</b> {{ job.state }}<br><b>Descripción:</b> {{ job.description }} <br><b>Asignado a:</b> " + profiles + "");
             new_point.push({{ job.lat }});
             new_point.push({{ job.lng }});
             new_point.push(getColor('{{ job.state }}'));
