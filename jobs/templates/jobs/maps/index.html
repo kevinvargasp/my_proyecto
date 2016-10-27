@@ -43,7 +43,7 @@
                     <tr>
                         <th>#</th>
                         <th>{% get_field_name job_obj 'jobtype' %}</th>
-                        <th>Estado de asignacion</th>
+                        <th>Asignado?</th>
                         <th>{% get_field_name job_obj 'state' %}</th>
                         <th>{% get_field_name job_obj 'register_at' %}</th>
                         <th>{% get_field_name job_obj 'name_client' %}</th>
@@ -60,9 +60,9 @@
                                 {% is_assigned_plain job.id as state_job %}
 
                                 {% if state_job %}
-                                    <span class="label label-megna label-rounded">ASIGNADO</span>
+                                    <span class="label label-megna label-rounded">SI</span>
                                 {% else %}
-                                    <span class="label label-danger label-rounded">SIN ASIGNAR</span>
+                                    <span class="label label-danger label-rounded">NO</span>
                                 {% endif %}
                                 <br>
 

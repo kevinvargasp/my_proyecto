@@ -2,12 +2,14 @@ from django.conf.urls import url, include
 from reports import views
 
 # import api lib for routes
-from reports.views import JobsStatePdf
+from reports.views import JobsStatePdf, EmployeesPdf
 
 urlpatterns = [
     url(r'^reports/index/$', views.index, name='report-index'),
     url(r'^reports/jobs/$', views.report_jobs, name='report-jobs'),
     url(r'^reports/jobs.pdf$', JobsStatePdf.as_view(), name='jobs-pdf'),
+    url(r'^reports/employees/$', views.report_employees, name='report-employees'),
+    url(r'^reports/employees.pdf$', EmployeesPdf.as_view(), name='employees-pdf'),
 ]
 
 '''

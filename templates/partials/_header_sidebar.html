@@ -114,7 +114,7 @@
 
             <li class="nav-small-cap m-t-10">--- Menu</li>
             {% if perms.jobs.index_jobtype  or perms.jobs.add_jobtype %}
-                <li><a href="#" class="waves-effect"><i class="fa fa-cubes"></i>
+                <li><a href="#" class="waves-effect"><i class="fa fa-gavel"></i>
                     <span class="hide-menu">Tipo de Trabajos <span class="fa arrow"></span><span
                             class="label label-rouded label-danger pull-right">1</span></span></a>
                     <ul class="nav nav-second-level">
@@ -173,14 +173,11 @@
 
                 </ul>
             </li>
-            <li><a href="#" class="waves-effect"><i class="fa fa-envelope-o"></i> <span
-                    class="hide-menu">Reportes<span class="fa arrow"></span> <span
-                    class="label label-rouded label-info pull-right">1</span> </span></a>
-                <ul class="nav nav-second-level">
-                    <li><a href="{% url 'report-index' %}">Reporte</a></li>
-                </ul>
-            </li>
 
+            <li>
+                <a href="{% url 'report-index' %}" class="waves-effect"><i class="fa fa-bar-chart"></i> <span
+                        class="hide-menu">Reportes</span></a>
+            </li>
             <li>
                 <a href="{% url 'log_out' %}" class="waves-effect"><i class="icon-logout fa-fw"></i> <span
                         class="hide-menu">Salir</span></a>

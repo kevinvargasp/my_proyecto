@@ -1,0 +1,53 @@
+{% extends "layout/application.pdf.html" %}
+{% block extra_style %}
+{% endblock %}
+{% load utils %}
+{% block content %}
+    <div id="content">
+        <div class="main">
+            <h1 align="center">EMPLEADOS</h1>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="row">
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-striped" class='table' width="100%" border="1">
+                    <thead class="table-bordered ">
+                    <tr>
+                        <th width="25">#</th>
+                        <th>Nombres y Apellidos</th>
+                        <th>{% get_field_name profile_obj 'ci' %}</th>
+                        <th>{% get_field_name profile_obj 'rol' %}</th>
+                        <th>{% get_field_name profile_obj 'register_at' %}</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for profile in profiles %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>
+                                {% if profile.user.is_active %}
+                                    <span class="fa fa-circle text-success m-r-10" data-tooltip="tooltip"
+                                          title="Cuenta Activa"></span>
+                                {% else %}
+                                    <span class="fa fa-circle text-warning m-r-10" data-tooltip="tooltip"
+                                          title="Cuenta Desactivada"></span>
+                                {% endif %}
+                                {{ profile.first_name }}
+                                {{ profile.middle_name }}
+                            </td>
+                            <td>{{ profile.ci }}</td>
+                            <td>{% get_role_profile profile.rol %}</td>
+                             <td>{{ profile.register_at }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

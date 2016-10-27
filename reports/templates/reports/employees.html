@@ -1,12 +1,12 @@
 {% extends 'layout/admin_base.html' %}
 {% load utils %}
 {% block title_layout %}
-    <h3>Reportes de Trabajos</h3>
+    <h3>Reportes de Empleados</h3>
 {% endblock %}
 {% block layout %}
     <div class="panel panel-primary">
         {% if is_correct %}
-            <a href="{% url 'jobs-pdf' %}?date_start={{ date_start }}&date_end={{ date_end }}" target="_blank" class="btn btn-success btn-outline">Reporte General</a>
+            <a href="{% url 'employees-pdf' %}?date_start={{ date_start }}&date_end={{ date_end }}" target="_blank" class="btn btn-success btn-outline">Reporte General</a>
         {% else %}
             {% include 'reports/_form_dates.html' %}
         {% endif %}
