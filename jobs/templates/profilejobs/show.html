@@ -14,19 +14,24 @@
         <div class="col-md-12">
             <div class="white-box">
                 <p>
-                    <strong>{% get_verbose_field_name profilejob_instance 'state' %}</strong>
+                    <strong>{% get_verbose_field_name profilejob_obj 'state' %}</strong>
                     {{ profilejob.state }}
                 </p>
                 <p>
-                    <strong>{% get_verbose_field_name profilejob_instance 'profile' %}</strong>
+                    <strong>{% get_verbose_field_name profilejob_obj 'profile' %}</strong>
                     {{ profilejob.profile }}
                 </p>
+
                 <p>
-                    <strong>{% get_verbose_field_name profilejob_instance 'job' %}</strong>
-                    {{ profilejob.job }}
+                    <strong>{% get_verbose_field_name job_obj 'name_client' %}</strong>
+                    {{ profilejob.job.name_client }}
                 </p>
                 <p>
-                    <strong>{% get_verbose_field_name profilejob_instance 'assign_at' %}</strong>
+                    <strong>{% get_verbose_field_name job_obj 'jobtype' %}</strong>
+                    {{ profilejob.job.jobtype }}
+                </p>
+                <p>
+                    <strong>{% get_verbose_field_name profilejob_obj 'assign_at' %}</strong>
                     {{ profilejob.assign_at }}
                 </p>
                 <h3>Historial</h3>
@@ -53,7 +58,7 @@
                             <td>{{ profile.lng }}</td>
                             <td>{{ profile.profile }}</td>
                             <td class="text-center">
-                                <a href="{% url 'jobhistories-edit' profile.id %}">Modificar</a> |
+                                <a href="{% url 'jobhistories-edit' profile.id %}">Modificar</a>
                             </td>
                         </tr>
                     {% endfor %}

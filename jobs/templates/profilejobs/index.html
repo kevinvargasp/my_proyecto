@@ -25,9 +25,10 @@
                     <thead class="table-bordered ">
                     <tr>
                         <th>#</th>
-                        <th>{% get_verbose_field_name profilejob_instance 'state' %}</th>
-                        <th>{% get_verbose_field_name profilejob_instance 'profile' %}</th>
-                        <th>{% get_verbose_field_name profilejob_instance 'job' %}</th>
+                        <th>{% get_verbose_field_name profilejob_obj 'state' %}</th>
+                        <th>{% get_verbose_field_name profilejob_obj 'profile' %}</th>
+                        <th>{% get_verbose_field_name job_obj 'name_client' %}</th>
+                        <th>{% get_verbose_field_name job_obj 'jobtype' %}</th>
                         <th class="text-center">Opciones</th>
                     </tr>
                     </thead>
@@ -36,11 +37,10 @@
                     {% for profilejob in profilejobs %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td>
-                                {{ profilejob.state }}
-                            </td>
+                            <td>{{ profilejob.state }}</td>
                             <td>{{ profilejob.profile }}</td>
-                            <td>{{ profilejob.job }}</td>
+                            <td>{{ profilejob.job.name_client }}</td>
+                            <td>{{ profilejob.job.jobtype }}</td>
                             <td class="text-center">
                                 <a href="{% url 'profilejobs-show' profilejob.id %}" data-tooltip="tooltip"
                                    title="Más Detalles"><i

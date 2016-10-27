@@ -52,7 +52,7 @@ class Zone(models.Model):
 
 class Job(models.Model):
     jobtype = models.ForeignKey(JobType, verbose_name='Tipo de Trabajo')
-    name_client = models.CharField(max_length=100, verbose_name='Nombres del Cliente')
+    name_client = models.CharField(max_length=100, verbose_name='Nombre del Cliente')
     address = models.CharField(max_length=100, verbose_name=u'Dirección')
     zone = models.ForeignKey(Zone, default=1, verbose_name='Zona')
     description = models.TextField(verbose_name=u'Descripción')

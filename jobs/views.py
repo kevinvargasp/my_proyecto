@@ -417,7 +417,9 @@ def jobs_delete(request, id):
 def profilejobs_index(request):
     profilejobs_all = ProfileJob.objects.all()
     return render(request, 'profilejobs/index.html', {
-        'profilejob_instance': ProfileJob,
+        'profilejob_obj': ProfileJob,
+        'profile_obj': Profile,
+        'job_obj': Job,
         'profilejobs': profilejobs_all,
     })
 
@@ -476,7 +478,8 @@ def profilejobs_show(request, id):
 
     return render(request, 'profilejobs/show.html', {
         'profilejob': profilejob,
-        'profilejob_instance': ProfileJob,
+        'profilejob_obj': ProfileJob,
+        'job_obj': Job,
         'jobhistories': jobhistories,
         'jobhistory_instance': JobHistory,
     })
