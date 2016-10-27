@@ -13,27 +13,61 @@
     <div class="row">
         <div class="col-md-12">
             <div class="white-box">
-                <p>
-                    <strong>{% get_verbose_field_name profilejob_obj 'state' %}</strong>
-                    {{ profilejob.state }}
-                </p>
-                <p>
-                    <strong>{% get_verbose_field_name profilejob_obj 'profile' %}</strong>
-                    {{ profilejob.profile }}
-                </p>
+                <div class="row">
+                    <div class="col-md-7">
+                        <p>
+                            <strong>{% get_verbose_field_name profilejob_obj 'state' %}</strong>
+                            {{ profilejob.state }}
+                        </p>
+                        <p>
+                            <strong>{% get_verbose_field_name profilejob_obj 'profile' %}</strong>
+                            {{ profilejob.profile }}
+                        </p>
+                        <p>
+                            <strong>{% get_verbose_field_name job_obj 'name_client' %}</strong>
+                            {{ profilejob.job.name_client }}
+                        </p>
+                        <p>
+                            <strong>{% get_verbose_field_name job_obj 'address' %}</strong>
+                            {{ profilejob.job.address }}
+                        </p>
+                        <p>
+                            <strong>{% get_verbose_field_name job_obj 'description' %}</strong>
+                            {{ profilejob.job.description }}
+                        </p>
+                        <p>
+                            <strong>{% get_verbose_field_name job_obj 'mobile_phone' %}</strong>
+                            {{ profilejob.job.mobile_phone }}
+                        </p>
+                        <p>
+                            <strong>{% get_verbose_field_name job_obj 'jobtype' %}</strong>
+                            {{ profilejob.job.jobtype }}
+                        </p>
+                        <p>
+                            <strong>{% get_verbose_field_name job_obj 'register_at' %}</strong>
+                            {{ profilejob.job.register_at }}
+                        </p>
+                        <p>
+                            <strong>{% get_verbose_field_name profilejob_obj 'assign_at' %}</strong>
+                            {{ profilejob.assign_at }}
+                        </p>
+                        <p>
+                            <strong>{% get_verbose_field_name job_obj 'lat' %}</strong>
+                            {{ profilejob.job.lat }}
+                        </p>
+                        <p>
+                            <strong>{% get_verbose_field_name job_obj 'lng' %}</strong>
+                            {{ profilejob.job.lng }}
+                        </p>
+                    </div>
 
-                <p>
-                    <strong>{% get_verbose_field_name job_obj 'name_client' %}</strong>
-                    {{ profilejob.job.name_client }}
-                </p>
-                <p>
-                    <strong>{% get_verbose_field_name job_obj 'jobtype' %}</strong>
-                    {{ profilejob.job.jobtype }}
-                </p>
-                <p>
-                    <strong>{% get_verbose_field_name profilejob_obj 'assign_at' %}</strong>
-                    {{ profilejob.assign_at }}
-                </p>
+                    <div class="col-md-5" onload="initialize()">
+                        <div id="gmap" style="width: 100%; height: 450px"></div>
+                    </div>
+
+                </div>
+
+
                 <h3>Historial</h3>
                 <table id="table-users" class="table table-bordered table-striped">
                     <thead class="table-bordered ">
@@ -71,6 +105,42 @@
     </div>
 {% endblock %}
 
+
 {% block code_js %}
+    {% include 'partials/_url_gmaps.html' %}
+
+    <script type="text/javascript">
+        var map;
+        var markers = [];
+        var lat = '{{ profilejob.job.lat }}';
+        var lng = '{{ profilejob.job.lng }}';
+        function initialize() {
+            var myLatlng = new google.maps.LatLng(lat, lng);
+            var myOptions = {
+                zoom: 14,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            map = new google.maps.Map(document.getElementById("gmap"), myOptions);
+            // marker refers to a global variable
+
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(lat, lng),
+                map: map
+            });
+            markers.push(marker);
+        }
+        function setMapOnAll(map) {
+            for (var i = 0; i < markers.length; i++) {
+                markers[i].setMap(map);
+            }
+        }
+
+        window.onload = function () {
+            initialize()
+        };
+    </script>
+
 
 {% endblock %}
