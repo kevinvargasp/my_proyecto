@@ -66,6 +66,7 @@ class Job(models.Model):
         return "%s %s" % (self.name_client, self.jobtype)
 
     class Meta:
+        ordering = ['-register_at']
         verbose_name = 'Trabajo'
         verbose_name_plural = 'Trabajos'
 
@@ -73,6 +74,7 @@ class Job(models.Model):
             ('report_job', 'Can Report Job'),
             ('show_job', 'Can Details Job'),
             ('index_job', 'Can List Job'),
+            ('index_map_job', 'Can List Maps Job'),
         )
 
 
@@ -89,6 +91,7 @@ class ProfileJob(models.Model):
         verbose_name = 'Assignacion'
         verbose_name_plural = 'Asignaciones'
         permissions = (
+            ('report_profilejob', 'Can Details Profije Job'),
             ('show_profilejob', 'Can Details Profije Job'),
             ('index_profilejob', 'Can List Profile Job'),
         )
@@ -108,6 +111,7 @@ class JobHistory(models.Model):
         return "%s" % (self.profilejob)
 
     class Meta:
+        ordering = ['register_at']
         verbose_name = 'Historial de Trabajo'
         verbose_name_plural = 'Historiales de trabajos'
 

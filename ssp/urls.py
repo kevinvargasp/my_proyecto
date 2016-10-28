@@ -24,6 +24,6 @@ urlpatterns = [
     url(r'', include('users.urls')),
     url(r'', include('jobs.urls')),
     url(r'', include('reports.urls')),
-    url(r'^notifications/', include('notifications.urls')),
+    url(r'', include('notifications.urls')),
     url(r'^admin/', admin.site.urls),
 ]

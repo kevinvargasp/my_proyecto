@@ -221,11 +221,13 @@ def add_group_permissions():
     group, created = Group.objects.get_or_create(name='TECNICO')
     if True:
         group.permissions.add(
-            Permission.objects.get(codename="change_job"),
             Permission.objects.get(codename="show_job"),
             Permission.objects.get(codename="index_job"),
 
             Permission.objects.get(codename="change_profile"),
             Permission.objects.get(codename="show_profile"),
+
+            Permission.objects.get(codename="index_profilejob"),
+            Permission.objects.get(codename="show_profilejob"),
         )
         logger.info('SUPERVISOR Group created')

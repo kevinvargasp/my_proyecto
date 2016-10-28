@@ -11,8 +11,10 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <a href="{% url 'jobs-new' %}"
-                               class="fcbtn btn btn-outline btn-primary btn-1f"> Agregar</a>
+                            {% if perms.jobs.add_job %}
+                                <a href="{% url 'jobs-new' %}"
+                                   class="fcbtn btn btn-outline btn-primary btn-1f"> Agregar</a>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="col-sm-6 text-right m-b-20">
@@ -50,10 +52,11 @@
                             <td>{{ job.zone }}</td>
                             <td>{{ job.register_at|naturaltime }}</td>
                             <td>{{ job.jobtype }}</td>
-                            <td class="text-center">{% autoescape off %}{% get_label_state job.state %}{% endautoescape %}</td>
+                            <td class="text-center">
+                                {% autoescape off %}{% get_label_state job.state %}{% endautoescape %}</td>
                             <td>
                                 {% is_assigned_plain job.id as job_state %}
-                                {% autoescape off %}{% get_label_state_assign job_state  %}{% endautoescape %}
+                                {% autoescape off %}{% get_label_state_assign job_state %}{% endautoescape %}
                                 <br>
                                 {% get_profiles_assigment job.id as jprofiles %}
                                 {% for jprofile in jprofiles %}
@@ -64,21 +67,29 @@
                             </td>
                             <td>{{ job.description }}</td>
                             <td class="text-center">
-                                <a href="{% url 'jobs-show' job.id %}" data-tooltip="tooltip"
-                                   title="Más Detalles"><i
-                                        class="fa fa-bars text-success"></i></a>
-                                <a href="{% url 'jobs-edit' job.id %}" data-tooltip="tooltip"
-                                   title="Modificar"><i
-                                        class="fa fa-pencil text-success"></i></a>
-                                <a href="{% url 'profilejobs-new' job.id %}" data-tooltip="tooltip"
-                                   title="Asignar">
-                                    <i class="fa fa-share text-success"></i>
-                                </a>
-                                <a href="#" data-href="{% url 'jobs-delete' job.id %}"
-                                   data-toggle="modal" data-target="#confirm-delete" data-tooltip="tooltip"
-                                   title="Eliminar">
-                                    <i class="fa fa-times text-danger"></i>
-                                </a>
+                                {% if perms.jobs.show_job %}
+                                    <a href="{% url 'jobs-show' job.id %}" data-tooltip="tooltip"
+                                       title="Más Detalles"><i
+                                            class="fa fa-bars text-success"></i></a>
+                                {% endif %}
+                                {% if perms.jobs.change_job %}
+                                    <a href="{% url 'jobs-edit' job.id %}" data-tooltip="tooltip"
+                                       title="Modificar"><i
+                                            class="fa fa-pencil text-success"></i></a>
+                                {% endif %}
+                                {% if perms.jobs.add_profilejob %}
+                                    <a href="{% url 'profilejobs-new' job.id %}" data-tooltip="tooltip"
+                                       title="Asignar">
+                                        <i class="fa fa-share text-success"></i>
+                                    </a>
+                                {% endif %}
+                                {% if perms.jobs.delete_job %}
+                                    <a href="#" data-href="{% url 'jobs-delete' job.id %}"
+                                       data-toggle="modal" data-target="#confirm-delete" data-tooltip="tooltip"
+                                       title="Eliminar">
+                                        <i class="fa fa-times text-danger"></i>
+                                    </a>
+                                {% endif %}
                             </td>
                         </tr>
                     {% endfor %}

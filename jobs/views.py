@@ -346,7 +346,14 @@ def jobs_maps_index(request):
 
 # JOBS
 def jobs_index(request):
-    jobs_all = Job.objects.all()
+
+    if request.user.is_superuser or Profile.objects.get(user_id=request.user.id).rol == 'SUP':
+        jobs_all = Job.objects.all()
+    else:
+        profile = Profile.objects.get(user_id=request.user.id)
+        jobs_all = Job.objects.filter(profilejob__profile=profile)
+
+    #jobs_all = Job.objects.all()
     return render(request, 'jobs/index.html', {
         'job_obj': Job,
         'jobs': jobs_all,

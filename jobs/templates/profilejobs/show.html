@@ -94,7 +94,9 @@
                             <td>{{ jh.lng }}</td>
                             <td>{{ jh.profile }}</td>
                             <td class="text-center">
+                                {% if perms.jobs.change_jobhistory %}
                                 <a href="{% url 'jobhistories-edit' jh.id %}">Modificar</a>
+                                {% endif %}
                             </td>
                         </tr>
                     {% endfor %}

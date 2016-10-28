@@ -145,10 +145,18 @@
                 <span class="hide-menu">Trabajos <span class="fa arrow"></span><span
                         class="label label-rouded label-danger pull-right">1</span></span></a>
                 <ul class="nav nav-second-level">
-                    <li><a href="{% url 'jobs-index' %}">Mostrar Todos</a></li>
-                    <li><a href="{% url 'jobs-new' %}">Agregar Trabajo</a></li>
-                    <li><a href="{% url 'profilejobs-index' %}">Asignaciones</a></li>
-                    <li><a href="{% url 'jobs-maps-index' %}">Mapas de Trabajos</a></li>
+                    {% if perms.jobs.index_job %}
+                        <li><a href="{% url 'jobs-index' %}">Mostrar Todos</a></li>
+                    {% endif %}
+                    {% if perms.jobs.add_job %}
+                        <li><a href="{% url 'jobs-new' %}">Agregar Trabajo</a></li>
+                    {% endif %}
+                    {% if perms.jobs.index_profilejob %}
+                        <li><a href="{% url 'profilejobs-index' %}">Asignaciones</a></li>
+                    {% endif %}
+                    {% if perms.jobs.index_map_job %}
+                        <li><a href="{% url 'jobs-maps-index' %}">Mapas de Trabajos</a></li>
+                    {% endif %}
                 </ul>
             </li>
             {% if perms.users.index_profile  or perms.users.add_profile %}
@@ -165,19 +173,18 @@
                     </ul>
                 </li>
             {% endif %}
-            <li><a href="#" class="waves-effect"><i class="fa fa-envelope-o"></i> <span
-                    class="hide-menu">Notificaciones<span class="fa arrow"></span> <span
-                    class="label label-rouded label-info pull-right">1</span> </span></a>
-                <ul class="nav nav-second-level">
-                    <li><a href="#">Enviados</a></li>
 
-                </ul>
-            </li>
-
-            <li>
-                <a href="{% url 'report-index' %}" class="waves-effect"><i class="fa fa-bar-chart"></i> <span
-                        class="hide-menu">Reportes</span></a>
-            </li>
+            {% if perms.users.index_notification %}
+                <li><a href="{% url 'notifications-index' %}" class="waves-effect"><i class="fa fa-envelope-o"></i>
+                    <span class="hide-menu">Notificaciones</span></a>
+                </li>
+            {% endif %}
+            {% if perms.users.index_notification %}
+                <li>
+                    <a href="{% url 'report-index' %}" class="waves-effect"><i class="fa fa-bar-chart"></i> <span
+                            class="hide-menu">Reportes</span></a>
+                </li>
+            {% endif %}
             <li>
                 <a href="{% url 'log_out' %}" class="waves-effect"><i class="icon-logout fa-fw"></i> <span
                         class="hide-menu">Salir</span></a>

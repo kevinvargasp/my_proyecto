@@ -42,21 +42,24 @@
                             <td>{{ profilejob.job.name_client }}</td>
                             <td>{{ profilejob.job.jobtype }}</td>
                             <td class="text-center">
-                                <a href="{% url 'profilejobs-show' profilejob.id %}" data-tooltip="tooltip"
-                                   title="Más Detalles"><i
-                                        class="fa fa-bars text-success"></i></a>
-                                <a href="{% url 'profilejobs-edit' profilejob.id %}" data-tooltip="tooltip"
-                                   title="Modificar"><i
-                                        class="fa fa-pencil text-success"></i></a>
-                                <a href="{% url 'assign-pdf' %}?id={{ profilejob.id }}" data-tooltip="tooltip"
-                                   title="Pdf" target="_blank"><i
-                                        class="fa fa-file-pdf-o text-success"></i></a>
-
-                                <a href="#" data-href="{% url 'profilejobs-delete' profilejob.id %}"
-                                   data-toggle="modal" data-target="#confirm-delete" data-tooltip="tooltip"
-                                   title="Eliminar">
-                                    <i class="fa fa-times text-danger"></i>
-                                </a>
+                                {% if perms.jobs.show_profilejob %}
+                                    <a href="{% url 'profilejobs-show' profilejob.id %}" data-tooltip="tooltip"
+                                       title="Más Detalles"><i class="fa fa-bars text-success"></i></a>
+                                {% endif %}
+                                {% if perms.jobs.change_profilejob %}
+                                    <a href="{% url 'profilejobs-edit' profilejob.id %}" data-tooltip="tooltip"
+                                       title="Modificar"><i class="fa fa-pencil text-success"></i></a>
+                                {% endif %}
+                                {% if perms.jobs.report_profilejob %}
+                                    <a href="{% url 'assign-pdf' %}?id={{ profilejob.id }}" data-tooltip="tooltip"
+                                       title="Pdf" target="_blank"><i class="fa fa-file-pdf-o text-success"></i></a>
+                                {% endif %}
+                                {% if perms.jobs.delete_profilejob %}
+                                    <a href="#" data-href="{% url 'profilejobs-delete' profilejob.id %}"
+                                       data-toggle="modal" data-target="#confirm-delete" data-tooltip="tooltip"
+                                       title="Eliminar"><i class="fa fa-times text-danger"></i>
+                                    </a>
+                                {% endif %}
 
                             </td>
                         </tr>

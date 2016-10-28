@@ -1,0 +1,34 @@
+{% extends 'layout/base.html' %}
+
+{% block layout %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="white-box">
+                <h3>Notificaciones</h3>
+                <table class="table table-bordered table-striped">
+                    <thead class="table-bordered ">
+                    <tr>
+                        <td>Titulo</td>
+                        <td>Mensaje</td>
+                        <td>Cliente</td>
+                        <td>Opciones</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for notification in notifications %}
+                        <tr>
+                            <td>{{ notification.title }}</td>
+                            <td>{{ notification.content }}</td>
+                            <td>{{notification.profile}}</td>
+                            <td></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block custom_js %}
+
+{% endblock %}

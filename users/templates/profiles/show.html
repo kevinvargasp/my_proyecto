@@ -7,7 +7,7 @@
                     class="fa fa-arrow-circle-left"></i></a>
         {% endif %}
         Detalles de Usuario
-        {% if perms.users.change_profile %}
+        {% if perms.users.change_profile and profile.user_id == request.user.id %}
             <a href="{% url 'profiles-edit' profile.id %}"  class="pull-right" data-tooltip="tooltip"
                title="Editar"><i class="fa fa-pencil text-success"></i></a>
         {% endif %}

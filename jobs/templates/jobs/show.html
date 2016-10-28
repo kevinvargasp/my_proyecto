@@ -5,9 +5,10 @@
             class="fa fa-arrow-circle-left"></i></a> Mostrando Trabajo</h3>
 {% endblock %}
 {% block layout %}
-
-    <a href="{% url 'profilejobs-new' job.id %}"
-       class="fcbtn btn btn-outline btn-primary btn-1f">Asignar</a>
+    {% if perms.jobs.add_profilejob %}
+        <a href="{% url 'profilejobs-new' job.id %}"
+           class="fcbtn btn btn-outline btn-primary btn-1f">Asignar</a>
+    {% endif %}
     <p>
         <strong>{% get_verbose_field_name job_obj 'name_client' %}</strong>
         {{ job.name_client }}
