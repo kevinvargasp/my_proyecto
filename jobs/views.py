@@ -13,6 +13,7 @@ from django.shortcuts import render_to_response
 from jobs.api import JobSerializer
 from jobs.models import JobType, Job, ProfileJob, JobHistory, Zone
 from jobs.form import JobTypeForm, JobForm, ProfileJobForm, JobHistoryForm, ZoneForm
+from notifications.models import Notification
 from users.models import Profile
 
 from rest_framework import generics
@@ -296,7 +297,7 @@ class HistoryViewSet(APIView):
                     job.state = state
                     job.save(update_fields=['state'])
 
-                    pj = ProfileJob.objects.get(profile=profile, job=job_id)
+                    pj = ProfileJob.objects.get(profile=profile, job_id=job_id)
                     pj.state = state
                     pj.save(update_fields=['state'])
 
@@ -307,6 +308,7 @@ class HistoryViewSet(APIView):
                                     profile_id=profile.id,
                                     profilejob_id=pj.id)
                     jh.save()
+                    build_notification(imei, job_id, state)
 
                     build_json = {'imei_code': imei,
                                   'state': state,
@@ -322,6 +324,23 @@ class HistoryViewSet(APIView):
 
             # message = {'message': 'No Existe perfil o Tarea'}
             # return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+
+def build_notification(imei, job_id, state):
+    profile = Profile.objects.get(imei_code=imei)
+
+    job = Job.objects.get(pk=job_id)
+    pj = ProfileJob.objects.get(profile=profile, job=job)
+
+    notification = Notification(profile_id=profile.id,
+                                level='LOW',
+                                type='MES',
+                                title='Historial enviado por: %s' % (profile),
+                                content='Se envio el historial con estado %s' % (state),
+                                obj='ProfileJob',
+                                obj_id=pj.id,
+                                )
+    notification.save()
 
 
 # JOBS MAPS
@@ -346,14 +365,13 @@ def jobs_maps_index(request):
 
 # JOBS
 def jobs_index(request):
-
     if request.user.is_superuser or Profile.objects.get(user_id=request.user.id).rol == 'SUP':
         jobs_all = Job.objects.all()
     else:
         profile = Profile.objects.get(user_id=request.user.id)
         jobs_all = Job.objects.filter(profilejob__profile=profile)
 
-    #jobs_all = Job.objects.all()
+    # jobs_all = Job.objects.all()
     return render(request, 'jobs/index.html', {
         'job_obj': Job,
         'jobs': jobs_all,

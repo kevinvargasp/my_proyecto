@@ -33,6 +33,6 @@ class Notification(models.Model):
         verbose_name_plural = 'Notificaciones'
 
         permissions = (
-            ('show_notificacion', 'Can Details Notificacion'),
-            ('index_notificacion', 'Can List Notificacion'),
+            ('show_notification', 'Can Details Notificacion'),
+            ('index_notification', 'Can List Notificacion'),
         )
