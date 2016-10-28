@@ -37,7 +37,7 @@
                     {% for profilejob in profilejobs %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td>{{ profilejob.state }}</td>
+                            <td class="text-center">{% autoescape off %}{% get_label_state profilejob.state %}{% endautoescape %}</td></td>
                             <td>{{ profilejob.profile }}</td>
                             <td>{{ profilejob.job.name_client }}</td>
                             <td>{{ profilejob.job.jobtype }}</td>
