@@ -86,17 +86,38 @@ def index(List, i):
     return List[int(i)]
 
 
+@register.simple_tag
+def get_label_state(state):
+    return {
+        'NUEVO': "<span class='label label-default label-rounded'>Nuevo</span>",
+        'EN_PROCESO': "<span class='label label-success label-rounded'>En proceso</span>",
+        'TERMINADO': "<span class='label label-info label-rounded'>Terminado</span>",
+        'DETENIDO': "<span class='label label-warning label-rounded'>Detenido</span>",
+    }[state]
+
+
+@register.simple_tag
+def get_label_state_assign(state):
+    state_assign = "<i class='fa fa-circle m-r-5' style='color: #00bfc7;' data-tooltip='tooltip' title='Asignado'></i>"
+    if not state:
+        state_assign = "<i class='fa fa-circle m-r-5' style='color: #fa3e18;' data-tooltip='tooltip' title='No Asignado'></i>"
+    return state_assign
+
+
 @register.assignment_tag
 def is_assigned_plain(job_id):
     return ProfileJob.objects.filter(job_id=int(job_id)).exists()
+
 
 @register.assignment_tag
 def get_profiles_assigment(job_id):
     return ProfileJob.objects.filter(job_id=int(job_id))
 
+
 @register.assignment_tag
 def is_use_zone(zone_id):
     return Job.objects.filter(zone_id=int(zone_id)).exists()
+
 
 @register.assignment_tag
 def is_use_job_type(type_job_id):

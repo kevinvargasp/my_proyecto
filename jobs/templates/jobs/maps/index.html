@@ -20,78 +20,6 @@
                    class="btn btn-info btn-block btn-outline">Completados</a>
             </div>
         </div>
-        <div class="row">
-            <div class="form-inline padding-bottom-15">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-
-                        </div>
-                    </div>
-                    <div class="col-sm-6 text-right m-b-20">
-                        <div class="form-group">
-                            <input id="demo-input-search2" type="text" placeholder="Buscar"
-                                   class="form-control"
-                                   autocomplete="off">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="table-responsive">
-                <table id="table-users" class="table table-bordered table-striped">
-                    <thead class="table-bordered ">
-                    <tr>
-                        <th>#</th>
-                        <th>{% get_field_name job_obj 'jobtype' %}</th>
-                        <th>Asignado?</th>
-                        <th>{% get_field_name job_obj 'state' %}</th>
-                        <th>{% get_field_name job_obj 'register_at' %}</th>
-                        <th>{% get_field_name job_obj 'name_client' %}</th>
-                        <th>{% get_field_name job_obj 'description' %}</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    {% for job in jobs %}
-                        <tr>
-                            <td>{{ forloop.counter }}</td>
-                            <td>{{ job.jobtype }}</td>
-                            <td class="text-center">
-                                {% is_assigned_plain job.id as state_job %}
-
-                                {% if state_job %}
-                                    <span class="label label-megna label-rounded">SI</span>
-                                {% else %}
-                                    <span class="label label-danger label-rounded">NO</span>
-                                {% endif %}
-                                <br>
-
-                                {% get_profiles_assigment job.id as jprofiles %}
-                                {% for jprofile in jprofiles %}
-                                    <br>
-                                    <a href="{% url 'profiles-show' jprofile.profile.id %}">{{ jprofile.profile }}</a>
-                                {% endfor %}
-                            </td>
-                            <td>{{ job.state }}</td>
-                            <td>{{ job.register_at }}</td>
-                            <td>{{ job.name_client }}</td>
-                            <td>{{ job.description }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <td colspan="7">
-                            <div class="text-right">
-                                <ul class="pagination">
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                    </tfoot>
-                </table>
-            </div>
-        </div>
     </div>
 {% endblock %}
 {% block code_js %}
@@ -152,8 +80,11 @@
             {% for jprofile in jprofiles %}
                 profiles += "<a href='{% url 'profiles-show' jprofile.profile.id %}'>{{ jprofile.profile }}</a>,";
             {% endfor %}
+            {% is_assigned_plain job.id as job_state %}
+            var state_assign = "{% autoescape off %}{% get_label_state_assign job_state  %}{% endautoescape %}";
+            var state = "{% autoescape off %}{% get_label_state job.state %}{% endautoescape %}";
 
-            new_point.push("<b>Cliente:</b> {{ job.name_client }}<br><b>Estado:</b> {{ job.state }}<br><b>Descripción:</b> {{ job.description|linebreaksbr }} <br><b>Asignado a:</b> " + profiles + "");
+            new_point.push("<b>Cliente:</b> {{ job.name_client }}<br><b>Estado:</b> " + state + "<br><b>Descripción:</b> {{ job.description|linebreaksbr }} <br><b>Asignado a:</b> " + state_assign + " " + profiles + "");
             new_point.push({{ job.lat }});
             new_point.push({{ job.lng }});
             new_point.push(getColor('{{ job.state }}'));

@@ -50,17 +50,10 @@
                             <td>{{ job.zone }}</td>
                             <td>{{ job.register_at|naturaltime }}</td>
                             <td>{{ job.jobtype }}</td>
-                            <td>{{ job.state }}</td>
+                            <td class="text-center">{% autoescape off %}{% get_label_state job.state %}{% endautoescape %}</td>
                             <td>
-                                {% is_assigned_plain job.id as state_job %}
-
-                                {% if state_job %}
-                                    <i class="fa fa-circle m-r-5" style="color: #00bfc7;" data-tooltip="tooltip"
-                                       title="Asignado"></i>
-                                {% else %}
-                                    <i class="fa fa-circle m-r-5" style="color: #fa3e18;" data-tooltip="tooltip"
-                                       title="No Asignado"></i>
-                                {% endif %}
+                                {% is_assigned_plain job.id as job_state %}
+                                {% autoescape off %}{% get_label_state_assign job_state  %}{% endautoescape %}
                                 <br>
                                 {% get_profiles_assigment job.id as jprofiles %}
                                 {% for jprofile in jprofiles %}
