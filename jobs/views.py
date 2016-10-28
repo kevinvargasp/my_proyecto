@@ -303,6 +303,7 @@ class HistoryViewSet(APIView):
                     jh = JobHistory(observation=observation,
                                     lat=lat,
                                     lng=lng,
+                                    state=state,
                                     profile_id=profile.id,
                                     profilejob_id=pj.id)
                     jh.save()
