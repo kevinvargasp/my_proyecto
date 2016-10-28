@@ -97,8 +97,7 @@ class ProfileJob(models.Model):
 class JobHistory(models.Model):
     profilejob = models.ForeignKey(ProfileJob, verbose_name='Trabajo asignado')
     profile = models.ForeignKey(Profile, verbose_name='Usuario')
-
-    # STATE ADD PARAMS
+    state = models.CharField(max_length=10, choices=STATUS_TASK, verbose_name='Estado', default='EN_PROCESO')
     observation = models.TextField(verbose_name=u'Observación')
     register_at = models.DateTimeField(default=datetime.now, verbose_name='Fecha de Registro')
 

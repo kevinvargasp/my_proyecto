@@ -482,7 +482,7 @@ def profilejobs_show(request, id):
         'job_obj': Job,
         'profile_obj': Profile,
         'jobhistories': jobhistories,
-        'jobhistory_instance': JobHistory,
+        'jobhistory_obj': JobHistory,
     })
 
 

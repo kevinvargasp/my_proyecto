@@ -73,26 +73,28 @@
                     <thead class="table-bordered ">
                     <tr>
                         <th>#</th>
-                        <th>{% get_verbose_field_name jobhistory_instance 'observation' %}</th>
-                        <th>{% get_verbose_field_name jobhistory_instance 'register_at' %}</th>
-                        <th>{% get_verbose_field_name jobhistory_instance 'lat' %}</th>
-                        <th>{% get_verbose_field_name jobhistory_instance 'lng' %}</th>
-                        <th>{% get_verbose_field_name jobhistory_instance 'profile' %}</th>
+                        <th>{% get_verbose_field_name jobhistory_obj 'state' %}</th>
+                        <th>{% get_verbose_field_name jobhistory_obj 'observation' %}</th>
+                        <th>{% get_verbose_field_name jobhistory_obj 'register_at' %}</th>
+                        <th>{% get_verbose_field_name jobhistory_obj 'lat' %}</th>
+                        <th>{% get_verbose_field_name jobhistory_obj 'lng' %}</th>
+                        <th>{% get_verbose_field_name jobhistory_obj 'profile' %}</th>
                         <th class="text-center">Opciones</th>
                     </tr>
                     </thead>
 
                     <tbody>
-                    {% for profile in jobhistories %}
+                    {% for jh in jobhistories %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td>{{ profile.observation }}</td>
-                            <td>{{ profile.register_at }}</td>
-                            <td>{{ profile.lat }}</td>
-                            <td>{{ profile.lng }}</td>
-                            <td>{{ profile.profile }}</td>
+                            <td>{{ jh.state }}</td>
+                            <td>{{ jh.observation }}</td>
+                            <td>{{ jh.register_at }}</td>
+                            <td>{{ jh.lat }}</td>
+                            <td>{{ jh.lng }}</td>
+                            <td>{{ jh.jh }}</td>
                             <td class="text-center">
-                                <a href="{% url 'jobhistories-edit' profile.id %}">Modificar</a>
+                                <a href="{% url 'jobhistories-edit' jh.id %}">Modificar</a>
                             </td>
                         </tr>
                     {% endfor %}
