@@ -29,11 +29,14 @@
                     <thead class="table-bordered ">
                     <tr>
                         <th>#</th>
-                        <th>{% get_field_name job_obj 'jobtype' %}</th>
-                        <th>{% get_field_name job_obj 'zone' %}</th>
-                        <th>{% get_field_name job_obj 'state' %}</th>
-                        <th>{% get_field_name job_obj 'register_at' %}</th>
                         <th>{% get_field_name job_obj 'name_client' %}</th>
+
+
+                        <th>{% get_field_name job_obj 'zone' %}</th>
+                        <th>{% get_field_name job_obj 'register_at' %}</th>
+                        <th>{% get_field_name job_obj 'jobtype' %}</th>
+                        <th>{% get_field_name job_obj 'state' %}</th>
+                        <th>Asignado a:</th>
                         <th>{% get_field_name job_obj 'description' %}</th>
                         <th class="text-center">Opciones</th>
                     </tr>
@@ -43,20 +46,29 @@
                     {% for job in jobs %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
+                            <td>{{ job.name_client }}</td>
+                            <td>{{ job.zone }}</td>
+                            <td>{{ job.register_at|naturaltime }}</td>
+                            <td>{{ job.jobtype }}</td>
+                            <td>{{ job.state }}</td>
                             <td>
                                 {% is_assigned_plain job.id as state_job %}
 
                                 {% if state_job %}
-                                    <i class="fa fa-circle m-r-5" style="color: #00bfc7;" data-tooltip="tooltip" title="Asignado"></i>
+                                    <i class="fa fa-circle m-r-5" style="color: #00bfc7;" data-tooltip="tooltip"
+                                       title="Asignado"></i>
                                 {% else %}
-                                    <i class="fa fa-circle m-r-5" style="color: #fa3e18;" data-tooltip="tooltip" title="No Asignado"></i>
+                                    <i class="fa fa-circle m-r-5" style="color: #fa3e18;" data-tooltip="tooltip"
+                                       title="No Asignado"></i>
                                 {% endif %}
-                                {{ job.jobtype }}
+                                <br>
+                                {% get_profiles_assigment job.id as jprofiles %}
+                                {% for jprofile in jprofiles %}
+                                    <a href='{% url 'profiles-show' jprofile.profile.id %}'>{{ jprofile.profile }}</a>
+                                    <br>
+                                {% endfor %}
+
                             </td>
-                            <td>{{ job.zone }}</td>
-                            <td>{{ job.state }}</td>
-                            <td>{{ job.register_at|naturaltime }}</td>
-                            <td>{{ job.name_client }}</td>
                             <td>{{ job.description }}</td>
                             <td class="text-center">
                                 <a href="{% url 'jobs-show' job.id %}" data-tooltip="tooltip"
