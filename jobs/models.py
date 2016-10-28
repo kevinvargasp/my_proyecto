@@ -91,7 +91,7 @@ class ProfileJob(models.Model):
         verbose_name = 'Assignacion'
         verbose_name_plural = 'Asignaciones'
         permissions = (
-            ('report_profilejob', 'Can Details Profije Job'),
+            ('report_profilejob', 'Can Details Report Profile Job'),
             ('show_profilejob', 'Can Details Profije Job'),
             ('index_profilejob', 'Can List Profile Job'),
         )
