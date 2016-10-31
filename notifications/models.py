@@ -1,8 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-
-# Create your models here.
+from datetime import datetime
 from users.models import Profile
 
 TYPE_NOTIFICATION = (('MES', 'MENSAJE'),
@@ -24,6 +23,10 @@ class Notification(models.Model):
 
     obj = models.CharField(max_length=25)
     obj_id = models.CharField(max_length=5)
+
+    register_at = models.DateTimeField(default=datetime.now, verbose_name='Fecha de envio')
+    read_at = models.DateTimeField(null=True, blank=True, verbose_name='Fecha de lectura')
+
 
     def __unicode__(self):
         return self.title
