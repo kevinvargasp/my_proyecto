@@ -1,0 +1,17 @@
+{% load utils %}
+{% load humanize %}
+{% get_notifications request as notifications %}
+
+{% for notification in notifications %}
+    <a href="{% url 'notifications-show' notification.id %}">
+        <div class="user-img">
+            <i class="fa fa-4x fa-user"></i>
+            <span class="profile-status {% if notification.read_at %}online{% else %}offline{% endif %} pull-right"></span>
+        </div>
+        <div class="mail-contnet">
+            <h5>{{ notification.profile }}</h5>
+            <span class="mail-desc">{{ notification.title }}</span>
+            <span class="time">{{ notification.register_at|naturaltime }}</span>
+        </div>
+    </a>
+{% endfor %}

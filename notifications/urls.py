@@ -3,5 +3,6 @@ from notifications import views
 
 urlpatterns = [
     url(r'^notifications/index/$', views.notifications_index, name='notifications-index'),
+    url(r'^notifications/show/(?P<id>\d+)/$', views.notifications_show, name='notifications-show'),
 
 ]

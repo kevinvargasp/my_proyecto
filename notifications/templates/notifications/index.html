@@ -11,6 +11,9 @@
                         <td>Titulo</td>
                         <td>Mensaje</td>
                         <td>Cliente</td>
+                        <td>Enviado</td>
+                        <td>Leido?</td>
+                        <td>Opciones</td>
                     </tr>
                     </thead>
                     <tbody>
@@ -19,9 +22,24 @@
                             <td>{{ notification.title }}</td>
                             <td>{{ notification.content }}
                                 {% get_obj_from_notification notification as obj %}
-                                <a href="{% url 'profilejobs-show' obj.id %}">{{ obj }}</a>
+                                <b><a href="{% url 'profilejobs-show' obj.id %}">{{ obj }}</a></b>
                             </td>
                             <td>{{ notification.profile }}</td>
+                            <td>{{ notification.register_at }}</td>
+                            <td class="text-center">
+                                {% if notification.read_at %}
+                                    <span class='label label-success label-rounded'>Si</span>
+                                {% else %}
+                                    <span class='label label-default label-rounded'>No</span>
+                                {% endif %}
+                            </td>
+                            <td class="text-center">
+                                {% if perms.notifications.show_notification %}
+                                    <a href="{% url 'notifications-show' notification.id %}" data-tooltip="tooltip"
+                                       title="Más Detalles"><i
+                                            class="fa fa-bars text-success"></i></a>
+                                {% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>

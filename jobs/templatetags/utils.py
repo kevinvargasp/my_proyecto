@@ -2,7 +2,8 @@ from django import template
 from datetime import datetime
 from django.apps import apps
 from jobs.models import ProfileJob, Job
-from users.models import ROLES_PROFILE, MARITAL_STATUS, GENDER
+from notifications.models import Notification
+from users.models import ROLES_PROFILE, MARITAL_STATUS, GENDER, Profile
 
 register = template.Library()
 
@@ -127,3 +128,13 @@ def is_use_job_type(type_job_id):
 def get_obj_from_notification(notification):
     obj = apps.get_model('jobs', notification.obj)
     return obj.objects.get(pk=notification.obj_id)
+
+@register.assignment_tag
+def get_notifications(requestt):
+
+    if requestt.user.is_superuser or Profile.objects.get(user_id=requestt.user.id).rol == 'SUP':
+        notifications = Notification.objects.all()[:10]
+    else:
+        notifications = Notification.objects.filter(profile_id=Profile.objects.get(user_id=requestt.user.id))[:10]
+
+    return notifications
