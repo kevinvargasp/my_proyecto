@@ -32,6 +32,7 @@ class Notification(models.Model):
         return self.title
 
     class Meta:
+        ordering = ['-register_at']
         verbose_name = 'Notificacion'
         verbose_name_plural = 'Notificaciones'
 
