@@ -1,6 +1,6 @@
 from django import template
 from datetime import datetime
-
+from django.apps import apps
 from jobs.models import ProfileJob, Job
 from users.models import ROLES_PROFILE, MARITAL_STATUS, GENDER
 
@@ -122,3 +122,8 @@ def is_use_zone(zone_id):
 @register.assignment_tag
 def is_use_job_type(type_job_id):
     return Job.objects.filter(jobtype_id=int(type_job_id)).exists()
+
+@register.assignment_tag
+def get_obj_from_notification(notification):
+    obj = apps.get_model('jobs', notification.obj)
+    return obj.objects.get(pk=notification.obj_id)

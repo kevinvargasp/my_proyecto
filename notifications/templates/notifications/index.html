@@ -1,5 +1,5 @@
 {% extends 'layout/base.html' %}
-
+{% load utils %}
 {% block layout %}
     <div class="row">
         <div class="col-md-12">
@@ -11,16 +11,17 @@
                         <td>Titulo</td>
                         <td>Mensaje</td>
                         <td>Cliente</td>
-                        <td>Opciones</td>
                     </tr>
                     </thead>
                     <tbody>
                     {% for notification in notifications %}
                         <tr>
                             <td>{{ notification.title }}</td>
-                            <td>{{ notification.content }}</td>
-                            <td>{{notification.profile}}</td>
-                            <td></td>
+                            <td>{{ notification.content }}
+                                {% get_obj_from_notification notification as obj %}
+                                <a href="{% url 'profilejobs-show' obj.id %}">{{ obj }}</a>
+                            </td>
+                            <td>{{ notification.profile }}</td>
                         </tr>
                     {% endfor %}
                     </tbody>

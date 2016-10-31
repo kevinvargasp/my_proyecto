@@ -6,7 +6,6 @@ from users.models import Profile
 
 
 def notifications_index(request):
-    print Profile.objects.get(user_id=request.user.id).rol
 
     if request.user.is_superuser or Profile.objects.get(user_id=request.user.id).rol == 'SUP':
         notifications = Notification.objects.all()
