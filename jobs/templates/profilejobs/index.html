@@ -29,6 +29,7 @@
                         <th>{% get_verbose_field_name profilejob_obj 'profile' %}</th>
                         <th>{% get_verbose_field_name job_obj 'name_client' %}</th>
                         <th>{% get_verbose_field_name job_obj 'jobtype' %}</th>
+                        <th>{% get_verbose_field_name profilejob_obj 'assign_at' %}</th>
                         <th class="text-center">Opciones</th>
                     </tr>
                     </thead>
@@ -41,6 +42,7 @@
                             <td>{{ profilejob.profile }}</td>
                             <td>{{ profilejob.job.name_client }}</td>
                             <td>{{ profilejob.job.jobtype }}</td>
+                            <td>{{ profilejob.assign_at }}</td>
                             <td class="text-center">
                                 {% if perms.jobs.show_profilejob %}
                                     <a href="{% url 'profilejobs-show' profilejob.id %}" data-tooltip="tooltip"

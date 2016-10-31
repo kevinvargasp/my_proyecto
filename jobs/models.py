@@ -88,6 +88,7 @@ class ProfileJob(models.Model):
         return "%s - %s" % (self.job, self.profile)
 
     class Meta:
+        ordering = ['-assign_at']
         verbose_name = 'Assignacion'
         verbose_name_plural = 'Asignaciones'
         permissions = (

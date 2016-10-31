@@ -79,7 +79,6 @@
                         <th>{% get_verbose_field_name jobhistory_obj 'lat' %}</th>
                         <th>{% get_verbose_field_name jobhistory_obj 'lng' %}</th>
                         <th>{% get_verbose_field_name jobhistory_obj 'profile' %}</th>
-                        <th class="text-center">Opciones</th>
                     </tr>
                     </thead>
 
@@ -93,11 +92,6 @@
                             <td>{{ jh.lat }}</td>
                             <td>{{ jh.lng }}</td>
                             <td>{{ jh.profile }}</td>
-                            <td class="text-center">
-                                {% if perms.jobs.change_jobhistory %}
-                                <a href="{% url 'jobhistories-edit' jh.id %}">Modificar</a>
-                                {% endif %}
-                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -127,7 +121,6 @@
             };
 
             map = new google.maps.Map(document.getElementById("gmap"), myOptions);
-            // marker refers to a global variable
 
             var marker = new google.maps.Marker({
                 position: new google.maps.LatLng(lat, lng),
@@ -135,16 +128,9 @@
             });
             markers.push(marker);
         }
-        function setMapOnAll(map) {
-            for (var i = 0; i < markers.length; i++) {
-                markers[i].setMap(map);
-            }
-        }
 
         window.onload = function () {
             initialize()
         };
     </script>
-
-
 {% endblock %}
