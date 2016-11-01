@@ -1,21 +1,48 @@
 {% extends 'layout/admin_base.html' %}
 {% load utils %}
 {% block title_layout %}
-    <h3>Reportes </h3>
+    Reportes  {% if is_correct %} <b>{{ date_start }}</b> a <b>{{ date_end }}</b>{% endif %}
 {% endblock %}
-{% block layout %}
-    <div class="panel panel-primary">
+{% block title_right %}
+    <a href="{% url 'report-index' %}" class="waves-effect pull-right btn btn-primary btn-outline">
+        <i class="fa fa-plus"></i>
+        <spanclass
+        ="hide-menu">Nuevo Reporte</span></a>
+{% endblock %}
 
-        <div class="row">
-            <div class="col-md-3">
-                <a href="{% url 'report-jobs' %}" class="btn btn-block btn-default btn-outline">Trabajos</a>
+{% block layout %}
+    <div class="row">
+        {% if is_correct %}
+            <div class="col-md-4">
+                <div class="white-box">
+                    <h3 class="box-title">Trabajos</h3>
+                    <a href="{% url 'jobs-pdf' %}?date_start={{ date_start }}&date_end={{ date_end }}" target="_blank"
+                       class="btn btn-success btn-outline">Reporte General</a>
+                </div>
             </div>
-            <div class="col-md-3">
-                <a href="{% url 'report-employees' %}" class="btn btn-block btn-default btn-outline">Empleados</a>
+            <div class="col-md-4">
+                <div class="white-box">
+                    <h3 class="box-title">Empleados</h3>
+                    <a href="{% url 'employees-pdf' %}?date_start={{ date_start }}&date_end={{ date_end }}"
+                       target="_blank" class="btn btn-success btn-outline">Reporte General</a>
+                </div>
             </div>
-            <div class="col-md-3">
-                <a href="{% url 'report-assigns' %}" class="btn btn-block btn-default btn-outline">Asignaciones</a>
+            <div class="col-md-4">
+                <div class="white-box">
+                    <h3 class="box-title">Asignaciones</h3>
+                    <a href="{% url 'assigns-pdf' %}?date_start={{ date_start }}&date_end={{ date_end }}"
+                       target="_blank" class="btn btn-success btn-outline">Reporte General</a>
+                </div>
             </div>
-        </div>
+        {% else %}
+            <div class="white-box">
+                <h3 class="box-title">Seleccione fechas</h3>
+                {% include 'reports/_form_dates.html' %}
+            </div>
+        {% endif %}
     </div>
+
+{% endblock %}
+{% block code_js %}
+    {% include 'reports/_script_dates.html' %}
 {% endblock %}

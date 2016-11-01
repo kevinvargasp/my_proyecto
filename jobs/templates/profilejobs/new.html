@@ -1,12 +1,15 @@
 {% extends 'layout/admin_base.html' %}
 
 {% block title_layout %}
-    <h3><a href="{% url 'jobs-index' %}" data-tooltip="tooltip" title="Atrás"><i
-            class="fa fa-arrow-circle-left"></i></a> Asignando</h3>
+    <a href="{% url 'jobs-index' %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
+            class="fa fa-arrow-circle-left"></i></a> Asignando
 {% endblock %}
 
 {% block layout %}
-    {% include 'partials/_partial_form_horizontal.html' %}
+    <div class="white-box">
+        {% include 'partials/_partial_form_horizontal.html' %}
+    </div>
+
 {% endblock %}
 {% block code_js %}
 

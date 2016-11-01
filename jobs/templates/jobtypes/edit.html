@@ -2,12 +2,15 @@
 
 {% block title_layout %}
 
-    <h3>{% if perms.jobs.index_jobtype %}<a href="{% url 'jobtypes-index' %}" data-tooltip="tooltip" title="Atrás"><i
-            class="fa fa-arrow-circle-left"></i></a> {% endif %} Modificando Tipo de Trabajo</h3>
+    {% if perms.jobs.index_jobtype %}
+        <a href="{% url 'jobtypes-index' %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
+                class="fa fa-arrow-circle-left"></i></a> {% endif %} Modificando Tipo de Trabajo
 
 {% endblock %}
 {% block layout %}
-    {% include 'partials/_partial_form_horizontal.html' %}
+    <div class="white-box">
+        {% include 'partials/_partial_form_horizontal.html' %}
+    </div>
 {% endblock %}
 {% block submit %}
     Guardar

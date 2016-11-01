@@ -70,18 +70,6 @@ def jobtypes_edit(request, id):
         'form': jobtype_form
     })
 
-
-@permission_required('jobs.show_jobtype', login_url='/log_in')
-def jobtypes_show(request, id):
-    jobtype = JobType.objects.get(id=id)
-
-    return render(request, 'jobtypes/show.html', {
-        'jobtype': jobtype,
-        'jobtype_instance': JobType,
-        'user_instance': User,
-    })
-
-
 @permission_required('jobs.delete_jobtype', login_url='/log_in')
 def jobtypes_delete(request, id):
     jobtype = JobType.objects.get(id=id)

@@ -2,30 +2,17 @@
 {% load utils %}
 {% load humanize %}
 {% block title_layout %}
-    <h3>Trabajos</h3>
+    Trabajos
+{% endblock %}
+{% block title_right %}
+    {% if perms.jobs.add_job %}
+        <a href="{% url 'jobs-new' %}"
+           class="fcbtn btn btn-outline btn-primary btn-1f pull-right"> Agregar</a>
+    {% endif %}
 {% endblock %}
 {% block layout %}
-    <div class="panel panel-primary">
+    <div class="white-box">
         <div class="row">
-            <div class="form-inline padding-bottom-15">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            {% if perms.jobs.add_job %}
-                                <a href="{% url 'jobs-new' %}"
-                                   class="fcbtn btn btn-outline btn-primary btn-1f"> Agregar</a>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="col-sm-6 text-right m-b-20">
-                        <div class="form-group">
-                            <input id="demo-input-search2" type="text" placeholder="Buscar"
-                                   class="form-control"
-                                   autocomplete="off">
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="table-responsive">
                 <table id="table-users" class="table table-bordered table-striped">
                     <thead class="table-bordered ">
@@ -96,7 +83,7 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colspan="8">
+                        <td colspan="9">
                             <div class="text-right">
                                 <ul class="pagination">
                                 </ul>

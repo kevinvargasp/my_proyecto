@@ -7,11 +7,14 @@
 {% block layout %}
     <div class="row">
         <div class="col-md-6">
-            {% include 'partials/_partial_form_horizontal.html' %}
+            <div class="white-box">
+                {% include 'partials/_partial_form_horizontal.html' %}
+            </div>
         </div>
         <div class="col-md-6" onload="initialize()">
-
-            <div id="gmap" style="width: 550px; height: 450px"></div>
+            <div class="white-box">
+                <div id="gmap" style="width: 100%; height: 450px"></div>
+            </div>
         </div>
 
     </div>

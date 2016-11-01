@@ -7,32 +7,34 @@
 {% block layout %}
     <div class="row">
         <div class="col-md-12">
-            <p>
-                <strong>{% get_verbose_field_name notification_obj 'title' %}</strong>
-                {{ notification.title }}
-            </p>
-            <p>
-                <strong>{% get_verbose_field_name notification_obj 'content' %}</strong>
-                {{ notification.content }}
-                {% get_obj_from_notification notification as obj %}
-                <strong>
-                    <a href="{% url 'profilejobs-show' obj.id %}">{{ obj }}</a>
-                </strong>
-            </p>
-            <p>
-                <strong>{% get_verbose_field_name notification_obj 'profile' %}</strong>
-                {{ notification.profile }}
-            </p>
-            <p>
-                <strong>{% get_verbose_field_name notification_obj 'register_at' %}</strong>
-                {{ notification.register_at }}
-            </p>
-            <p>
-                <strong>{% get_verbose_field_name notification_obj 'read_at' %}</strong>
-                {% if notification.read_at %}
-                    <span class='label label-success label-rounded'>{{ notification.register_at }}</span>
-                {% endif %}
-            </p>
+            <div class="white-box">
+                <p>
+                    <strong>{% get_verbose_field_name notification_obj 'title' %}</strong>
+                    {{ notification.title }}
+                </p>
+                <p>
+                    <strong>{% get_verbose_field_name notification_obj 'content' %}</strong>
+                    {{ notification.content }}
+                    {% get_obj_from_notification notification as obj %}
+                    <strong>
+                        <a href="{% url 'profilejobs-show' obj.id %}">{{ obj }}</a>
+                    </strong>
+                </p>
+                <p>
+                    <strong>{% get_verbose_field_name notification_obj 'profile' %}</strong>
+                    {{ notification.profile }}
+                </p>
+                <p>
+                    <strong>{% get_verbose_field_name notification_obj 'register_at' %}</strong>
+                    {{ notification.register_at }}
+                </p>
+                <p>
+                    <strong>{% get_verbose_field_name notification_obj 'read_at' %}</strong>
+                    {% if notification.read_at %}
+                        <span class='label label-success label-rounded'>{{ notification.read_at }}</span>
+                    {% endif %}
+                </p>
+            </div>
         </div>
     </div>
 {% endblock %}

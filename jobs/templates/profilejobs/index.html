@@ -1,25 +1,11 @@
 {% extends 'layout/admin_base.html' %}
 {% load utils %}
 {% block title_layout %}
-    <h3>Asignaciones</h3>
+    Asignaciones
 {% endblock %}
 {% block layout %}
-
-    <div class="panel panel-primary">
-        <div class="row">
-            <div class="form-inline padding-bottom-15">
-                <div class="row">
-                    <div class="col-sm-6">
-                    </div>
-                    <div class="col-sm-6 text-right m-b-20">
-                        <div class="form-group">
-                            <input id="demo-input-search2" type="text" placeholder="Buscar"
-                                   class="form-control"
-                                   autocomplete="off">
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="row">
+        <div class="white-box">
             <div class="table-responsive">
                 <table id="table-users" class="table table-bordered table-striped">
                     <thead class="table-bordered ">
@@ -38,7 +24,9 @@
                     {% for profilejob in profilejobs %}
                         <tr>
                             <td>{{ forloop.counter }}</td>
-                            <td class="text-center">{% autoescape off %}{% get_label_state profilejob.state %}{% endautoescape %}</td></td>
+                            <td class="text-center">
+                                {% autoescape off %}{% get_label_state profilejob.state %}{% endautoescape %}</td>
+                            </td>
                             <td>{{ profilejob.profile }}</td>
                             <td>{{ profilejob.job.name_client }}</td>
                             <td>{{ profilejob.job.jobtype }}</td>

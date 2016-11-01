@@ -7,49 +7,53 @@
 {% block layout %}
     <div class="row">
         <div class="col-md-7">
-            <p>
-                <strong>{% get_verbose_field_name job_obj 'name_client' %}</strong>
-                {{ job.name_client }}
-            </p>
-            <p>
-                <strong>{% get_verbose_field_name job_obj 'jobtype' %}</strong>
-                {{ job.jobtype }}
-            </p>
-            <p>
-                <strong>{% get_verbose_field_name job_obj 'state' %}</strong>
-                {{ job.state }}
-            </p>
-            <p>
-                <strong>{% get_verbose_field_name job_obj 'address' %}</strong>
-                {{ job.address }}
-            </p>
-            <p>
-                <strong>{% get_verbose_field_name job_obj 'zone' %}</strong>
-                {{ job.zone }}
-            </p>
-            <p>
-                <strong>{% get_verbose_field_name job_obj 'description' %}</strong>
-                {{ job.description }}
-            </p>
-            <p>
-                <strong>{% get_verbose_field_name job_obj 'mobile_phone' %}</strong>
-                {{ job.mobile_phone }}
-            </p>
-            <p>
-                <strong>{% get_verbose_field_name job_obj 'register_at' %}</strong>
-                {{ job.register_at }}
-            </p>
-            <p>
-                <strong>{% get_verbose_field_name job_obj 'lat' %}</strong>
-                {{ job.lat }}
-            </p>
-            <p>
-                <strong>{% get_verbose_field_name job_obj 'lng' %}</strong>
-                {{ job.lng }}
-            </p>
+            <div class="white-box">
+                <p>
+                    <strong>{% get_verbose_field_name job_obj 'name_client' %}</strong>
+                    {{ job.name_client }}
+                </p>
+                <p>
+                    <strong>{% get_verbose_field_name job_obj 'jobtype' %}</strong>
+                    {{ job.jobtype }}
+                </p>
+                <p>
+                    <strong>{% get_verbose_field_name job_obj 'state' %}</strong>
+                    {{ job.state }}
+                </p>
+                <p>
+                    <strong>{% get_verbose_field_name job_obj 'address' %}</strong>
+                    {{ job.address }}
+                </p>
+                <p>
+                    <strong>{% get_verbose_field_name job_obj 'zone' %}</strong>
+                    {{ job.zone }}
+                </p>
+                <p>
+                    <strong>{% get_verbose_field_name job_obj 'description' %}</strong>
+                    {{ job.description }}
+                </p>
+                <p>
+                    <strong>{% get_verbose_field_name job_obj 'mobile_phone' %}</strong>
+                    {{ job.mobile_phone }}
+                </p>
+                <p>
+                    <strong>{% get_verbose_field_name job_obj 'register_at' %}</strong>
+                    {{ job.register_at }}
+                </p>
+                <p>
+                    <strong>{% get_verbose_field_name job_obj 'lat' %}</strong>
+                    {{ job.lat }}
+                </p>
+                <p>
+                    <strong>{% get_verbose_field_name job_obj 'lng' %}</strong>
+                    {{ job.lng }}
+                </p>
+            </div>
         </div>
         <div class="col-md-5" onload="initialize()">
-            <div id="gmap" style="width: 100%; height: 450px"></div>
+            <div class="white-box">
+                <div id="gmap" style="width: 100%; height: 450px"></div>
+            </div>
         </div>
     </div>
 

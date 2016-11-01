@@ -1,30 +1,17 @@
 {% extends 'layout/admin_base.html' %}
 {% block title_layout %}
-    <h3>Zonas</h3>
+    Zonas
+{% endblock %}
+{% block title_right %}
+    {% if perms.jobs.add_zone %}
+        <a href="{% url 'zones-new' %}" class="fcbtn btn btn-outline btn-primary btn-1f pull-right">Nueva Zona</a>
+    {% endif %}
 {% endblock %}
 {% load utils %}
 {% block layout %}
-    <div class="panel panel-primary">
-        <div class="row">
-            <div class="form-inline padding-bottom-15">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            {% if perms.jobs.add_zone %}
-                                <a href="{% url 'zones-new' %}"
-                                   class="fcbtn btn btn-outline btn-primary btn-1f"> Nueva Zona</a>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="col-sm-6 text-right m-b-20">
-                        <div class="form-group">
-                            <input id="demo-input-search2" type="text" placeholder="Buscar"
-                                   class="form-control"
-                                   autocomplete="off">
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+    <div class="row">
+        <div class="white-box">
             <table id="table-users" class="table table-bordered table-striped">
                 <thead class="table-bordered ">
                 <tr>
@@ -46,7 +33,7 @@
                             {% endif %}
                             {% is_use_zone zone.id as is_use %}
 
-                            {% if perms.jobs.delete_zone and not is_use  %}
+                            {% if perms.jobs.delete_zone and not is_use %}
                                 <a href="#" data-href="{% url 'zones-delete' zone.id %}"
                                    data-toggle="modal" data-target="#confirm-delete" data-tooltip="tooltip"
                                    title="Eliminar"> <i class="fa fa-times text-danger"></i>

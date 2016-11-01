@@ -1,13 +1,13 @@
 {% extends 'layout/admin_base.html' %}
 {% load utils %}
 {% block title_layout %}
-    <h3>
-        {% if perms.jobs.index_profilejob %}
-            <a href="{% url 'profilejobs-index' %}" data-tooltip="tooltip" title="Atrás">
-                <i class="fa fa-arrow-circle-left"></i></a>
-        {% endif %}
-        Mostrando Asignación
-    </h3>
+
+    {% if perms.jobs.index_profilejob %}
+        <a href="{% url 'profilejobs-index' %}" data-tooltip="tooltip" title="Atrás">
+            <i class="fa fa-arrow-circle-left"></i></a>
+    {% endif %}
+    Mostrando Asignación
+
 {% endblock %}
 {% block layout %}
     <div class="row">

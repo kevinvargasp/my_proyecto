@@ -1,31 +1,12 @@
 {% extends 'layout/admin_base.html' %}
 {% block title_layout %}
-    <h3>Usuarios</h3>
+    Usuarios
 {% endblock %}
 {% load utils %}
 {% block layout %}
-    <div class="panel panel-primary">
-        <div class="row">
-            <div class="form-inline padding-bottom-15">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            {% if perms.users.add_profile %}
-                                <a href="{% url 'profiles-new' %}"
-                                   class="fcbtn btn btn-outline btn-primary btn-1f"> Nuevo Perfil</a>
-                            {% endif %}
 
-                        </div>
-                    </div>
-                    <div class="col-sm-6 text-right m-b-20">
-                        <div class="form-group">
-                            <input id="demo-input-search2" type="text" placeholder="Buscar"
-                                   class="form-control"
-                                   autocomplete="off">
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="row">
+        <div class="white-box">
             <table id="table-users" class="table table-bordered table-striped">
                 <thead class="table-bordered ">
                 <tr>

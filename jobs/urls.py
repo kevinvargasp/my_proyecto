@@ -23,7 +23,6 @@ urlpatterns = [
     url(r'^jobtypes/index$', views.jobtypes_index, name='jobtypes-index'),
     url(r'^jobtypes/new/$', views.jobtypes_new, name='jobtypes-new'),
     url(r'^jobtypes/edit/(\d+)/$', views.jobtypes_edit, name='jobtypes-edit'),
-    url(r'^jobtypes/show/(\d+)/$', views.jobtypes_show, name='jobtypes-show'),
     url(r'^jobtypes/delete/(\d+)/$', views.jobtypes_delete, name='jobtypes-delete'),
 
     url(r'^zones/index$', views.zones_index, name='zones-index'),

@@ -2,13 +2,15 @@
 
 {% block title_layout %}
     {% if perms.jobs.index_zone %}
-        <h3><a href="{% url 'zones-index' %}" data-tooltip="tooltip" title="Atrás"><i
-                class="fa fa-arrow-circle-left"></i></a> Modificando Zona</h3>
+        <a href="{% url 'zones-index' %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
+                class="fa fa-arrow-circle-left"></i></a> Modificando Zona
     {% endif %}
 {% endblock %}
 
 {% block layout %}
-    {% include 'partials/_partial_form_horizontal.html' %}
+    <div class="white-box">
+        {% include 'partials/_partial_form_horizontal.html' %}
+    </div>
 {% endblock %}
 {% block code_js %}
 

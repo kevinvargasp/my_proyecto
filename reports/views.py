@@ -9,7 +9,13 @@ from users.models import Profile
 
 
 def index(request):
-    return render(request, 'reports/index.html')
+    date_start = request.POST.get('date_start')
+    date_end = request.POST.get('date_end')
+    is_correct = (date_start is not None and date_end is not None)
+
+    return render(request, 'reports/index.html',
+                  {'is_correct': is_correct, 'date_start': date_start, 'date_end': date_end})
+
 
 
 def report_jobs(request):
