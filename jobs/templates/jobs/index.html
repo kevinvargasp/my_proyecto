@@ -77,7 +77,7 @@
                                        title="Modificar"><i
                                             class="fa fa-pencil text-success"></i></a>
                                 {% endif %}
-                                {% if perms.jobs.add_profilejob %}
+                                {% if perms.jobs.add_profilejob and job.state != 'TERMINADO' %}
                                     <a href="{% url 'profilejobs-new' job.id %}" data-tooltip="tooltip"
                                        title="Asignar">
                                         <i class="fa fa-share text-success"></i>
