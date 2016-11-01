@@ -148,7 +148,7 @@
                     <span class="hide-menu">Notificaciones</span></a>
                 </li>
             {% endif %}
-            {% if perms.users.index_notification %}
+            {% if perms.notifications.index_notification %}
                 <li>
                     <a href="{% url 'report-index' %}" class="waves-effect"><i class="fa fa-bar-chart"></i> <span
                             class="hide-menu">Reportes</span></a>
