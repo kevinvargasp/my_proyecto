@@ -154,14 +154,6 @@ def zones_delete(request, id):
 
 
 # JOB HISTORIES
-def jobhistories_index(request):
-    jobhistories_all = JobHistory.objects.all()
-    return render(request, 'jobhistories/index.html', {
-        'jobhistory_instance': JobHistory,
-        'jobhistories': jobhistories_all,
-    })
-
-
 def jobhistories_delete(request, id):
     jobhistory = JobHistory.objects.get(id=id)
     jobhistory.delete()

@@ -1,8 +1,8 @@
 {% extends 'layout/admin_base.html' %}
 {% load utils %}
 {% block title_layout %}
-    <h3><a href="{% url 'jobs-index' %}" data-tooltip="tooltip" title="Atrás"><i
-            class="fa fa-arrow-circle-left"></i></a> Mostrando Trabajo</h3>
+    <a href="{% url 'jobs-index' %}" data-tooltip="tooltip" data-placement="right"  title="Atrás"><i
+            class="fa fa-arrow-circle-left"></i></a> Mostrando Trabajo
 {% endblock %}
 {% block layout %}
     <div class="row">
