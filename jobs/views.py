@@ -162,53 +162,6 @@ def jobhistories_index(request):
     })
 
 
-def jobhistories_new(request, pj_id):
-    if request.method == 'POST':
-        form = JobHistoryForm(request.POST)
-        if form.is_valid():
-            jobhistory = form.save(commit=False)
-            jobhistory.save()
-            message = 'Registrado correctamente!'
-            messages.add_message(request, messages.SUCCESS, message)
-            return HttpResponseRedirect(reverse(jobhistories_index))
-        else:
-            message = 'Existen errores por favor verifica!.'
-            messages.add_message(request, messages.ERROR, message)
-    else:
-        pj = ProfileJob.objects.get(pk=int(pj_id))
-        form = JobHistoryForm(initial={'profilejob': pj})
-    return render(request, 'jobhistories/new.html', {
-        'form': form,
-    })
-
-
-def jobhistories_edit(request, id):
-    jobhistory = JobHistory.objects.get(id=id)
-    if request.method == 'POST':
-        jobhistory_form = JobHistoryForm(request.POST, request.FILES, instance=jobhistory)
-        if jobhistory_form.is_valid():
-            save_jobhistory = jobhistory_form.save()
-
-            message = "actualizado Correctamente"
-            messages.add_message(request, messages.INFO, message)
-            return HttpResponseRedirect(reverse(jobhistories_index))
-    else:
-        jobhistory_form = JobHistoryForm(instance=jobhistory)
-    return render(request, 'jobhistories/edit.html', {
-        'form': jobhistory_form
-    })
-
-
-def jobhistories_show(request, id):
-    jobhistory = JobHistory.objects.get(id=id)
-
-    return render(request, 'jobhistories/show.html', {
-        'jobhistory': jobhistory,
-        'jobhistory_instance': JobHistory,
-        'user_instance': User,
-    })
-
-
 def jobhistories_delete(request, id):
     jobhistory = JobHistory.objects.get(id=id)
     jobhistory.delete()

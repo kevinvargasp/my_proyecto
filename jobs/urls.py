@@ -6,9 +6,6 @@ from jobs import views
 urlpatterns = [
 
     url(r'^jobhistories/index$', views.jobhistories_index, name='jobhistories-index'),
-    url(r'^jobhistories/new/(?P<pj_id>\d+)/$', views.jobhistories_new, name='jobhistories-new'),
-    url(r'^jobhistories/edit/(\d+)/$', views.jobhistories_edit, name='jobhistories-edit'),
-    url(r'^jobhistories/show/(\d+)/$', views.jobhistories_show, name='jobhistories-show'),
     url(r'^jobhistories/delete/(\d+)/$', views.jobhistories_delete, name='jobhistories-delete'),
 
     url(r'^api/v1/jobhistories/$', views.HistoryViewSet.as_view(), name='gmap_list'),

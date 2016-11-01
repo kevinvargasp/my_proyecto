@@ -1,11 +1,10 @@
 {% extends 'layout/admin_base.html' %}
 
 {% block title_layout %}
-
     {% if perms.jobs.index_jobtype %}
         <a href="{% url 'jobtypes-index' %}" data-tooltip="tooltip" data-placement="right" title="Atrás"><i
-                class="fa fa-arrow-circle-left"></i></a> {% endif %} Modificando Tipo de Trabajo
-
+                class="fa fa-arrow-circle-left"></i></a>
+    {% endif %} Modificando Tipo de Trabajo
 {% endblock %}
 {% block layout %}
     <div class="white-box">
