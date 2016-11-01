@@ -3,7 +3,7 @@
 {% block title_layout %}
 
     {% if perms.jobs.index_profilejob %}
-        <a href="{% url 'profilejobs-index' %}" data-tooltip="tooltip" title="Atrás">
+        <a href="{% url 'profilejobs-index' %}" data-tooltip="tooltip" data-placement="right" title="Atrás">
             <i class="fa fa-arrow-circle-left"></i></a>
     {% endif %}
     Mostrando Asignación
@@ -16,8 +16,8 @@
                 <div class="row">
                     <div class="col-md-7">
                         <p>
-                            <strong>{% get_verbose_field_name profilejob_obj 'state' %}</strong>
-                            {{ profilejob.state }}
+                            <strong>{% get_verbose_field_name job_obj 'state' %}</strong>
+                            {{ profilejob.job.state }}
                         </p>
                         <p>
                             <strong>{% get_verbose_field_name profilejob_obj 'profile' %}</strong>

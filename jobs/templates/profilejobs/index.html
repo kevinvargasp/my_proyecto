@@ -11,7 +11,7 @@
                     <thead class="table-bordered ">
                     <tr>
                         <th>#</th>
-                        <th>{% get_verbose_field_name profilejob_obj 'state' %}</th>
+                        <th>{% get_verbose_field_name job_obj 'state' %}</th>
                         <th>{% get_verbose_field_name profilejob_obj 'profile' %}</th>
                         <th>{% get_verbose_field_name job_obj 'name_client' %}</th>
                         <th>{% get_verbose_field_name job_obj 'jobtype' %}</th>
@@ -25,7 +25,7 @@
                         <tr>
                             <td>{{ forloop.counter }}</td>
                             <td class="text-center">
-                                {% autoescape off %}{% get_label_state profilejob.state %}{% endautoescape %}</td>
+                                {% autoescape off %}{% get_label_state profilejob.job.state %}{% endautoescape %}</td>
                             </td>
                             <td>{{ profilejob.profile }}</td>
                             <td>{{ profilejob.job.name_client }}</td>

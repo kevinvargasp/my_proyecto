@@ -69,7 +69,7 @@ class ProfileJobForm(BaseForm):
             self.add_error('job', msg)
             self.add_error('profile', msg)
 
-        if ProfileJob.objects.filter(profile=profile, state='NUEVO').count() > 5:
+        if ProfileJob.objects.filter(profile=profile, job__state='NUEVO').count() > 5:
             msg = "No se pueden asignar mas trabajos."
             self.add_error('job', msg)
             self.add_error('profile', msg)

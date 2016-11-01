@@ -14,7 +14,7 @@
                 <thead class="table-bordered ">
                 <tr>
                     <th width="25">#</th>
-                    <th>{% get_verbose_field_name profilejob_obj 'state' %}</th>
+                    <th>{% get_verbose_field_name job_obj 'state' %}</th>
                     <th>{% get_verbose_field_name profilejob_obj 'profile' %}</th>
                     <th>{% get_verbose_field_name profilejob_obj 'job' %}</th>
                     <th>{% get_verbose_field_name profilejob_obj 'assign_at' %}</th>
@@ -25,7 +25,7 @@
                 {% for profilejob in profilejobs %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td>{{ profilejob.state }}</td>
+                        <td>{{ profilejob.job.state }}</td>
                         <td>{{ profilejob.profile }}</td>
                         <td>{{ profilejob.job }}</td>
                         <td>{{ profilejob.assign_at }}</td>

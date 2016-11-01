@@ -231,8 +231,6 @@ class HistoryViewSet(APIView):
                     job.save(update_fields=['state'])
 
                     pj = ProfileJob.objects.get(profile=profile, job_id=job_id)
-                    pj.state = state
-                    pj.save(update_fields=['state'])
 
                     jh = JobHistory(observation=observation,
                                     lat=lat,
@@ -390,12 +388,6 @@ def profilejobs_new(request, j_id):
             profilejob = form.save(commit=False)
             pj = profilejob.save()
 
-            profilejob = ProfileJob.objects.get(pk=profilejob.id)
-
-            job = Job.objects.get(pk=profilejob.job_id)
-            job.state = request.POST.get('state')
-            job.save(update_fields=['state'])
-
             message = 'Registrado correctamente!'
             messages.add_message(request, messages.SUCCESS, message)
             return HttpResponseRedirect(reverse(profilejobs_index))
@@ -416,10 +408,6 @@ def profilejobs_edit(request, id):
         profilejob_form = ProfileJobForm(request.POST, request.FILES, instance=profilejob)
         if profilejob_form.is_valid():
             save_profilejob = profilejob_form.save()
-
-            job = Job.objects.get(pk=profilejob.job_id)
-            job.state = request.POST.get('state')
-            job.save(update_fields=['state'])
 
             message = "actualizado Correctamente"
             messages.add_message(request, messages.INFO, message)
