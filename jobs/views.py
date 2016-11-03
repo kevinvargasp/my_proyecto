@@ -281,7 +281,7 @@ def jobs_maps_index(request):
 
     if filter == 'assig':
         pj = ProfileJob.objects.all().values_list('job_id', flat=True)
-        jobs_all = Job.objects.filter(pk__in=pj, state__in=['EN_PROCESO','EN_PROCESO','NUEVO'])
+        jobs_all = Job.objects.filter(pk__in=pj, state__in=['EN_PROCESO','DETENIDO','NUEVO'])
     elif filter == 'wassig':
         jobs_all = Job.objects.filter(profilejob__profile=None)
     elif filter == 'comp':
