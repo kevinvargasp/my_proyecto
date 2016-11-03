@@ -1,7 +1,7 @@
 from django import template
 from datetime import datetime
 from django.apps import apps
-from jobs.models import ProfileJob, Job
+from jobs.models import ProfileJob, Job, JobType, Zone
 from notifications.models import Notification
 from users.models import ROLES_PROFILE, MARITAL_STATUS, GENDER, Profile
 
@@ -72,6 +72,26 @@ def get_category(status):
         'REP': 'REPARADO',
         'NOU': 'NO USABLE',
     }[status]
+
+
+
+@register.simple_tag
+def get_total_job_types():
+    return JobType.objects.all().count()
+
+
+@register.simple_tag
+def get_total_zones():
+    return Zone.objects.all().count()
+
+@register.simple_tag
+def get_total_jobs():
+    return Job.objects.all().count()
+
+
+@register.simple_tag
+def get_total_profiles():
+    return Profile.objects.all().count()
 
 
 @register.filter()
