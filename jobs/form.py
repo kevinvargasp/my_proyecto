@@ -55,7 +55,7 @@ class ProfileJobForm(BaseForm):
         initial_s = kwargs.pop('initial', '')
         super(ProfileJobForm, self).__init__(*args, **kwargs)
         # access object through self.instance...
-        profiles = Profile.objects.filter(rol='TEC')
+        profiles = Profile.objects.filter(rol='TEC', user__is_active=True)
 
         if 'job' in initial_s:
             job = initial_s['job']
