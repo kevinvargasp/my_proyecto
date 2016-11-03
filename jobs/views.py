@@ -70,6 +70,7 @@ def jobtypes_edit(request, id):
         'form': jobtype_form
     })
 
+
 @permission_required('jobs.delete_jobtype', login_url='/log_in')
 def jobtypes_delete(request, id):
     jobtype = JobType.objects.get(id=id)
@@ -281,7 +282,7 @@ def jobs_maps_index(request):
 
     if filter == 'assig':
         pj = ProfileJob.objects.all().values_list('job_id', flat=True)
-        jobs_all = Job.objects.filter(pk__in=pj, state__in=['EN_PROCESO','DETENIDO','NUEVO'])
+        jobs_all = Job.objects.filter(pk__in=pj, state__in=['EN_PROCESO', 'DETENIDO', 'NUEVO'])
     elif filter == 'wassig':
         jobs_all = Job.objects.filter(profilejob__profile=None)
     elif filter == 'comp':
@@ -378,6 +379,7 @@ def profilejobs_index(request):
         'profile_obj': Profile,
         'job_obj': Job,
         'profilejobs': profilejobs_all,
+        'profilejobs': profilejobs_all,
     })
 
 
@@ -413,7 +415,8 @@ def profilejobs_edit(request, id):
             messages.add_message(request, messages.INFO, message)
             return HttpResponseRedirect(reverse(profilejobs_index))
     else:
-        profilejob_form = ProfileJobForm(instance=profilejob)
+        profilejob_form = ProfileJobForm(instance=profilejob, initial={'job': profilejob.job})
+
     return render(request, 'profilejobs/edit.html', {
         'form': profilejob_form
     })
