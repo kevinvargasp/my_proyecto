@@ -101,7 +101,9 @@
             });
             $('.option_id').change(function () {
                 checkOptionId($(this).val());
-            })
+            });
+            checkOption($('#option_report').val());
+
         });
 
         function checkOption(value) {
