@@ -30,8 +30,51 @@
             <div class="col-md-4">
                 <div class="white-box">
                     <h3 class="box-title">Asignaciones</h3>
-                    <a href="{% url 'assigns-pdf' %}?date_start={{ date_start }}&date_end={{ date_end }}"
-                       target="_blank" class="btn btn-success btn-outline">Reporte General</a>
+                    <label for="option_report">Seleccione tipo de reporte</label>
+                    <select class="form-control" id="option_report">
+                        <option value="generally">General</option>
+                        <option value="employee">Por Empleado</option>
+                        <option value="zone">Por Zona</option>
+                        <option value="state">Por Estado</option>
+                        <option value="typejob">Por Tipo de trabajo</option>
+                    </select>
+                    <div class="sec_employee hidden">
+                        <label for="option_employee">Seleccione Empleado</label>
+                        <select class="form-control option_id" id="option_employee">
+                            {% for employee in employees %}
+                                <option value="{{ employee.id }}">{{ employee }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="sec_zone hidden">
+                        <label for="option_zone">Seleccione Zona</label>
+                        <select class="form-control option_id" id="option_zone">
+                            {% for zone in zones %}
+                                <option value="{{ zone.id }}">{{ zone }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="sec_state hidden">
+                        <label for="option_state">Seleccione Estado</label>
+                        <select class="form-control option_id" id="option_state">
+                            <option value="NUEVO">NUEVO</option>
+                            <option value="EN_PROCESO">EN_PROCESO</option>
+                            <option value="TERMINADO">TERMINADO</option>
+                            <option value="DETENIDO">DETENIDO</option>
+                        </select>
+                    </div>
+                    <div class="sec_type_job hidden">
+                        <label for="option_type_job">Seleccione Tipo de Trabajo</label>
+                        <select class="form-control option_id" id="option_type_job">
+                            {% for jt in jobtypes %}
+                                <option value="{{ jt.id }}">{{ jt }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <br/>
+
+                    <a href="#" target="_blank" class="btn btn-success btn-outline btn-report-assing">Reporte
+                        General</a>
                 </div>
             </div>
         {% else %}
@@ -45,4 +88,73 @@
 {% endblock %}
 {% block code_js %}
     {% include 'reports/_script_dates.html' %}
+    <script>
+        var url_report = "{% url 'assigns-pdf' %}";
+        var date_start = "{{ date_start }}";
+        var date_end = "{{ date_end }}";
+
+        $(document).ready(function () {
+
+            $('#option_report').change(function () {
+                checkOption($(this).val());
+                checkShowOption($(this).val())
+            });
+            $('.option_id').change(function () {
+                checkOptionId($(this).val());
+            })
+        });
+
+        function checkOption(value) {
+            var btn_assing = $('.btn-report-assing');
+            var url = url_report + '?date_start=' + date_start + '&date_end=' + date_end + '&filter=' + value;
+
+            btn_assing.attr('href', url);
+        }
+
+        function checkOptionId(id) {
+            var btn_assing = $('.btn-report-assing');
+            var url = btn_assing.attr('href');
+            btn_assing.attr('href', url + '&id=' + id);
+        }
+
+        function checkShowOption(option) {
+            if (option == 'generally') {
+                $('.sec_employee').addClass('hidden');
+                $('.sec_state').addClass('hidden');
+                $('.sec_type_job').addClass('hidden');
+                $('.sec_zone').addClass('hidden');
+            }
+            else if (option == 'employee') {
+                checkOptionId($('#option_employee').val());
+                $('.sec_employee').removeClass('hidden');
+                $('.sec_state').addClass('hidden');
+                $('.sec_type_job').addClass('hidden');
+                $('.sec_zone').addClass('hidden');
+            }
+            else if (option == 'zone') {
+                checkOptionId($('#option_zone').val());
+                $('.sec_employee').addClass('hidden');
+                $('.sec_state').addClass('hidden');
+                $('.sec_type_job').addClass('hidden');
+                $('.sec_zone').removeClass('hidden');
+            }
+            else if (option == 'state') {
+                checkOptionId($('#option_state').val());
+                $('.sec_employee').addClass('hidden');
+                $('.sec_state').removeClass('hidden');
+                $('.sec_type_job').addClass('hidden');
+                $('.sec_zone').addClass('hidden');
+            }
+            else if (option == 'typejob') {
+                checkOptionId($('#option_type_job').val());
+                $('.sec_employee').addClass('hidden');
+                $('.sec_state').addClass('hidden');
+                $('.sec_type_job').removeClass('hidden');
+                $('.sec_zone').addClass('hidden');
+            }
+        }
+
+    </script>
+
+
 {% endblock %}

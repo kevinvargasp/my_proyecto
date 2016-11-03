@@ -62,7 +62,7 @@ class ProfileJobForm(BaseForm):
             jobs = Job.objects.filter(pk=job.id)
             self.fields['job'] = forms.ModelChoiceField(queryset=jobs,
                                                         widget=forms.Select(attrs={'class': 'form-control'}),
-                                                        empty_label=None)
+                                                        empty_label=None, label='Trabajo')
         self.fields['profile'] = forms.ModelChoiceField(queryset=profiles,
                                                         widget=forms.Select(attrs={'class': 'form-control'}),
                                                         label='Perfil')

@@ -4,7 +4,8 @@ from django.template.context import RequestContext
 from django.utils.datetime_safe import datetime
 from easy_pdf.views import PDFTemplateView
 
-from jobs.models import Job, ProfileJob, JobHistory
+from jobs.models import Job, ProfileJob, JobHistory, JobType, Zone
+from jobs.views import jobs_maps_index
 from users.models import Profile
 
 
@@ -14,8 +15,14 @@ def index(request):
     is_correct = (date_start is not None and date_end is not None)
 
     return render(request, 'reports/index.html',
-                  {'is_correct': is_correct, 'date_start': date_start, 'date_end': date_end})
-
+                  {'is_correct': is_correct,
+                   'date_start': date_start,
+                   'date_end': date_end,
+                   'jobs': Job.objects.all(),
+                   'jobtypes': JobType.objects.all(),
+                   'zones': Zone.objects.all(),
+                   'employees': Profile.objects.filter(rol='TEC')
+                   })
 
 
 def report_jobs(request):
@@ -101,12 +108,34 @@ class AssignsPdf(PDFTemplateView):
     def get_context_data(self, **kwargs):
         date_start = datetime.strptime(self.request.GET.get('date_start'), "%m/%d/%Y").date()
         date_end = datetime.strptime(self.request.GET.get('date_end'), "%m/%d/%Y").date()
+
+        get_s = self.request.GET
+
+        filter = get_s.get('filter')
+        id = get_s.get('id')
+
+        profilejobs = ProfileJob.objects.none()
+
+        if filter == 'generally':
+            profilejobs = ProfileJob.objects.filter(assign_at__range=(date_start, date_end))
+        elif filter == 'employee':
+            profilejobs = ProfileJob.objects.filter(assign_at__range=(date_start, date_end), profile_id=int(id))
+        elif filter == 'zone':
+            profilejobs = ProfileJob.objects.filter(assign_at__range=(date_start, date_end), job__zone__id=int(id))
+        elif filter == 'state':
+            profilejobs = ProfileJob.objects.filter(assign_at__range=(date_start, date_end), job__state=id)
+        elif filter == 'typejob':
+            profilejobs = ProfileJob.objects.filter(assign_at__range=(date_start, date_end),
+                                                    job__jobtype__id=int(id))
+
         return super(AssignsPdf, self).get_context_data(
             pagesize="Letter",
             jobhistory_obj=JobHistory,
             profilejob_obj=ProfileJob,
             profile_obj=Profile,
             job_obj=Job,
-            profilejobs=ProfileJob.objects.filter(assign_at__range=(date_start, date_end)),
+            profilejobs=profilejobs,
+            date_start=date_start,
+            date_end=date_end,
             **kwargs
         )
