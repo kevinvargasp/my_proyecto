@@ -21,7 +21,8 @@ def index(request):
                    'jobs': Job.objects.all(),
                    'jobtypes': JobType.objects.all(),
                    'zones': Zone.objects.all(),
-                   'employees': Profile.objects.filter(rol='TEC')
+                   'employees': Profile.objects.filter(rol='TEC'),
+                   'clients': Job.objects.all().values('name_client').distinct()
                    })
 
 
@@ -127,6 +128,9 @@ class AssignsPdf(PDFTemplateView):
         elif filter == 'typejob':
             profilejobs = ProfileJob.objects.filter(assign_at__range=(date_start, date_end),
                                                     job__jobtype__id=int(id))
+        elif filter == 'client':
+            profilejobs = ProfileJob.objects.filter(assign_at__range=(date_start, date_end),
+                                                    job__name_client=id)
 
         return super(AssignsPdf, self).get_context_data(
             pagesize="Letter",

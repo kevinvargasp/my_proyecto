@@ -37,6 +37,7 @@
                         <option value="zone">Por Zona</option>
                         <option value="state">Por Estado</option>
                         <option value="typejob">Por Tipo de trabajo</option>
+                        <option value="client">Por Cliente</option>
                     </select>
                     <div class="sec_employee hidden">
                         <label for="option_employee">Seleccione Empleado</label>
@@ -68,6 +69,14 @@
                         <select class="form-control option_id" id="option_type_job">
                             {% for jt in jobtypes %}
                                 <option value="{{ jt.id }}">{{ jt }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="sec_client hidden">
+                        <label for="option_client">Seleccione Cliente</label>
+                        <select class="form-control option_id" id="option_client">
+                            {% for c in clients %}
+                                <option value="{{ c.name_client }}">{{ c.name_client|upper }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -124,6 +133,7 @@
                 $('.sec_state').addClass('hidden');
                 $('.sec_type_job').addClass('hidden');
                 $('.sec_zone').addClass('hidden');
+                $('.sec_client').addClass('hidden');
             }
             else if (option == 'employee') {
                 checkOptionId($('#option_employee').val());
@@ -131,6 +141,8 @@
                 $('.sec_state').addClass('hidden');
                 $('.sec_type_job').addClass('hidden');
                 $('.sec_zone').addClass('hidden');
+                $('.sec_client').addClass('hidden');
+
             }
             else if (option == 'zone') {
                 checkOptionId($('#option_zone').val());
@@ -138,6 +150,8 @@
                 $('.sec_state').addClass('hidden');
                 $('.sec_type_job').addClass('hidden');
                 $('.sec_zone').removeClass('hidden');
+                $('.sec_client').addClass('hidden');
+
             }
             else if (option == 'state') {
                 checkOptionId($('#option_state').val());
@@ -145,6 +159,8 @@
                 $('.sec_state').removeClass('hidden');
                 $('.sec_type_job').addClass('hidden');
                 $('.sec_zone').addClass('hidden');
+                $('.sec_client').addClass('hidden');
+
             }
             else if (option == 'typejob') {
                 checkOptionId($('#option_type_job').val());
@@ -152,6 +168,17 @@
                 $('.sec_state').addClass('hidden');
                 $('.sec_type_job').removeClass('hidden');
                 $('.sec_zone').addClass('hidden');
+                $('.sec_client').addClass('hidden');
+
+            }
+            else if (option == 'client') {
+                checkOptionId($('#option_client').val());
+                $('.sec_employee').addClass('hidden');
+                $('.sec_state').addClass('hidden');
+                $('.sec_type_job').addClass('hidden');
+                $('.sec_zone').addClass('hidden');
+                $('.sec_client').removeClass('hidden');
+
             }
         }
 
