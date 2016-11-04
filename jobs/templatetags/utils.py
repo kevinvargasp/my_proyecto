@@ -2,7 +2,7 @@
 from django import template
 from datetime import datetime
 from django.apps import apps
-from jobs.models import ProfileJob, Job, JobType, Zone
+from jobs.models import ProfileJob, Job, JobType, Zone, JobHistory
 from notifications.models import Notification
 from users.models import ROLES_PROFILE, MARITAL_STATUS, GENDER, Profile
 
@@ -75,7 +75,6 @@ def get_category(status):
     }[status]
 
 
-
 @register.simple_tag
 def get_total_job_types():
     return JobType.objects.all().count()
@@ -84,6 +83,7 @@ def get_total_job_types():
 @register.simple_tag
 def get_total_zones():
     return Zone.objects.all().count()
+
 
 @register.simple_tag
 def get_total_jobs():
@@ -145,17 +145,26 @@ def is_use_zone(zone_id):
 def is_use_job_type(type_job_id):
     return Job.objects.filter(jobtype_id=int(type_job_id)).exists()
 
+
 @register.assignment_tag
 def get_obj_from_notification(notification):
     obj = apps.get_model('jobs', notification.obj)
     return obj.objects.get(pk=notification.obj_id)
 
+
 @register.assignment_tag
 def get_notifications(requestt):
-
     if requestt.user.is_superuser or Profile.objects.get(user_id=requestt.user.id).rol == 'SUP':
         notifications = Notification.objects.all()[:10]
     else:
         notifications = Notification.objects.filter(profile_id=Profile.objects.get(user_id=requestt.user.id))[:10]
 
     return notifications
+
+
+@register.assignment_tag
+def get_last_history(pj):
+    if JobHistory.objects.filter(profilejob=pj).exists():
+        return JobHistory.objects.filter(profilejob=pj).last()
+    else:
+        return None

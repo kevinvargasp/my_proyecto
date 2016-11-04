@@ -19,6 +19,7 @@
                     <th>{% get_verbose_field_name profilejob_obj 'profile' %}</th>
                     <th>{% get_verbose_field_name profilejob_obj 'job' %}</th>
                     <th>{% get_verbose_field_name profilejob_obj 'assign_at' %}</th>
+                    <th>Ultimo registro de Historial</th>
                 </tr>
                 </thead>
 
@@ -30,6 +31,11 @@
                         <td>{{ profilejob.profile }}</td>
                         <td>{{ profilejob.job }}</td>
                         <td>{{ profilejob.assign_at }}</td>
+                        <td>{% get_last_history profilejob as pj %}
+                            {% if pj is not None %}
+                                {{ pj.register_at }}
+                            {% endif %}
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>

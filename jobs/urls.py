@@ -9,7 +9,7 @@ urlpatterns = [
 
     url(r'^api/v1/jobhistories/$', views.HistoryViewSet.as_view(), name='gmap_list'),
     url(r'^api/v1/jobs/(?P<imei>\d+)/$', views.JobViewSet.as_view(), name='job_list'),
-    url(r'^jobs/index$', views.jobs_index, name='jobs-index'),
+    url(r'^jobs/index/$', views.jobs_index, name='jobs-index'),
     url(r'^jobs/new/$', views.jobs_new, name='jobs-new'),
     url(r'^jobs/edit/(\d+)/$', views.jobs_edit, name='jobs-edit'),
     url(r'^jobs/show/(\d+)/$', views.jobs_show, name='jobs-show'),

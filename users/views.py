@@ -145,7 +145,7 @@ def log_in(request):
                     if access.is_superuser:
                         return HttpResponseRedirect('/admin/')
                     else:
-                        return HttpResponseRedirect('/')
+                        return HttpResponseRedirect('/jobs/index/')
                 else:
                     message = 'El Usuario no esta Activo'
                     messages.add_message(request, messages.ERROR, message)
