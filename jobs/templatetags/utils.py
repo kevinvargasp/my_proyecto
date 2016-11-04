@@ -149,7 +149,7 @@ def is_use_job_type(type_job_id):
 @register.assignment_tag
 def get_obj_from_notification(notification):
     obj = apps.get_model('jobs', notification.obj)
-    if obj.objects.filter(pk=notification.obj_id).exist():
+    if obj.objects.filter(pk=notification.obj_id).exists():
         return obj.objects.get(pk=notification.obj_id)
     else:
         return None
