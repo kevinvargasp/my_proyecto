@@ -85,7 +85,7 @@ class ProfileJob(models.Model):
     assign_at = models.DateTimeField(default=datetime.now, verbose_name=u'Fecha de Asignación')
 
     def __unicode__(self):
-        return "%s - %s" % (self.job, self.profile)
+        return u"%s - %s" % (self.job, self.profile)
 
     class Meta:
         ordering = ['-assign_at']

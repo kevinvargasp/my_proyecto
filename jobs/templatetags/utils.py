@@ -1,3 +1,4 @@
+# encoding:utf-8
 from django import template
 from datetime import datetime
 from django.apps import apps
