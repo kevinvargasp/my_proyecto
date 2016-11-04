@@ -37,7 +37,7 @@
                             <td>{{ forloop.counter }}</td>
                             <td>{{ job.name_client }}</td>
                             <td>{{ job.zone }}</td>
-                            <td>{{ job.register_at|naturaltime }}</td>
+                            <td>{{ job.register_at }}</td>
                             <td>{{ job.jobtype }}</td>
                             <td class="text-center">
                                 {% autoescape off %}{% get_label_state job.state %}{% endautoescape %}</td>

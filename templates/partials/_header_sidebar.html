@@ -15,8 +15,8 @@
             <li>
                 <form role="search" class="app-search hidden-xs">
                     <input id="demo-input-search2" type="text" placeholder="Buscar..."
-                                   class="form-control"
-                                   autocomplete="off">
+                           class="form-control"
+                           autocomplete="off">
                     <a href=""><i class="fa fa-search"></i></a>
                 </form>
 
@@ -44,13 +44,11 @@
 
             <!-- /.dropdown -->
             <li class="dropdown"><a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <img
-                    src="/static/eliteadmin/plugins/images/users/hritik.jpg" alt="user-img" width="36"
+                    src="/static/images/user.png" alt="user-img" width="36"
                     class="img-circle"><b
                     class="hidden-xs">{{ user.username }}</b> </a>
                 <ul class="dropdown-menu dropdown-user animated flipInY">
                     <li><a href="{% url 'profiles-user-show' user.id %}"><i class="ti-user"></i> Mi perfil</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#"><i class="ti-settings"></i> Configuraciones</a></li>
                     <li role="separator" class="divider"></li>
                     <li><a href="{% url 'log_out' %}"><i class="fa fa-power-off"></i> Salir</a></li>
                 </ul>
@@ -159,10 +157,11 @@
                 <a href="{% url 'log_out' %}" class="waves-effect"><i class="icon-logout fa-fw"></i> <span
                         class="hide-menu">Salir</span></a>
             </li>
-            <li class="nav-small-cap">--- Support</li>
-            <li><a href="{% url 'api-docs' %}" class="waves-effect"><i class="fa fa-circle-o text-danger"></i> <span
-                    class="hide-menu">Documentation</span></a></li>
-
+            {% if reques.user.is_superuser %}
+                <li class="nav-small-cap">--- Support</li>
+                <li><a href="{% url 'api-docs' %}" class="waves-effect"><i class="fa fa-circle-o text-danger"></i> <span
+                        class="hide-menu">Documentation</span></a></li>
+            {% endif %}
         </ul>
     </div>
 </div>

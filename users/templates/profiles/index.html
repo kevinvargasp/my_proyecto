@@ -47,8 +47,7 @@
                             {% if perms.users.delete_profile %}
                                 <a href="#" data-href="{% url 'profiles-delete' profile.id %}"
                                    data-toggle="modal" data-target="#confirm-delete" data-tooltip="tooltip"
-                                   data-title="Desactivar" data-message="Está seguro de desactivar"
-                                   title="Desactivar"> <i class="fa fa-times text-warning"></i>
+                                   title="Eliminar"> <i class="fa fa-times text-danger"></i>
                                 </a>
                             {% endif %}
                         </td>
