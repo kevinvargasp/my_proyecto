@@ -16,9 +16,12 @@
                     <strong>{% get_verbose_field_name notification_obj 'content' %}</strong>
                     {{ notification.content }}
                     {% get_obj_from_notification notification as obj %}
-                    <strong>
-                        <a href="{% url 'profilejobs-show' obj.id %}">{{ obj }}</a>
-                    </strong>
+                    {% if obj is not None %}
+                        <strong>
+                            <a href="{% url 'profilejobs-show' obj.id %}">{{ obj }}</a>
+                        </strong>
+                    {% endif %}
+
                 </p>
                 <p>
                     <strong>Técnico</strong>
