@@ -58,8 +58,8 @@ class Job(models.Model):
     description = models.TextField(verbose_name=u'Descripción')
     mobile_phone = models.CharField(max_length=20, verbose_name=u'Número de Celular')
     state = models.CharField(max_length=10, choices=STATUS_TASK, verbose_name='Estado', default='NUEVO')
-    lat = models.CharField(max_length=50, blank=True, verbose_name='Latitud')
-    lng = models.CharField(max_length=50, blank=True, verbose_name='Longitud')
+    lat = models.CharField(max_length=50, verbose_name='Latitud')
+    lng = models.CharField(max_length=50,  verbose_name='Longitud')
     register_at = models.DateTimeField(default=datetime.now, verbose_name='Fecha de registro')
 
     def __unicode__(self):
