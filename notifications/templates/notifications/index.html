@@ -25,7 +25,9 @@
                             <td>{{ notification.title }}</td>
                             <td>{{ notification.content }}
                                 {% get_obj_from_notification notification as obj %}
-                                <b><a href="{% url 'profilejobs-show' obj.id %}">{{ obj }}</a></b>
+                                {% if obj is not None %}
+                                    <b><a href="{% url 'profilejobs-show' obj.id %}">{{ obj }}</a></b>
+                                {% endif %}
                             </td>
                             <td>{{ notification.profile }}</td>
                             <td>{{ notification.register_at }}</td>
