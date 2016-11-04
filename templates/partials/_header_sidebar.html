@@ -1,3 +1,4 @@
+{% load utils %}
 <nav class="navbar navbar-default navbar-static-top m-b-0">
     <div class="navbar-header"><a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)"
                                   data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
@@ -85,7 +86,7 @@
             {% if perms.jobs.index_jobtype  or perms.jobs.add_jobtype %}
                 <li><a href="#" class="waves-effect"><i class="fa fa-gavel"></i>
                     <span class="hide-menu">Tipo de Trabajos <span class="fa arrow"></span><span
-                            class="label label-rouded label-danger pull-right">1</span></span></a>
+                            class="label label-rouded label-danger pull-right">{% get_total_job_types %}</span></span></a>
                     <ul class="nav nav-second-level">
                         {% if perms.jobs.index_jobtype %}
                             <li><a href="{% url 'jobtypes-index' %}">Mostrar Todos</a></li>
@@ -99,7 +100,7 @@
             {% if perms.jobs.index_zone  or perms.jobs.add_zone %}
                 <li><a href="#" class="waves-effect"><i class="fa fa-cubes"></i>
                     <span class="hide-menu">Zonas <span class="fa arrow"></span><span
-                            class="label label-rouded label-danger pull-right">1</span></span></a>
+                            class="label label-rouded label-danger pull-right">{% get_total_zones %}</span></span></a>
                     <ul class="nav nav-second-level">
                         {% if perms.jobs.index_zone %}
                             <li><a href="{% url 'zones-index' %}">Mostrar Todos</a></li>
@@ -112,7 +113,7 @@
             {% endif %}
             <li><a href="#" class="waves-effect"><i class="fa fa-object-group"></i>
                 <span class="hide-menu">Trabajos <span class="fa arrow"></span><span
-                        class="label label-rouded label-danger pull-right">1</span></span></a>
+                        class="label label-rouded label-danger pull-right">{% get_total_jobs %}</span></span></a>
                 <ul class="nav nav-second-level">
                     {% if perms.jobs.index_job %}
                         <li><a href="{% url 'jobs-index' %}">Mostrar Todos</a></li>
@@ -131,7 +132,7 @@
             {% if perms.users.index_profile  or perms.users.add_profile %}
                 <li><a href="#" class="waves-effect"><i class="fa fa-users"></i> <span
                         class="hide-menu">Usuarios<span class="fa arrow"></span> <span
-                        class="label label-rouded label-info pull-right">2</span> </span></a>
+                        class="label label-rouded label-info pull-right">{% get_total_profiles %}</span> </span></a>
                     <ul class="nav nav-second-level">
                         {% if perms.users.index_profile %}
                             <li><a href="{% url 'profiles-index' %}">Todos los Usuarios</a></li>

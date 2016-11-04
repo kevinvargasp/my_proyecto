@@ -85,7 +85,7 @@
             var state_assign = "{% autoescape off %}{% get_label_state_assign job_state  %}{% endautoescape %}";
             var state = "{% autoescape off %}{% get_label_state job.state %}{% endautoescape %}";
 
-            new_point.push("<b>Cliente:</b> {{ job.name_client }}<br><b>Estado:</b> " + state + "<br><b>Descripción:</b> {{ job.description|linebreaksbr }} <br><b>Asignado a:</b> " + state_assign + " " + profiles + "");
+            new_point.push("<b>Cliente:</b> {{ job.name_client }}<br><b>Estado:</b> " + state + "<br><b>Tipo de trabajo:</b> {{ job.jobtype }}<br><b>Descripción:</b> {{ job.description|linebreaksbr }} <br><b>Asignado a:</b> " + state_assign + " " + profiles + "");
             new_point.push({{ job.lat }});
             new_point.push({{ job.lng }});
             new_point.push(getColor('{{ job.state }}'));

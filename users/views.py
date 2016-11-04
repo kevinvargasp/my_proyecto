@@ -119,14 +119,16 @@ def profiles_user_show(request, u_id):
 @permission_required('users.delete_profile', login_url='/log_in')
 def profiles_delete(request, id):
     profile = Profile.objects.get(id=id)
-    profile.delete()
-    is_exist = Profile.objects.filter(id=id).exists()
+    user = User.objects.get(pk=profile.user_id)
+    user.is_active = False
+    user.save(update_fields=['is_active'])
 
-    if is_exist:
-        message = 'No se pudo eliminar'
+
+    if user.is_active:
+        message = 'No se pudo desactivar'
         messages.add_message(request, messages.ERROR, message)
     else:
-        message = 'Eliminado!'
+        message = 'Desactivado!'
         messages.add_message(request, messages.SUCCESS, message)
 
     return HttpResponseRedirect(reverse(profiles_index))
