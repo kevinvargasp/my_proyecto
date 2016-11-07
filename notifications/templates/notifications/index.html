@@ -45,7 +45,7 @@
                                             class="fa fa-bars text-success"></i></a>
                                 {% endif %}
                                 {% if perms.notifications.delete_notification %}
-                                    <a href="{% url 'notifications-show' notification.id %}" data-tooltip="tooltip"
+                                    <a href="{% url 'notifications-delete' notification.id %}" data-tooltip="tooltip"
                                        title="Eliminar"><i
                                             class="fa fa-times text-danger"></i></a>
                                 {% endif %}

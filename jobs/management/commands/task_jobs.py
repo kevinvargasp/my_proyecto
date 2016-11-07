@@ -18,11 +18,9 @@ class Command(BaseCommand):
         for pj in pjs:
             date_next = pj.assign_at + timedelta(days=1)
             exist_history = JobHistory.objects.filter(profilejob=pj).exists()
-            print "%s > %s" % (date_next, now)
-            if date_next <= now and exist_history:
-                print "Existe registro"
-            else:
-                print "NO es Correcto"
+            print "FECHA ACTUAL: %s >= F24H:%s, %s, %s " % (now ,date_next,(now >= date_next), exist_history)
+            if (date_next <= now) and not exist_history:
+                print "Creando notificacion"
                 if not Notification.objects.filter(obj='ProfileJob', obj_id=pj.id, profile=pj.profile).exists():
                     notification = Notification(profile=pj.profile,
                                                 level=u'HIG',
