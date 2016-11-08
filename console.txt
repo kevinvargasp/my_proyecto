@@ -1,5 +1,6 @@
-python-admin startapp ssp
+python-admin startapp ssp-admin
 python manage.py startapp fronts
 python manage.py startapp users
 python manage.py startapp jobs
 python manage.py startapp notifications
+python manage.py startapp reports
